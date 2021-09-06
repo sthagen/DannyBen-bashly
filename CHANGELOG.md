@@ -1,6 +1,18 @@
 Change Log
 ========================================
 
+Untagged - Latest
+----------------------------------------
+
+- Add support for -abc, -a=arg and --flag=arg
+
+
+v0.6.5 - 2021-09-03
+----------------------------------------
+
+- Upgrade completely gem to allow completions for local scripts
+
+
 v0.6.4 - 2021-08-27
 ----------------------------------------
 
