@@ -40,7 +40,7 @@ a [docker image](https://hub.docker.com/r/dannyben/bashly).
    file for you ([example](https://github.com/DannyBen/bashly/tree/master/examples/minimal#bashlyyml)).
 2. Bashly then automatically generates a bash script (when you run
    `bashly generate`) that can parse and validate user input, provide help
-   messages, and run your code for each command ([example](https://github.com/DannyBen/bashly/blob/master/examples/minimal/download)).
+   messages, and run your code for each command.
 3. Your code for each command is kept in a separate file, and can be merged
    again if you change it ([example](https://github.com/DannyBen/bashly/blob/master/examples/minimal/src/root_command.sh)).
 
@@ -67,11 +67,13 @@ Bashly is responsible for:
 ## Contributing / Support
 
 If you experience any issue, have a question or a suggestion, or if you wish
-to contribute, feel free to [open an issue][issues].
+to contribute, feel free to [open an issue][issues] or
+[start a discussion][discussions].
 
 
 
 [issues]: https://github.com/DannyBen/bashly/issues
+[discussions]: https://github.com/DannyBen/bashly/discussions
 [docs]: https://bashly.dannyb.co/
 [examples]: https://github.com/DannyBen/bashly/tree/master/examples#bashly-examples
 

@@ -1,0 +1,29 @@
+name: validate
+help: Sample application demonstrating validations
+version: 0.1.0
+
+commands:
+- name: calc
+  help: Add two numbers
+
+  args:
+  - name: first
+    help: First number
+    required: true
+
+    # Specify a validation function.
+    # Bashly will look for a function named `validate_integer` in your
+    # script, you can use any name as long as it has a matching function.
+    validate: integer
+  - name: second
+    help: Second number
+    validate: integer
+
+  flags:
+  - long: --save
+    arg: path
+    help: Save the result to a file
+
+    # Validations also work on flags (when they have arguments)
+    validate: file_exists
+

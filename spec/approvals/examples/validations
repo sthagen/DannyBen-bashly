@@ -1,0 +1,28 @@
++ bashly add validations --force
+created src/lib/validations/validate_dir_exists.sh
+created src/lib/validations/validate_file_exists.sh
+created src/lib/validations/validate_integer.sh
+created src/lib/validations/validate_not_empty.sh
++ bashly generate
+creating user files in src
+created src/initialize.sh
+created src/calc_command.sh
+created ./validate
+run ./validate --help to test your bash script
++ ./validate calc 1 2 --save README.md
+# this file is located in 'src/calc_command.sh'
+# code for 'validate calc' goes here
+# you can edit it freely and regenerate (it will not be overwritten)
+args:
+- ${args[first]} = 1
+- ${args[--save]} = README.md
+- ${args[second]} = 2
++ ./validate calc A
+validation error in FIRST:
+must be an integer
++ ./validate calc 1 B
+validation error in SECOND:
+must be an integer
++ ./validate calc 1 2 --save no-such-file.txt
+validation error in --save PATH:
+must be an existing file
