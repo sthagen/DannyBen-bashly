@@ -10,7 +10,9 @@ describe 'generated bash scripts' do
   examples = Dir["examples/*"].select { |f| File.directory? f }
 
   # ...as well as internal examples, not suitable for public view
-  fixtures = Dir["spec/fixtures/workspaces/*"].select { |f| File.directory? f }
+  fixtures = Dir["spec/fixtures/workspaces/*"].select do |f|
+    File.directory? f and File.exist? "#{f}/test.sh"
+  end
 
   test_cases = fixtures + examples
 
@@ -20,7 +22,7 @@ describe 'generated bash scripts' do
   leeway = ENV['CI'] ? 30 : 0
 
   test_cases.each do |example|
-    approval_name = example.gsub "spec/fixtures/workspaces", "examples"
+    approval_name = example.gsub "spec/fixtures/workspaces", "fixtures"
 
     describe example do
       it "works" do
