@@ -1,0 +1,6 @@
+:basic_argument:
+  name: file
+
+:required:
+  name: file
+  required: true

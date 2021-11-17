@@ -23,6 +23,7 @@ module Bashly
         long
         name
         parent_name
+        private
         required
         short
         validate
@@ -32,7 +33,7 @@ module Bashly
       def initialize(options)
         raise Error, "Invalid options provided" unless options.respond_to? :keys
         @options = options
-        verify if respond_to? :verify
+        validate_options if respond_to? :validate_options
       end
 
       def optional

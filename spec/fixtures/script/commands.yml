@@ -55,23 +55,8 @@
 :helpless:
   name: helpless
 
-:invalid_with_args:
-  name: invalid
-  help: invalid since there are both commands and args
-  commands:
-  - name: sub
-  args:
-  - name: source
-
-:invalid_with_flags:
-  name: invalid
-  help: invalid since there are both commands and flags
-  commands:
-  - name: sub
-  flags:
-  - long: --force
-
 :default_command:
+  name: cli
   commands:
   - name: get
     default: true
@@ -88,6 +73,7 @@
     long: --vorld
 
 :default_values:
+  name: cli
   args:
   - name: files
     default: "*.jpg"
@@ -98,6 +84,7 @@
     default: png
 
 :whitelist:
+  name: cli
   args:
   - name: region
     allowed: [eu, us]

@@ -1,6 +1,8 @@
 module Bashly
   module Commands
     class Generate < Base
+      using ComposeRefinements
+
       help "Generate the bash script and required files"
 
       usage "bashly generate [--force --quiet --upgrade --wrap FUNCTION]"
@@ -13,6 +15,7 @@ module Bashly
 
       environment "BASHLY_SOURCE_DIR", "The path containing the bashly configuration and source files [default: src]"
       environment "BASHLY_TARGET_DIR", "The path to use for creating the bash script [default: .]"
+      environment "BASHLY_STRICT", "When not empty, enable bash strict mode (set -euo pipefail)"
 
       example "bashly generate --force"
       example "bashly generate --wrap my_function"
@@ -35,20 +38,9 @@ module Bashly
           content = File.read file
           
           if content =~ /\[@bashly-upgrade (.+)\]/
-            lib = $1
-            
-            case lib
-            when "colors"
-              upgrade file, Library::Colors.new
-            when "config"
-              upgrade file, Library::Config.new
-            when "yaml"
-              upgrade file, Library::YAML.new
-            when "validations"
-              upgrade file, Library::Validations.new
-            when /completions (.+)/
-              upgrade file, Library::CompletionsFunction.new(file, function: $1)
-            end
+            args = $1.split ' '
+            library_name = args.shift
+            upgrade file, library_name, *args
           end
         end
       end
@@ -57,8 +49,17 @@ module Bashly
         Dir["#{Settings.source_dir}/**/*.*"].sort
       end
 
-      def upgrade(existing_file, handler)
-        file = handler.files.select { |f| f[:path] == existing_file }.first
+      def upgrade(existing_file, library_name, *args)
+        if Library.exist? library_name
+          upgrade! existing_file, library_name, *args
+        else
+          quiet_say "!txtred!warning!txtrst! not upgrading !txtcyn!#{existing_file}!txtrst!, unknown library '#{library_name}'"
+        end
+      end
+
+      def upgrade!(existing_file, library_name, *args)
+        library = Bashly::Library.new library_name, *args
+        file = library.find_file existing_file
 
         if file
           File.deep_write file[:path], file[:content]
@@ -117,7 +118,7 @@ module Bashly
       end
 
       def config
-        @config ||= Config.new "#{Settings.source_dir}/bashly.yml"
+        @config ||= Config.new("#{Settings.source_dir}/bashly.yml").compose
       end
 
       def command
