@@ -157,6 +157,22 @@ describe Script::Command do
     end
   end
 
+  describe '#filters' do
+    context "when filters are not defined" do
+      it "returns nil" do
+        expect(subject.filters).to be_nil
+      end
+    end
+
+    context "when filters is defined" do
+      let(:fixture) { :filters_array }
+
+      it "returns it as is" do
+        expect(subject.filters).to eq %w[docker_running redis_running]
+      end
+    end
+  end
+
   describe '#flags' do
     it "returns an array of Flag objects" do
       expect(subject.flags).to be_an Array

@@ -61,3 +61,13 @@
   args:
   - name: --user
 
+:invalid_filters_type:
+  name: invalid
+  help: invalid since command.filters should be an array
+  filters: docker_running
+
+:invalid_filters_array:
+  name: invalid
+  help: invalid since command.filters should be an array of strings
+  filters: [1, 2]
+
