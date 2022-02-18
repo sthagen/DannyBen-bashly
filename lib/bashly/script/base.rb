@@ -10,6 +10,7 @@ module Bashly
         arg
         catch_all
         completions
+        conflicts
         default
         dependencies
         description
@@ -25,6 +26,7 @@ module Bashly
         name
         parent_name
         private
+        repeatable
         required
         short
         validate
