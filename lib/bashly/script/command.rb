@@ -125,13 +125,7 @@ module Bashly
       # This is meant to provide the user with the ability to add custom
       # functions
       def user_lib
-        @user_lib ||= Dir["#{Settings.source_dir}/lib/**/*.sh"].sort
-      end
-
-      # Raise an exception if there are some serious issues with the command
-      # definition. This is called by Base#initialize.
-      def validate_options
-        Bashly::ConfigValidator.new(options).validate
+        @user_lib ||= Dir["#{Settings.full_lib_dir}/**/*.sh"].sort
       end
 
     end
