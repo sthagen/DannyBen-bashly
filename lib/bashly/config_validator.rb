@@ -42,8 +42,13 @@ module Bashly
       end
     end
 
-    def assert_hash(key, value)
+    def assert_hash(key, value, whitelist = nil)
       assert value.is_a?(Hash), "#{key} must be a hash"
+      
+      if whitelist
+        invalid_keys = value.keys.map(&:to_sym) - whitelist
+        assert invalid_keys.empty?, "#{key} contains invalid options: #{invalid_keys.join(', ')}"
+      end
     end
 
     def assert_version(key, value)
@@ -61,6 +66,7 @@ module Bashly
     end
 
     def assert_catch_all_hash(key, value)
+      assert_hash key, value, Script::CatchAll.option_keys
       assert_string "#{key}.label", value['label']
       assert_optional_string "#{key}.help", value['help']
       assert_boolean "#{key}.required", value['required']
@@ -73,7 +79,7 @@ module Bashly
     end
 
     def assert_arg(key, value)
-      assert_hash key, value
+      assert_hash key, value, Script::Argument.option_keys
       assert_string "#{key}.name", value['name']
       assert_optional_string "#{key}.help", value['help']
       assert_optional_string "#{key}.default", value['default']
@@ -89,7 +95,7 @@ module Bashly
     end
 
     def assert_flag(key, value)
-      assert_hash key, value
+      assert_hash key, value, Script::Flag.option_keys
       assert value['short'] || value['long'], "#{key} must have at least one of long or short name"
 
       assert_optional_string "#{key}.long", value['long']
@@ -99,6 +105,7 @@ module Bashly
       assert_optional_string "#{key}.default", value['default']
       assert_optional_string "#{key}.validate", value['validate']
       
+      assert_boolean "#{key}.repeatable", value['repeatable']
       assert_boolean "#{key}.required", value['required']
       assert_array "#{key}.allowed", value['allowed'], of: :string
       assert_array "#{key}.conflicts", value['conflicts'], of: :string
@@ -119,7 +126,7 @@ module Bashly
     end
 
     def assert_env_var(key, value)
-      assert_hash key, value
+      assert_hash key, value, Script::EnvironmentVariable.option_keys
       assert_string "#{key}.name", value['name']
       assert_optional_string "#{key}.help", value['help']
       assert_optional_string "#{key}.default", value['default']
@@ -127,11 +134,11 @@ module Bashly
     end
 
     def assert_command(key, value)
-      assert_hash key, value
+      assert_hash key, value, Script::Command.option_keys
 
       refute value['commands'] && value['args'], "#{key} cannot have both commands and args"
       refute value['commands'] && value['flags'], "#{key} cannot have both commands and flags"
-      
+
       assert_string "#{key}.name", value['name']
       assert_optional_string "#{key}.short", value['short']
       assert_optional_string "#{key}.help", value['help']
@@ -139,6 +146,7 @@ module Bashly
       assert_optional_string "#{key}.group", value['group']
       assert_optional_string "#{key}.filename", value['filename']
 
+      assert_boolean "#{key}.private", value['private']
       assert_boolean "#{key}.default", value['default']
       assert_version "#{key}.version", value['version']
       assert_catch_all "#{key}.catch_all", value['catch_all']
@@ -152,6 +160,11 @@ module Bashly
       assert_array "#{key}.filters", value['filters'], of: :string
       assert_array "#{key}.environment_variables", value['environment_variables'], of: :env_var
       assert_array "#{key}.examples", value['examples'], of: :string
+
+      if value['catch_all'] and value['args']
+        repeatable_arg = value['args'].select { |a| a['repeatable'] }.first&.dig 'name'
+        refute repeatable_arg, "#{key}.catch_all makes no sense with repeatable arg (#{repeatable_arg})"
+      end
 
       if key == "root"
         refute value['short'], "#{key}.short makes no sense"
