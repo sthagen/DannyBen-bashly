@@ -40,7 +40,7 @@ module Bashly
 
       # Returns a string suitable to be a headline
       def caption_string
-        help ? "#{full_name} - #{summary}" : full_name
+        help.empty? ? full_name : "#{full_name} - #{summary}"
       end
 
       def catch_all
@@ -94,12 +94,13 @@ module Bashly
       # If the file is not found, returns a string with a hint.
       def load_user_file(file, placeholder: true)
         path = "#{Settings.source_dir}/#{file}"
-        default_content = placeholder ? "echo \"error: cannot load file\"" : ''
 
         content = if File.exist? path
           File.read(path).remove_front_matter
-        else 
-          default_content
+        elsif placeholder
+          %q[echo "error: cannot load file"]
+        else
+          ''
         end
 
         Bashly.production? ? content : "#{view_marker path}\n#{content}"
@@ -111,7 +112,12 @@ module Bashly
         options['parents'] || []
       end
 
-      # Returns trus if this is the root command (no parents)
+      # Returns true if one of the args is repeatable
+      def repeatable_arg_exist?
+        args.select(&:repeatable).any?
+      end
+
+      # Returns true if this is the root command (no parents)
       def root_command?
         parents.empty?
       end

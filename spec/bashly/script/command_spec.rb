@@ -59,6 +59,14 @@ describe Script::Command do
     it "returns a string containing the name and summary" do
       expect(subject.caption_string).to eq "get - get something from somewhere"
     end
+
+    context "when help is not defined" do
+      let(:fixture) { :helpless }
+
+      it "returns the full name only" do
+        expect(subject.caption_string).to eq "helpless"
+      end
+    end
   end
 
   describe '#command_names' do
@@ -242,6 +250,22 @@ describe Script::Command do
     end
   end
 
+  describe '#repeatable_arg_exist?' do
+    context "when the command does not have any repeatable flags" do
+      it "returns false" do
+        expect(subject.repeatable_arg_exist?).to be false
+      end
+    end
+
+    context "when the command has at least one repeatable flag" do
+      let(:fixture) { :repeatable_arg }
+
+      it "returns true" do
+        expect(subject.repeatable_arg_exist?).to be true
+      end
+    end
+  end
+
   describe '#root_command?' do
     context "when the command has no parents" do
       it "returns true" do
@@ -303,6 +327,14 @@ describe Script::Command do
       it "includes [command] in the usage string" do
         expect(subject.usage_string).to eq "docker [command]"
       end      
+    end
+
+    context "when catch_all is enabled" do
+      let(:fixture) { :catch_all }
+
+      it "includes the catch_all usage string" do
+        expect(subject.usage_string).to eq "get [...]"
+      end
     end
   end
 
