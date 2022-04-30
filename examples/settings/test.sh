@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+rm -f ./src/*.sh
+
 set -x
 
-BASHLY_TAB_INDENT=1 bashly generate
+bashly generate
 
 ### Try Me ###
 
-./cli
+./out/cli
