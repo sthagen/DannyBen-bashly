@@ -11,6 +11,7 @@ Each of these examples demonstrates one aspect or feature of bashly.
 ## Basic features
 
 - [command-default](command-default#readme) - configuring a default command
+- [command-aliases](command-aliases#readme) - allowing a command to be called with multiple names
 - [dependencies](dependencies#readme) - halting script execution unless certain dependencies are installed
 - [environment-variables](environment-variables#readme) - halting script execution unless certain environment variables are set
 - [default-values](default-values#readme) - arguments and flags with default values
