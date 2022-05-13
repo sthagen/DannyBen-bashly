@@ -4,4 +4,9 @@ class Array
     indentation = " " * offset
     map { |line| "#{indentation}#{line}" }
   end
+
+  def nonuniq
+    tally.select { |key, count| count > 1 }.keys
+  end
+
 end
