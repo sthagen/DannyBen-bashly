@@ -2,11 +2,8 @@ require 'spec_helper'
 
 describe Script::Command do
   let(:fixture) { :basic_command }
-
-  subject do
-    options = load_fixture('script/commands')[fixture]
-    described_class.new options
-  end
+  fixtures = load_fixture('script/commands')
+  subject { described_class.new fixtures[fixture] }
 
   describe '#action_name' do
     context "when it is the root command" do
@@ -48,6 +45,15 @@ describe Script::Command do
     end
   end
 
+  describe '#all_full_names' do
+    let(:fixture) { :nested_aliases }
+    
+    it "returns an array of all full names including aliases" do
+      expect(subject.deep_commands.last.all_full_names.to_yaml)
+        .to match_approval('script/command/nested_aliases')
+    end
+  end
+
   describe '#args' do
     it "returns an array of Argument objects" do
       expect(subject.args).to be_an Array
@@ -66,6 +72,14 @@ describe Script::Command do
       it "returns the full name only" do
         expect(subject.caption_string).to eq "helpless"
       end
+    end
+  end
+
+  describe '#command_aliases' do
+    let(:fixture) { :aliases }
+
+    it "returns an array of command aliases" do
+      expect(subject.command_aliases).to eq ["download", "d", "pull", "upload", "u", "push", "update", "upgrade"]
     end
   end
 
@@ -124,7 +138,6 @@ describe Script::Command do
       expect(subject.default_flags.first.long).to eq "--format"
     end
   end
-
 
   describe '#environment_cariables' do
     it "returns an array of EnvironemntVariable objects" do

@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 describe Script::Command do
-  let(:fixture) { :completions_simple }
+  fixtures = load_fixture('script/commands')
 
-  subject do
-    options = load_fixture('script/commands')[fixture]
-    described_class.new options
-  end
+  let(:fixture) { :completions_simple }
+  subject { described_class.new fixtures[fixture] }
 
   describe '#completion_data' do
     it "returns a data structure for completely" do
@@ -46,6 +44,17 @@ describe Script::Command do
       it "returns a data structure that includes thw whitelist" do
         expect(subject.completion_data.to_yaml)
           .to match_approval("completions/whitelist")
+      end
+    end
+  end
+
+  context "with a command that has nested command aliases" do
+    let(:fixture) { :nested_aliases }
+
+    describe '#completion_data' do
+      it "returns a data structure that includes all command full names" do
+        expect(subject.completion_data.to_yaml)
+          .to match_approval("completions/nested_aliases")
       end
     end
   end
