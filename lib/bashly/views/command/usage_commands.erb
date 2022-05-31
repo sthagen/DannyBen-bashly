@@ -1,18 +1,13 @@
 <%= view_marker %>
-% unless commands.first.group
-printf "<%= strings[:commands] %>\n"
-% end
-% maxlen = command_names.map(&:size).max
-% commands.reject(&:private).each do |command|
-% summary = command.summary
-% summary = strings[:default_command_summary] % { summary: summary } if command.default
-% if command.group
-% if command.name == commands.first.name
-printf "<%= strings[:group] % { group: command.group } %>\n"
+% maxlen = command_help_data.values.map(&:keys).flatten.map(&:size).max
+% command_help_data.each do |group, commands|
+printf "<%= group %>\n"
+% commands.each do |command, info|
+% if info[:extended]
+[[ -n $long_usage ]] && echo "  <%= command.ljust maxlen %>   <%= info[:summary] %>"
 % else
-printf "\n<%= strings[:group] % { group: command.group } %>\n"
+echo "  <%= command.ljust maxlen %>   <%= info[:summary] %>"
 % end
-% end
-echo "  <%= command.name.ljust maxlen %>   <%= summary %>"
 % end
 echo
+% end
