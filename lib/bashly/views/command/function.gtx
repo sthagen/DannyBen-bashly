@@ -1,0 +1,6 @@
+= view_marker
+
+> {{ function_name }}_command() {
+= load_user_file(filename).indent 2
+> }
+>

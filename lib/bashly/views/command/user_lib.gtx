@@ -1,0 +1,11 @@
+if user_lib.any?
+  = view_marker
+
+  user_lib.each do |file|
+    = view_marker file
+    = File.read file
+    > 
+  end
+
+  >
+end
