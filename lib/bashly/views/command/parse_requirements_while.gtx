@@ -4,8 +4,10 @@
 >   key="$1"
 >   case "$key" in
 
-flags.each do |flag|
-  = flag.render(:case).indent 2
+unless global_flags?
+  flags.each do |flag|
+    = flag.render(:case).indent 2
+  end
 end
 
 >
@@ -17,7 +19,7 @@ if catch_all.enabled?
   >     ;;
 
 else
-  >     printf "<%= strings[:invalid_flag] %>\n" "$key"
+  >     printf "<%= strings[:invalid_flag] %>\n" "$key" >&2
   >     exit 1
   >     ;;
 

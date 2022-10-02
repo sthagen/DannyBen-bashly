@@ -1,18 +1,21 @@
 module Bashly
   class Settings
     class << self
-      attr_writer :source_dir, :target_dir, :lib_dir, :strict, :tab_indent
+      include AssetHelper
+
+      attr_writer :compact_short_flags, :source_dir, :target_dir,
+        :lib_dir, :strict, :tab_indent
 
       def source_dir
-        @source_dir ||= get :source_dir, 'src'
+        @source_dir ||= get :source_dir
       end
 
       def target_dir
-        @target_dir ||= get :target_dir, '.'
+        @target_dir ||= get :target_dir
       end
 
       def lib_dir
-        @lib_dir ||= get :lib_dir, 'lib'
+        @lib_dir ||= get :lib_dir
       end
 
       def strict
@@ -23,8 +26,12 @@ module Bashly
         @tab_indent ||= get :tab_indent
       end
 
+      def compact_short_flags
+        @compact_short_flags ||= get :compact_short_flags
+      end
+
       def env
-        @env ||= get(:env, :development)&.to_sym
+        @env ||= get(:env)&.to_sym
       end
 
       def env=(value)
@@ -41,14 +48,33 @@ module Bashly
 
     private
 
-      def get(key, default = nil)
-        ENV["BASHLY_#{key.upcase}"] || user_settings[key.to_s] || default
+      def get(key)
+        case env_value key
+        when nil                 then config[key.to_s]
+        when "0", "false", "no"  then false
+        when "1", "true", "yes"  then true
+        else                     env_value key
+        end
+      end
+
+      def env_value(key)
+        ENV["BASHLY_#{key.upcase}"]
+      end
+
+      def config
+        @config ||= defsult_settings.merge user_settings
       end
 
       def user_settings
-        @user_settings ||= begin
-          File.exist?('settings.yml') ? Config.new('settings.yml') : {}
-        end
+        @user_settings ||= File.exist?('settings.yml') ? Config.new('settings.yml') : {}
+      end
+
+      def defsult_settings
+        @defsult_settings ||= Config.new(default_settings_path)
+      end
+
+      def default_settings_path
+        asset "templates/settings.yml"
       end
 
     end
