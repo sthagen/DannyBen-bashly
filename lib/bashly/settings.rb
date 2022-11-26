@@ -51,8 +51,8 @@ module Bashly
       def get(key)
         case env_value key
         when nil                 then config[key.to_s]
-        when "0", "false", "no"  then false
-        when "1", "true", "yes"  then true
+        when '0', 'false', 'no'  then false
+        when '1', 'true', 'yes'  then true
         else                     env_value key
         end
       end
@@ -70,13 +70,12 @@ module Bashly
       end
 
       def defsult_settings
-        @defsult_settings ||= Config.new(default_settings_path)
+        @defsult_settings ||= Config.new default_settings_path
       end
 
       def default_settings_path
-        asset "templates/settings.yml"
+        asset 'templates/settings.yml'
       end
-
     end
   end
 end

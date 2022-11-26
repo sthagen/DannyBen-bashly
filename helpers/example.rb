@@ -10,7 +10,7 @@ class Example
     end
 
     def executables
-      all.map &:executable
+      all.map(&:executable)
     end
   end
 
@@ -21,7 +21,7 @@ class Example
   end
 
   def config
-    @config ||= YAML.properly_load_file(yaml_path)
+    @config ||= YAML.properly_load_file yaml_path
   end
 
   def yaml
@@ -71,30 +71,30 @@ class Example
   def generated_readme
     marker = '-----'
     content = readme.split(marker)[0].strip
-    extra_files = ""
+    extra_files = ''
     if content =~ /<!-- include: (.*) -->/
-      included_files = $1.split(' ')
+      included_files = $1.split
       extra_files = files_markdown included_files
     end
 
-    <<~EOF
-    #{content}
+    <<~MARKDOWN
+      #{content}
 
-    #{marker}
+      #{marker}
 
-    ## `bashly.yml`
+      ## `bashly.yml`
 
-    ```yaml
-    #{yaml}
-    ```
+      ```yaml
+      #{yaml}
+      ```
 
-    #{extra_files}
+      #{extra_files}
 
-    ## Generated script output
+      ## Generated script output
 
-    #{test_output}
+      #{test_output}
 
-    EOF
+    MARKDOWN
   end
 
   def files_markdown(files)
@@ -113,16 +113,17 @@ class Example
   def markdown_lang(file)
     result = langs[File.extname file]
     raise "Cannot determine language for #{file}" unless result
+
     result
   end
 
   def langs
     @langs ||= {
-      "" => "bash",
-      ".sh" => "bash",
-      ".ini" => "ini",
-      ".yml" => "yaml",
-      ".yaml" => "yaml",
+      ''      => 'bash',
+      '.sh'   => 'bash',
+      '.ini'  => 'ini',
+      '.yml'  => 'yaml',
+      '.yaml' => 'yaml',
     }
   end
 

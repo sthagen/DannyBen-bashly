@@ -1,6 +1,6 @@
 require 'simplecov'
 
-if !ENV['NOCOV']
+unless ENV['NOCOV']
   SimpleCov.start do
     enable_coverage :branch
   end

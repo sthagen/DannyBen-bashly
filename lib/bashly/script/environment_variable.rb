@@ -6,11 +6,11 @@ module Bashly
           @option_keys ||= %i[default help name required]
         end
       end
-      
+
       def usage_string(extended: false)
         result = [name.upcase]
-        result << strings[:required] if required and extended
-        result.join " "
+        result << strings[:required] if required && extended
+        result.join ' '
       end
     end
   end

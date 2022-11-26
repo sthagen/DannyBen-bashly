@@ -6,7 +6,7 @@ module Bashly
       end
 
       def config
-        @config ||= YAML.properly_load_file(config_path)
+        @config ||= YAML.properly_load_file config_path
       end
 
       def config_path
@@ -18,7 +18,8 @@ module Bashly
     attr_reader :name, :args
 
     def initialize(name, *args)
-      @name, @args = name.to_s, args
+      @name = name.to_s
+      @args = args
     end
 
     def files
@@ -27,7 +28,7 @@ module Bashly
 
       else
         config['files'].map do |file|
-          { path: file['target'] % target_file_args,
+          { path:    file['target'] % target_file_args,
             content: asset_content(file['source']) }
         end
       end
@@ -42,13 +43,14 @@ module Bashly
     end
 
     def find_file(path)
-      files.select { |f| f[:path] == path }.first
+      files.find { |f| f[:path] == path }
     end
 
   private
 
     def custom_handler
       return nil unless config.is_a? Symbol
+
       @custom_handler ||= Bashly::Libraries.const_get(config).new(*args)
     end
 
@@ -60,7 +62,7 @@ module Bashly
       {
         user_source_dir: Settings.source_dir,
         user_target_dir: Settings.target_dir,
-        user_lib_dir: Settings.full_lib_dir,
+        user_lib_dir:    Settings.full_lib_dir,
       }
     end
   end

@@ -1,15 +1,16 @@
 class String
   def sanitize_for_print
-    gsub("\n", "\\n").gsub("\"", "\\\"")
+    gsub("\n", '\\n').gsub('"', '\"')
   end
 
   def indent(offset)
-    return self unless offset > 0
+    return self unless offset.positive?
+
     lines.indent(offset).join
   end
 
   def to_underscore
-    gsub(/(.)([A-Z])/,'\1_\2').gsub(/[\- ]/, '_').downcase
+    gsub(/(.)([A-Z])/, '\1_\2').gsub(/[- ]/, '_').downcase
   end
 
   def wrap(length = 80)
@@ -24,7 +25,7 @@ class String
   end
 
   def lint
-    gsub(/\s+\n/m, "\n\n").lines.reject { |l| l =~ /^\s*##/ }.join
+    gsub(/\s+\n/m, "\n\n").lines.grep_v(/^\s*##/).join
   end
 
   def remove_front_matter
@@ -33,8 +34,7 @@ class String
 
   def expand_tabs(tabstop = 2)
     gsub(/^( {#{tabstop}}+)/) do
-      "\t" * ($1.size / tabstop)
+      "\t" * (::Regexp.last_match(1).size / tabstop)
     end
   end
-
 end

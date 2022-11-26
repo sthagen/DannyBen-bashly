@@ -18,12 +18,15 @@ module Bashly
             {}
           end
 
-          new **options
+          new(**options)
         end
       end
 
       def initialize(label: nil, help: nil, required: false, enabled: true)
-        @label, @help, @required, @enabled = label, help, required, enabled
+        @label = label
+        @help = help
+        @required = required
+        @enabled = enabled
       end
 
       def enabled?
@@ -44,10 +47,9 @@ module Bashly
 
       def usage_string
         return nil unless enabled?
+
         required? ? label : "[#{label}]"
       end
-
     end
   end
 end
-

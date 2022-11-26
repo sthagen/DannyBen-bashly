@@ -9,21 +9,23 @@ module Bashly
     end
 
     def validate
-      assert_command "root", data
+      assert_command 'root', data
     end
 
   private
 
     def assert_version(key, value)
       return unless value
+
       assert [String, Integer, Float].include?(value.class),
-        "#{key} must be a string or a number" 
+        "#{key} must be a string or a number"
     end
 
     def assert_catch_all(key, value)
       return unless value
+
       assert [TrueClass, String, Hash].include?(value.class),
-        "#{key} must be a boolean, a string or a hash" 
+        "#{key} must be a boolean, a string or a hash"
 
       assert_catch_all_hash key, value if value.is_a? Hash
     end
@@ -37,13 +39,15 @@ module Bashly
 
     def assert_extensible(key, value)
       return unless value
+
       assert [TrueClass, String].include?(value.class),
-        "#{key} must be a boolean or a string" 
+        "#{key} must be a boolean or a string"
     end
 
     def assert_expose(key, value)
       return unless value
-      assert [true, false, nil, 'always'].include?(value), "#{key} must be a boolean, or the string 'always'" 
+
+      assert [true, false, nil, 'always'].include?(value), "#{key} must be a boolean, or the string 'always'"
     end
 
     def assert_arg(key, value)
@@ -54,7 +58,7 @@ module Bashly
       assert_optional_string "#{key}.validate", value['validate']
       assert_boolean "#{key}.required", value['required']
       assert_boolean "#{key}.repeatable", value['repeatable']
-      
+
       assert_array "#{key}.allowed", value['allowed'], of: :string
 
       refute value['name'].match(/^-/), "#{key}.name must not start with '-'"
@@ -74,14 +78,14 @@ module Bashly
       assert_optional_string "#{key}.arg", value['arg']
       assert_optional_string "#{key}.default", value['default']
       assert_optional_string "#{key}.validate", value['validate']
-      
+
       assert_boolean "#{key}.repeatable", value['repeatable']
       assert_boolean "#{key}.required", value['required']
       assert_array "#{key}.allowed", value['allowed'], of: :string
       assert_array "#{key}.conflicts", value['conflicts'], of: :string
       assert_array "#{key}.completions", value['completions'], of: :string
 
-      assert value['long'].match(/^--[a-zA-Z0-9_\-]+$/), "#{key}.long must be in the form of '--name'" if value['long']
+      assert value['long'].match(/^--[a-zA-Z0-9_-]+$/), "#{key}.long must be in the form of '--name'" if value['long']
       assert value['short'].match(/^-[a-zA-Z0-9]$/), "#{key}.short must be in the form of '-n'" if value['short']
       refute value['arg'].match(/^-/), "#{key}.arg must not start with '-'" if value['arg']
 
@@ -129,30 +133,31 @@ module Bashly
       assert_string_or_array "#{key}.alias", value['alias']
       assert_string_or_array "#{key}.examples", value['examples']
       assert_extensible "#{key}.extensible", value['extensible']
-      
+
       assert_array "#{key}.args", value['args'], of: :arg
-      assert_array "#{key}.flags", value['flags'] , of: :flag
+      assert_array "#{key}.flags", value['flags'], of: :flag
       assert_array "#{key}.commands", value['commands'], of: :command
       assert_array "#{key}.completions", value['completions'], of: :string
       assert_array "#{key}.dependencies", value['dependencies'], of: :string
       assert_array "#{key}.filters", value['filters'], of: :string
       assert_array "#{key}.environment_variables", value['environment_variables'], of: :env_var
 
-      assert_uniq "#{key}.commands", value['commands'], ['name', 'alias']
+      assert_uniq "#{key}.commands", value['commands'], %w[name alias]
       assert_uniq "#{key}.flags", value['flags'], 'long'
       assert_uniq "#{key}.flags", value['flags'], 'short'
       assert_uniq "#{key}.args", value['args'], 'name'
 
       if value['function']
-        assert value['function'].match(/^[a-z0-9_]+$/), "#{key}.function must contain lowercase alphanumeric characters and underscores only" 
+        assert value['function'].match(/^[a-z0-9_]+$/),
+          "#{key}.function must contain lowercase alphanumeric characters and underscores only"
       end
 
       if value['default']
         assert value['args'], "#{key}.default makes no sense without args"
       end
 
-      if value['catch_all'] and value['args']
-        repeatable_arg = value['args'].select { |a| a['repeatable'] }.first&.dig 'name'
+      if value['catch_all'] && value['args']
+        repeatable_arg = value['args'].find { |a| a['repeatable'] }&.dig 'name'
         refute repeatable_arg, "#{key}.catch_all makes no sense with repeatable arg (#{repeatable_arg})"
       end
 
@@ -160,7 +165,7 @@ module Bashly
         assert value['commands'], "#{key}.expose makes no sense without commands"
       end
 
-      if key == "root"
+      if key == 'root'
         refute value['alias'], "#{key}.alias makes no sense"
         refute value['group'], "#{key}.group makes no sense"
         refute value['default'], "#{key}.default makes no sense"
@@ -173,7 +178,7 @@ module Bashly
 
       # DEPRECATION 0.8.0
       if value['short']
-        deprecate "#{key}.short", replacement: "alias", reference: "https://github.com/DannyBen/bashly/pull/220"
+        deprecate "#{key}.short", replacement: 'alias', reference: 'https://github.com/DannyBen/bashly/pull/220'
       end
     end
   end

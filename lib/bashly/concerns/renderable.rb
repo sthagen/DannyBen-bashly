@@ -11,7 +11,7 @@ module Bashly
     end
 
     def view_marker(id = nil)
-      id ||= ":#{caller_locations.first.path}"
+      id ||= ":#{caller_locations(1..1).first.path}"
       "# #{id}" unless Settings.production?
     end
 
@@ -23,7 +23,7 @@ module Bashly
       content = if File.exist? path
         File.read(path).remove_front_matter
       elsif placeholder
-        %q[echo "error: cannot load file"]
+        'echo "error: cannot load file"'
       else
         ''
       end
@@ -38,11 +38,11 @@ module Bashly
     end
 
     def self_views_path
-      @self_view_path ||= "#{base_views_path}/#{views_subfolder}"
+      @self_views_path ||= "#{base_views_path}/#{views_subfolder}"
     end
 
     def base_views_path
-      @base_views_path ||= File.expand_path("../views/", __dir__)
+      @base_views_path ||= File.expand_path '../views/', __dir__
     end
 
     def views_subfolder

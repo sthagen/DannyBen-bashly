@@ -2,7 +2,6 @@ module Bashly
   # This is a `ConfigValidator` concern responsible for providing basic
   # assertion methods.
   module ValidationHelpers
-
     def deprecations
       @deprecations ||= []
     end
@@ -30,34 +29,35 @@ module Bashly
     end
 
     def assert_boolean(key, value)
-      assert [true, false, nil].include?(value), "#{key} must be a boolean" 
+      assert [true, false, nil].include?(value), "#{key} must be a boolean"
     end
 
     def assert_array(key, value, of: nil)
       return unless value
+
       assert value.is_a?(Array), "#{key} must be an array"
-      if of
-        value.each_with_index do |val, i|
-          send "assert_#{of}".to_sym, "#{key}[#{i}]", val
-        end
+      return unless of
+
+      value.each_with_index do |val, i|
+        send "assert_#{of}".to_sym, "#{key}[#{i}]", val
       end
     end
 
     def assert_hash(key, value, whitelist = nil)
       assert value.is_a?(Hash), "#{key} must be a hash"
-      
-      if whitelist
-        invalid_keys = value.keys.map(&:to_sym) - whitelist
-        assert invalid_keys.empty?, "#{key} contains invalid options: #{invalid_keys.join(', ')}"
-      end
+      return unless whitelist
+
+      invalid_keys = value.keys.map(&:to_sym) - whitelist
+      assert invalid_keys.empty?, "#{key} contains invalid options: #{invalid_keys.join ', '}"
     end
 
     def assert_uniq(key, value, array_keys)
       return unless value
+
       array_keys = [array_keys] unless array_keys.is_a? Array
       list = []
       array_keys.each do |array_key|
-        list += value.map { |c| c[array_key] }.compact.flatten
+        list += value.filter_map { |c| c[array_key] }.flatten
       end
 
       nonuniqs = list.nonuniq
@@ -66,6 +66,7 @@ module Bashly
 
     def assert_string_or_array(key, value)
       return unless value
+
       assert [Array, String].include?(value.class),
         "#{key} must be a string or an array"
 

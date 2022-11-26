@@ -12,7 +12,8 @@ module Bashly
       end
 
       def initialize(options)
-        raise Error, "Invalid options provided" unless options.respond_to? :keys
+        raise Error, 'Invalid options provided' unless options.respond_to? :keys
+
         @options = options
       end
 
@@ -21,7 +22,7 @@ module Bashly
       end
 
       def summary
-        help.empty? ? "" : help.split("\n").first
+        help.empty? ? '' : help.split("\n").first
       end
 
       def help

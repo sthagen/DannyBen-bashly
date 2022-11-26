@@ -1,12 +1,12 @@
 require 'mister_bin'
 
 module Bashly
-  # The CLI class is used by the bashly binary and forwards incoming CLI 
+  # The CLI class is used by the bashly binary and forwards incoming CLI
   # commands to the relevant Bashly::Commands class
   class CLI
     def self.runner
       runner = MisterBin::Runner.new version: Bashly::VERSION,
-        header: "Bashly - Bash CLI Generator",
+        header: 'Bashly - Bash CLI Generator',
         footer: "Help: !txtpur!bashly COMMAND --help!txtrst!\nDocs: !undblu!https://bashly.dannyb.co"
 
       runner.route 'init',      to: Commands::Init
@@ -18,5 +18,4 @@ module Bashly
       runner
     end
   end
-
 end

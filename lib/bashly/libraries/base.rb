@@ -8,7 +8,7 @@ module Bashly
       end
 
       def files
-        raise NotImplementedError, "Please implement #files"
+        raise NotImplementedError, 'Please implement #files'
       end
 
       def post_install_message

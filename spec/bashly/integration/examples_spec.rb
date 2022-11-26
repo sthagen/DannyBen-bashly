@@ -7,10 +7,10 @@ require 'spec_helper'
 
 describe 'generated bash scripts' do
   # Test public examples from the examples folder...
-  examples = Dir["examples/*"].select { |f| File.directory? f }
+  examples = Dir['examples/*'].select { |f| File.directory? f }
 
   # ...as well as internal examples, not suitable for public view
-  fixtures = Dir["spec/fixtures/workspaces/*"].select do |f|
+  fixtures = Dir['spec/fixtures/workspaces/*'].select do |f|
     File.directory? f and File.exist? "#{f}/test.sh"
   end
 
@@ -22,15 +22,15 @@ describe 'generated bash scripts' do
   leeway = ENV['CI'] ? 30 : 0
 
   test_cases.each do |example|
-    approval_name = example.gsub "spec/fixtures/workspaces", "fixtures"
+    approval_name = example.gsub 'spec/fixtures/workspaces', 'fixtures'
 
     describe example do
-      it "works" do
-        output = "not executed"
+      it 'is executed properly' do
+        output = 'not executed'
         Dir.chdir example do
           output = `bash test.sh 2>&1`
         end
-        
+
         # Use .diff to give CI some leeway, since its shell differs soemtimes
         # This was observed in at least these two cases:
         # - The "+ ..." shell messages driven by `set -x` have no space
@@ -39,5 +39,4 @@ describe 'generated bash scripts' do
       end
     end
   end
-
 end

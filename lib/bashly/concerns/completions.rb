@@ -24,12 +24,12 @@ module Bashly
         result = {}
 
         all_full_names.each do |name|
-          result[name] = completion_words(with_version: with_version)
+          result[name] = completion_words with_version: with_version
           flags.each do |flag|
             result.merge! flag.completion_data(name)
           end
         end
-        
+
         commands.each do |command|
           result.merge! command.completion_data(with_version: false)
         end
@@ -42,13 +42,13 @@ module Bashly
       end
 
       def completion_function(name = nil)
-        completion_generator.wrapper_function(name)
+        completion_generator.wrapper_function name
       end
 
     private
 
       def completion_generator
-        Completely::Completions.new(completion_data)
+        Completely::Completions.new completion_data
       end
 
       def completion_flag_names
@@ -63,14 +63,13 @@ module Bashly
         trivial_flags = %w[--help -h]
         trivial_flags += %w[--version -v] if with_version
         all = (
-          command_aliases + trivial_flags + 
+          command_aliases + trivial_flags +
           completion_flag_names + completion_allowed_args
         )
 
         all += completions if completions
         all.compact.uniq.sort
       end
-
     end
   end
 end
