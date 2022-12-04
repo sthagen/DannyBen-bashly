@@ -4,6 +4,7 @@ Usage:
   bashly add colors [--force]
   bashly add comp FORMAT [OUTPUT --force]
   bashly add config [--force]
+  bashly add help [--force]
   bashly add lib [--force]
   bashly add settings [--force]
   bashly add strings [--force]
@@ -23,9 +24,15 @@ Commands:
   config
     Add standard functions for handling INI files to the lib directory.
 
+  help
+    Add a help command, in addition to the standard --help flag.
+
   lib
-    Create the additional lib directory for additional user scripts. All *.sh
-    scripts in this folder will be included in the final bash script.
+    Create the lib directory for any additional user scripts.
+    All *.sh scripts in this directory will be included in the final bash
+    script.
+    Note that if you configured a different partials_extension, then the
+    extensions of the files in this directory need to match.
 
   settings
     Copy a sample settings.yml file to your project, allowing you to customize

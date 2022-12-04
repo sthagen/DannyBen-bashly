@@ -44,6 +44,24 @@
   commands:
   - name: config
 
+:command_dependencies_invalid:
+  name: invalid
+  dependencies: 1
+
+:command_dependencies_invalid:
+  name: invalid
+  dependencies: 1
+
+:command_dependencies_invalid_array:
+  name: invalid
+  dependencies: [1, 2]
+
+:command_dependencies_invalid_hash:
+  name: invalid
+  dependencies:
+    docker: 1
+    git: 2
+
 :command_expose_invalid_type:
   name: invalid
   help: expose should be boolean or 'always'
@@ -107,19 +125,34 @@
   args:
   - name: source
 
-:commands_default_without_args:
+:commands_default:
   name: invalid
-  help: default command requires args
+  help: command.default should be a boolean or 'force'
   commands:
   - name: sub
-    default: true
+    default: yes_please
 
-:env_var:
+:env_var_required:
   name: invalid
   help: env_var.required should be a boolean
   environment_variables:
   - name: api_key
     required: 1
+
+:env_var_private:
+  name: invalid
+  help: env_var.private should be a boolean
+  environment_variables:
+  - name: server_env
+    default: development
+    private: 1
+
+:env_var_private_without_default:
+  name: invalid
+  help: env_var.private makes no sense without default
+  environment_variables:
+  - name: server_env
+    private: true
 
 :flag_long:
   name: invalid

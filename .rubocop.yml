@@ -9,37 +9,16 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.7
-  SuggestExtensions: false
-
-# The `ConfigValidator` class is a DSL, give it some complexity leeway
-Metrics/AbcSize:
   Exclude:
-  - lib/bashly/config_validator.rb
+    - debug.rb
+    - dev/**/*
 
-# (same as previous rule)
-Metrics/CyclomaticComplexity:
-  Exclude:
-  - lib/bashly/config_validator.rb
-
-# (same as previous rule)
-Metrics/PerceivedComplexity:
-  Exclude:
-  - lib/bashly/config_validator.rb
-
-# (same as previous rule)
-Metrics/MethodLength:
-  Exclude:
-  - lib/bashly/config_validator.rb
-
-# Guard clauses are inconsistent in the case of `ConfigValidator` 
-Style/GuardClause:
-  Exclude:
-  - lib/bashly/config_validator.rb
-
-# Commands may include long lines
-Layout/LineLength:
-  Exclude:
-    - 'lib/bashly/commands/*'
+# The `ConfigValidator` class is a DSL, let it be
+Metrics/AbcSize:              { Exclude: [lib/bashly/config_validator.rb] }
+Metrics/CyclomaticComplexity: { Exclude: [lib/bashly/config_validator.rb] }
+Metrics/PerceivedComplexity:  { Exclude: [lib/bashly/config_validator.rb] }
+Metrics/MethodLength:         { Exclude: [lib/bashly/config_validator.rb] }
+Style/GuardClause:            { Exclude: [lib/bashly/config_validator.rb] }
 
 # Allow irregular filenames in some cases
 RSpec/FilePath:

@@ -3,18 +3,23 @@
 
 cd ./test || exit
 source approvals.bash
-PATH="$PATH:../"
 
 # Update me
-cli=download
+cli=./download
 
-# Tests
-describe "root command"
-  approve "$cli"
-  approve "$cli --help"
+# Tests (context, describe and indentation are optional)
+context "when DEBUG is on"
+  export DEBUG=1
 
-describe "some other command"
-  approve "$cli other"
-  approve "$cli other --help"
+  describe "root command"
+    approve "$cli"
+    approve "$cli --help"
+
+context "when DEBUG is off"
+  unset DEBUG
+
+  describe "some other command"
+    approve "$cli other"
+    approve "$cli other --help"
 
 # ...more tests...

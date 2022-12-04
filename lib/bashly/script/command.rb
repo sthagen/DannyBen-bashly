@@ -34,16 +34,6 @@ module Bashly
         [name] + alt
       end
 
-      # Returns an array of all full names (including aliases and aliases of
-      # parents)
-      def all_full_names
-        if parent_command
-          parent_command.all_full_names.product(aliases).map { |a| a.join ' ' }
-        else
-          aliases
-        end
-      end
-
       # Returns an array of alternative aliases if any
       def alt
         # DEPRECATION 0.8.0
@@ -166,7 +156,7 @@ module Bashly
       # Returns the bash filename that is expected to hold the user code
       # for this command
       def filename
-        options['filename'] || "#{action_name.to_underscore}_command.sh"
+        options['filename'] || "#{action_name.to_underscore}_command.#{Settings.partials_extension}"
       end
 
       # Returns an array of Flags
@@ -291,7 +281,7 @@ module Bashly
       # This is meant to provide the user with the ability to add custom
       # functions
       def user_lib
-        @user_lib ||= Dir["#{Settings.full_lib_dir}/**/*.sh"].sort
+        @user_lib ||= Dir["#{Settings.full_lib_dir}/**/*.#{Settings.partials_extension}"].sort
       end
 
       # Returns an array of all the args with a whitelist
