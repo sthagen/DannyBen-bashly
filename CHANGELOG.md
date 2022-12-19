@@ -1,6 +1,21 @@
 Change Log
 ========================================
 
+v0.9.2 - 2022-12-16
+----------------------------------------
+
+- Fix repeatable arg validation
+- Fix all shfmt offenses
+
+
+v0.9.1 - 2022-12-09
+----------------------------------------
+
+- Add support for default command that is used instead of showing usage
+- Remove call to root_command when there are sub-commands
+- Add the ability to choose .bash as the partials extension
+
+
 v0.9.0 - 2022-12-02
 ----------------------------------------
 

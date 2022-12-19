@@ -2,18 +2,17 @@
 
 condition = "if"
 args.each do |arg|
-  > {{ condition }} [[ -z ${args[{{ arg.name }}]+x} ]]; then
-  = arg.render(:validations).indent 2
-
+  = arg.render(:validations)
+  > {{ condition }} [[ -z ${args['{{ arg.name }}']+x} ]]; then
   if arg.repeatable
-    >   args[{{ arg.name }}]="\"$1\""
+    >   args['{{ arg.name }}']="\"$1\""
     >   shift
     > else
-    >   args[{{ arg.name }}]="${args[{{ arg.name }}]} \"$1\""
+    >   args['{{ arg.name }}']="${args[{{ arg.name }}]} \"$1\""
     >   shift
 
   else
-    >   args[{{ arg.name }}]=$1
+    >   args['{{ arg.name }}']=$1
     >   shift
 
   end
