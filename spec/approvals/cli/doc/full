@@ -517,7 +517,7 @@ environment_variable.name
 environment_variable.private
 
   Specify that this environment variable should not be advertised in the usage
-  text. Only makes sense when accompanied by default.
+  text.
 
     environment_variables:
     - name: editor
@@ -670,6 +670,18 @@ flag.long
       help: Clone using SSH
 
   See https://bashly.dannyb.co/configuration/flag/#long
+
+flag.private
+
+  Specify that this flag should not be displayed in the help text.
+
+    flags:
+    - long: --legacy
+      short: -l
+      help: Run using the legacy mode
+      private: true
+
+  See https://bashly.dannyb.co/configuration/flag/#private
 
 flag.repeatable
 
