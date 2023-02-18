@@ -102,7 +102,8 @@ describe Commands::Generate do
       expect { subject.execute %w[generate --wrap function] }.to output_approval('cli/generate/wrap-function')
       expect(File).to exist(cli_script)
       lines = File.readlines cli_script
-      expect(lines[0..10].join).to match_approval('cli/generate/wrap-script').except(/\d+\.\d+\.\d+/)
+      expect(lines[0..10].join).to match_approval('cli/generate/wrap-script')
+        .except(/\d+\.\d+\.\d+(\.rc\d)?/)
     end
   end
 
@@ -200,6 +201,19 @@ describe Commands::Generate do
         expect { subject.execute %w[generate -u] }.to output_approval('cli/generate/upgrade-unknown-lib')
       end
     end
+
+    context 'when upgrading a library from an external source' do
+      before do
+        reset_tmp_dir
+        cp 'spec/fixtures/workspaces/lib-custom-source/*'
+        system "rm -rf /tmp/bashly-tmp-source ; ln -s #{Dir.pwd}/spec/fixtures/libraries /tmp/bashly-tmp-source"
+      end
+
+      it 'upgrades the library' do
+        expect { subject.execute %w[generate -u] }.to output_approval('cli/generate/upgrade-custom-source')
+        expect(File.read 'spec/tmp/src/lib/database.sh').to include('dummy')
+      end
+    end
   end
 
   context 'with --watch' do
@@ -234,18 +248,6 @@ describe Commands::Generate do
         expect { subject.execute %w[generate --watch] }
           .to output_approval('cli/generate/watch-stderr').to_stderr
       end
-    end
-  end
-
-  # DEPRECATION 0.8.0
-  context 'with deprecated command.short option' do
-    before do
-      reset_tmp_dir create_src: true
-      cp 'spec/fixtures/deprecations/command-short.yml', "#{source_dir}/bashly.yml"
-    end
-
-    it 'shows deprecations messages in stderr' do
-      expect { subject.execute %w[generate] }.to output_approval('cli/deprecations/command-short-stderr').to_stderr
     end
   end
 end

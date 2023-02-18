@@ -1,25 +1,12 @@
 module Bashly
   class Library
-    class << self
-      def exist?(name)
-        config.has_key? name.to_s
-      end
+    attr_reader :path, :config, :upgrade_string
+    attr_accessor :args
 
-      def config
-        @config ||= YAML.properly_load_file config_path
-      end
-
-      def config_path
-        @config_path ||= File.expand_path 'libraries.yml', __dir__
-      end
-    end
-
-    include AssetHelper
-    attr_reader :name, :args
-
-    def initialize(name, *args)
-      @name = name.to_s
-      @args = args
+    def initialize(path, config, upgrade_string: nil)
+      @path = path.to_s
+      @config = config
+      @upgrade_string = upgrade_string
     end
 
     def files
@@ -28,8 +15,10 @@ module Bashly
 
       else
         config['files'].map do |file|
-          { path:    file['target'] % target_file_args,
-            content: asset_content(file['source']) }
+          {
+            path:    file['target'] % target_file_args,
+            content: file_contents("#{path}/#{file['source']}"),
+          }
         end
       end
     end
@@ -49,13 +38,13 @@ module Bashly
   private
 
     def custom_handler
-      return nil unless config.is_a? Symbol
+      return nil unless config['handler']
 
-      @custom_handler ||= Bashly::Libraries.const_get(config).new(*args)
+      @custom_handler ||= Module.const_get(config['handler']).new(*args)
     end
 
-    def config
-      @config ||= self.class.config[name]
+    def file_contents(path)
+      File.read(path).sub('[@bashly-upgrade]', "[@bashly-upgrade #{upgrade_string}]")
     end
 
     def target_file_args

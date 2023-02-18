@@ -82,6 +82,7 @@ module Bashly
           next unless content =~ /\[@bashly-upgrade (.+)\]/
 
           args = $1.split
+
           library_name = args.shift
           upgrade file, library_name, *args
         end
@@ -92,16 +93,25 @@ module Bashly
       end
 
       def upgrade(existing_file, library_name, *args)
-        if Library.exist? library_name
-          upgrade! existing_file, library_name, *args
+        if library_name.include? ';'
+          source_name, library_name = library_name.split(';')
+          source = Bashly::LibrarySource.new source_name
+        else
+          source = Bashly::LibrarySource.new
+        end
+
+        library = source.libraries[library_name.to_sym]
+
+        if library
+          library.args = args
+          upgrade! existing_file, library
         else
           quiet_say "r`warning` not upgrading c`#{existing_file}`, " \
             "unknown library '#{library_name}'"
         end
       end
 
-      def upgrade!(existing_file, library_name, *args)
-        library = Bashly::Library.new library_name, *args
+      def upgrade!(existing_file, library)
         file = library.find_file existing_file
 
         if file
