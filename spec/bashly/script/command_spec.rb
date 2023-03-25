@@ -332,6 +332,47 @@ describe Script::Command do
     end
   end
 
+  describe '#user_file_path' do
+    it 'returns the path to the user file' do
+      expect(subject.user_file_path 'test.sh').to eq 'spec/tmp/src/test.sh'
+    end
+
+    context 'when the file argument does not end with .sh extension' do
+      it 'returns the path with .sh appended' do
+        expect(subject.user_file_path 'test').to eq 'spec/tmp/src/test.sh'
+      end
+    end
+
+    context 'when partials_extension is set and the argument does not end with the selected extension' do
+      before { Settings.partials_extension = 'bash' }
+      after  { Settings.partials_extension = 'sh' }
+
+      it 'returns the path with the selected extension appended' do
+        expect(subject.user_file_path 'test').to eq 'spec/tmp/src/test.bash'
+      end
+    end
+  end
+
+  describe '#user_file_exist?' do
+    before { FileUtils.mkdir_p 'spec/tmp/src' }
+
+    context 'when the file exists in the user source path' do
+      before { FileUtils.touch 'spec/tmp/src/test.sh' }
+
+      it 'returns true' do
+        expect(subject.user_file_exist?('test')).to be true
+      end
+    end
+
+    context 'when the file does not in the user source path' do
+      before { FileUtils.rm_f 'spec/tmp/src/test.sh' }
+
+      it 'returns false' do
+        expect(subject.user_file_exist?('test')).to be false
+      end
+    end
+  end
+
   describe '#required_args' do
     it 'returns an array of only the required Argument objects' do
       expect(subject.required_args.size).to eq 1
