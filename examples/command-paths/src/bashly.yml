@@ -1,0 +1,45 @@
+name: docker
+help: Docker example with nested command filenames
+version: 0.1.0
+
+flags:
+- long: --debug
+  short: -d
+  help: Enable debug mode
+
+commands:
+- name: container
+  alias: c*
+  help: Container commands
+
+  commands:
+  - name: run
+    help: Run a container
+    args:
+    - name: image
+      help: Image name
+      required: true
+
+  - name: stop
+    help: Stop a container
+    args:
+    - name: container
+      help: Container name
+      required: true
+
+- name: image
+  alias: i*
+  help: Image commands
+
+  commands:
+  - name: ls
+    alias: l
+    help: Show all images
+
+- name: ps
+  help: List containers
+
+  flags:
+  - long: --all
+    short: -a
+    help: Show all containers
