@@ -1,6 +1,18 @@
 class String
   def sanitize_for_print
-    gsub("\n", '\\n').gsub('"', '\"')
+    gsub("\n", '\\n').gsub('"', '\"').gsub('`', '\\\\`')
+  end
+
+  def for_markdown
+    gsub('<', '\\<').gsub('>', '\\>').nl2br
+  end
+
+  def for_manpage
+    gsub('<', '\\<').gsub('>', '\\>').gsub('`', '**').gsub("  \n", "\n\n")
+  end
+
+  def nl2br
+    gsub("\n", "  \n")
   end
 
   def indent(offset)
@@ -11,6 +23,10 @@ class String
 
   def to_underscore
     gsub(/(.)([A-Z])/, '\1_\2').gsub(/[- ]/, '_').downcase
+  end
+
+  def to_hyphen
+    tr(' ', '-').gsub(/([a-z])([A-Z])/, '\1-\2').downcase
   end
 
   def to_path

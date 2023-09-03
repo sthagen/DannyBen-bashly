@@ -56,6 +56,37 @@ lib:
     - source: "lib/sample_function.sh"
       target: "%{user_lib_dir}/sample_function.%{user_ext}"
 
+render_markdown:
+  help: Copy the markdown templates to your project, allowing you to customize the markdown documentation output.
+  skip_src_check: true
+  files:
+    - source: "render/markdown/README.md"
+      target: "templates/markdown/README.md"
+    - source: "render/markdown/markdown.gtx"
+      target: "templates/markdown/markdown.gtx"
+    - source: "render/markdown/render.rb"
+      target: "templates/markdown/render.rb"
+  post_install_message: |
+    Generate your markdown documentation by running:
+
+      m`$ bashly render templates/markdown docs`
+
+render_mandoc:
+  help: Copy the mandoc templates to your project, allowing you to customize the man documentation output.
+  skip_src_check: true
+  files:
+    - source: "render/mandoc/README.md"
+      target: "templates/mandoc/README.md"
+    - source: "render/mandoc/mandoc.gtx"
+      target: "templates/mandoc/mandoc.gtx"
+    - source: "render/mandoc/render.rb"
+      target: "templates/mandoc/render.rb"
+  post_install_message: |
+    Note that this template requires pandoc.
+    Generate your man pages by running:
+
+      m`$ bashly render templates/mandoc docs`
+
 settings:
   help: Copy a sample settings.yml file to your project, allowing you to customize some bashly options.
   skip_src_check: true

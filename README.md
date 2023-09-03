@@ -71,7 +71,8 @@ Bashly is responsible for:
   - **Config file management** (INI format).
   - **YAML parsing**.
   - **Bash completions**.
-  - and more.
+  - *and more*.
+- Auto-generating **markdown and man page documentation** for your script.
 
 ## Contributing / Support
 

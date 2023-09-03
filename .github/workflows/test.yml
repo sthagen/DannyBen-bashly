@@ -14,11 +14,24 @@ jobs:
       LC_ALL: en_US.UTF-8 
 
     strategy:
-      matrix: { ruby: ['3.0', '3.1', '3.2', head] }
+      matrix: { ruby: ['3.0', '3.1', '3.2'] }
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Install OS dependencies
+      run: sudo apt-get -y install mandoc
+
+    # Rush needed for easy installation of stuff
+    - name: Install rush
+      run: curl -Ls http://get.dannyb.co/rush/setup | bash
+
+    - name: Connect rush repo
+      run: rush clone dannyben --shallow --default
+
+    - name: Install pandoc
+      run: rush get pandoc
 
     # libyaml needed for Ruby's YAML library
     - name: Install OS dependencies
@@ -103,11 +116,5 @@ jobs:
     - name: Generate all subjects
       run: bundle exec run examples regen
 
-    - name: Run bashly schema tests
-      run: bundle exec run schema examples
-
-    - name: Run settings schema tests
-      run: bundle exec run schema settings
-
-    - name: Run strings schema tests
-      run: bundle exec run schema strings
+    - name: Run schema tests
+      run: bundle exec run schema all

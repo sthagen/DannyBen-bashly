@@ -1,9 +1,33 @@
 describe String do
   describe '#sanitize_for_print' do
-    subject { %[this is\na "new line"] }
+    subject { "this is\na \"new line\" with `backticks`" }
 
     it 'escapes newlines and quotes' do
-      expect(subject.sanitize_for_print).to eq 'this is\\na \"new line\"'
+      expect(subject.sanitize_for_print).to eq 'this is\\na \"new line\" with \`backticks\`'
+    end
+  end
+
+  describe '#for_markdown' do
+    subject { "line one\nline two is <tagged>\n" }
+
+    it 'inserts two spaces before newlines and escapes < > characters' do
+      expect(subject.for_markdown).to eq "line one  \nline two is \\<tagged\\>  \n"
+    end
+  end
+
+  describe '#for_manpage' do
+    subject { "line one  \n`line two`  \nand <tagged>\n" }
+
+    it 'doubles soft newlines, escapes < > characters and converts ` => **' do
+      expect(subject.for_manpage).to eq "line one\n\n**line two**\n\nand \\<tagged\\>\n"
+    end
+  end
+
+  describe '#nl2br' do
+    subject { "line one\nline two" }
+
+    it 'inserts two spaces before newlines' do
+      expect(subject.for_markdown).to eq "line one  \nline two"
     end
   end
 
@@ -59,6 +83,31 @@ describe String do
 
       it 'returns its snake_case version' do
         expect(subject.to_underscore).to eq 'in_any_case'
+      end
+    end
+  end
+
+  describe '#to_hyphen' do
+    subject { 'Some String' }
+
+    it 'does not mutate the source' do
+      subject.to_hyphen
+      expect(subject).to eq 'Some String'
+    end
+
+    context 'with CamelCased argument' do
+      subject { 'NotCamelCase' }
+
+      it 'returns its hyphen case version' do
+        expect(subject.to_hyphen).to eq 'not-camel-case'
+      end
+    end
+
+    context 'with any string with spaces and hyphens' do
+      subject { 'In Any-case' }
+
+      it 'returns its snake_case version' do
+        expect(subject.to_hyphen).to eq 'in-any-case'
       end
     end
   end
