@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'tmpdir'
 
 module Bashly
   class LibrarySource
@@ -14,7 +15,7 @@ module Bashly
     end
 
     def config
-      @config ||= YAML.load_file config_path
+      @config ||= LibrarySourceConfig.new(config_path).validated_data
     end
 
     def libraries
