@@ -95,12 +95,17 @@ module Bashly
       assert_optional_string "#{key}.validate", value['validate']
       assert_boolean "#{key}.required", value['required']
       assert_boolean "#{key}.repeatable", value['repeatable']
+      assert_boolean "#{key}.unique", value['unique']
 
       assert_array "#{key}.allowed", value['allowed'], of: :string
 
       refute value['name'].match(/^-/), "#{key}.name must not start with '-'"
 
       refute value['required'] && value['default'], "#{key} cannot have both nub`required` and nub`default`"
+
+      if value['unique']
+        assert value['repeatable'], "#{key}.unique does not make sense without nub`repeatable`"
+      end
     end
 
     def assert_flag(key, value)
@@ -118,6 +123,7 @@ module Bashly
 
       assert_boolean "#{key}.private", value['private']
       assert_boolean "#{key}.repeatable", value['repeatable']
+      assert_boolean "#{key}.unique", value['unique']
       assert_boolean "#{key}.required", value['required']
       assert_array "#{key}.allowed", value['allowed'], of: :string
       assert_array "#{key}.conflicts", value['conflicts'], of: :string
@@ -139,6 +145,10 @@ module Bashly
 
       if value['completions']
         assert value['arg'], "#{key}.completions does not make sense without nub`arg`"
+      end
+
+      if value['unique']
+        assert value['arg'] && value['repeatable'], "#{key}.unique does not make sense without nub`arg` and nub`repeatable`"
       end
     end
 
@@ -199,6 +209,16 @@ module Bashly
       if value['catch_all'] && value['args']
         repeatable_arg = value['args'].find { |a| a['repeatable'] }&.dig 'name'
         refute repeatable_arg, "#{key}.catch_all makes no sense with repeatable arg (#{repeatable_arg})"
+      end
+
+      if value['args']
+        repeatable_args = value['args'].count { |a| a['repeatable'] }
+        assert repeatable_args < 2, "#{key}.args cannot have more than one repeatable args"
+
+        if repeatable_args == 1
+          assert value['args'].last['repeatable'],
+            "#{key}.args cannot contain a repeatable arg unless it is the last one"
+        end
       end
 
       if value['expose']
