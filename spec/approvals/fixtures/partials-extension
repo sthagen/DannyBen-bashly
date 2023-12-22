@@ -102,3 +102,7 @@ Environment Variables:
 # you can edit it freely and regenerate (it will not be overwritten)
 args:
 - ${args[source]} = something
+
+environment variables:
+- $API_KEY = 
+- $DEFAULT_TARGET_LOCATION = 

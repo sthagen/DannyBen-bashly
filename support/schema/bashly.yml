@@ -245,6 +245,71 @@ definitions:
             const: true
     patternProperties: *custom-properties
     additionalProperties: false
+  environment-variable:
+    title: environment variable
+    description: |-
+      An environment variable of the current application
+      https://bashly.dannyb.co/configuration/environment-variable/#environment-variable
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        title: name
+        description: |-
+          A name of the current environment variable
+          https://bashly.dannyb.co/configuration/environment-variable/#name
+        type: string
+        minLength: 1
+        examples:
+          - config_path
+      help:
+        title: help
+        description: |-
+          A description of the current environment variable
+          https://bashly.dannyb.co/configuration/environment-variable/#help
+        type: string
+        minLength: 1
+        examples:
+          - Location of the config file
+      private:
+        title: private
+        description: |-
+          Whether the current environment variable is hidden from help
+          https://bashly.dannyb.co/configuration/environment-variable/#private
+        type: boolean
+        default: false
+      required:
+        title: required
+        description: |-
+          Whether the current environment variable is required
+          https://bashly.dannyb.co/configuration/environment-variable/#required
+        type: boolean
+        default: true
+      allowed:
+        title: allowed
+        description: |-
+          Valid values of the current environment variable
+          https://bashly.dannyb.co/configuration/environment-variable/#allowed
+        type: array
+        minLength: 1
+        uniqueItems: true
+        items:
+          description: A valid value of the current environment variable
+          type: string
+          minLength: 1
+          examples:
+            - production
+      default:
+        title: default
+        description: |-
+          A default value of the current environment variable
+          https://bashly.dannyb.co/configuration/environment-variable/#default
+        type: string
+        examples:
+          - ~/config.ini
+    patternProperties: *custom-properties
+    additionalProperties: false
   name-property:
     title: name
     description: |-
@@ -336,47 +401,6 @@ definitions:
       - type: string
         enum:
           - force
-  environment-variables-name-property:
-    $comment: '''environment-variables-'' prefix is used as this property is related to https://bashly.dannyb.co/configuration/environment-variable/#environment-variable'
-    title: name
-    description: |-
-      A name of the current environment variable
-      https://bashly.dannyb.co/configuration/environment-variable/#name
-    type: string
-    minLength: 1
-    examples:
-      - config_path
-  environment-variables-help-property:
-    title: help
-    description: |-
-      A description of the current environment variable
-      https://bashly.dannyb.co/configuration/environment-variable/#help
-    type: string
-    minLength: 1
-    examples:
-      - Location of the config file
-  environment-variables-default-property:
-    title: default
-    description: |-
-      A default value of the current environment variable
-      https://bashly.dannyb.co/configuration/environment-variable/#default
-    type: string
-    examples:
-      - ~/config.ini
-  environment-variables-private-property:
-    title: private
-    description: |-
-      Whether the current environment variable is hidden from help
-      https://bashly.dannyb.co/configuration/environment-variable/#private
-    type: boolean
-    default: false
-  environment-variables-required-property:
-    title: required
-    description: |-
-      Whether the current environment variable is required
-      https://bashly.dannyb.co/configuration/environment-variable/#required
-    type: boolean
-    default: true
   environment-variables-property:
     title: environment variables
     description: |-
@@ -385,54 +409,7 @@ definitions:
     type: array
     uniqueItems: true
     items:
-      title: environment variable
-      description: |-
-        An environment variable of the current application
-        https://bashly.dannyb.co/configuration/environment-variable/#environment-variable
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          $ref: '#/definitions/environment-variables-name-property'
-        help:
-          $ref: '#/definitions/environment-variables-help-property'
-        default:
-          $ref: '#/definitions/environment-variables-default-property'
-        private:
-          $ref: '#/definitions/environment-variables-private-property'
-        required:
-          $ref: '#/definitions/environment-variables-required-property'
-      if:
-        properties:
-          required:
-            const: false
-      then:
-        properties:
-          name:
-            $ref: '#/definitions/environment-variables-name-property'
-          help:
-            $ref: '#/definitions/environment-variables-help-property'
-          default:
-            $ref: '#/definitions/environment-variables-default-property'
-          private:
-            $ref: '#/definitions/environment-variables-private-property'
-          required:
-            $ref: '#/definitions/environment-variables-required-property'
-        patternProperties: *custom-properties
-        additionalProperties: false
-      else:
-        properties:
-          name:
-            $ref: '#/definitions/environment-variables-name-property'
-          help:
-            $ref: '#/definitions/environment-variables-help-property'
-          private:
-            $ref: '#/definitions/environment-variables-private-property'
-          required:
-            $ref: '#/definitions/environment-variables-required-property'
-        patternProperties: *custom-properties
-        additionalProperties: false
+      $ref: '#/definitions/environment-variable'
   examples-property:
     title: examples
     oneOf:

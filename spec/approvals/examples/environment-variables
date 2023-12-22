@@ -53,8 +53,13 @@ Environment Variables:
   MY_SECRET (required)
     Your secret
 
+  REGION
+    Cloud region
+    Default: us-east-2
+
   ENVIRONMENT
     One of development, production or test
+    Allowed: development, production, testing
     Default: development
 
 + ./cli verify
@@ -65,10 +70,12 @@ missing required environment variable: MY_SECRET
 # code for 'cli verify' goes here
 # you can edit it freely and regenerate (it will not be overwritten)
 args: none
-environment:
-- API_KEY=
-- ENVIRONMENT=development
-- MY_SECRET=there is no spoon
+
+environment variables:
+- $API_KEY = 
+- $ENVIRONMENT = development
+- $MY_SECRET = there is no spoon
+- $REGION = us-east-2
 + ENVIRONMENT=production
 + MY_SECRET=safe-with-me
 + ./cli verify
@@ -76,7 +83,9 @@ environment:
 # code for 'cli verify' goes here
 # you can edit it freely and regenerate (it will not be overwritten)
 args: none
-environment:
-- API_KEY=
-- ENVIRONMENT=production
-- MY_SECRET=safe-with-me
+
+environment variables:
+- $API_KEY = 
+- $ENVIRONMENT = production
+- $MY_SECRET = safe-with-me
+- $REGION = us-east-2
