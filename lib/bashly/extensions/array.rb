@@ -1,9 +1,13 @@
+require 'bashly/indenter'
+
 class Array
   def indent(offset)
     return self unless offset.positive?
 
     indentation = ' ' * offset
-    map { |line| "#{indentation}#{line}" }
+    indenter = Indenter.new indentation
+
+    map { |line| indenter.indent line }
   end
 
   def nonuniq
