@@ -11,15 +11,19 @@ module Bashly
         def command_help_data
           result = {}
 
-          public_commands.each do |command|
+          commands.each do |command|
             result[command.group_string] ||= {}
-            result[command.group_string][command.name] = { summary: command.summary_string }
+            result[command.group_string][command.name] = {
+              summary:    command.summary_string,
+              visibility: command.visibility,
+            }
             next unless command.expose
 
-            command.public_commands.each do |subcommand|
+            command.commands.each do |subcommand|
               result[command.group_string]["#{command.name} #{subcommand.name}"] = {
-                summary:   subcommand.summary_string,
-                help_only: command.expose != 'always',
+                summary:    subcommand.summary_string,
+                visibility: subcommand.visibility,
+                help_only:  command.expose != 'always',
               }
             end
           end
@@ -68,12 +72,12 @@ module Bashly
         def grouped_commands
           result = {}
 
-          public_commands.each do |command|
+          visible_commands.each do |command|
             result[command.group_string] ||= []
             result[command.group_string] << command
             next unless command.expose
 
-            command.public_commands.each do |subcommand|
+            command.visible_commands.each do |subcommand|
               result[command.group_string] << subcommand
             end
           end
@@ -89,6 +93,17 @@ module Bashly
         # Returns a full list of the public Command names and aliases combined
         def public_command_aliases
           public_commands.map(&:aliases).flatten
+        end
+
+        # Returns only public commands, or both public and private commands
+        # if Settings.private_reveal_key is set
+        def visible_commands
+          Settings.private_reveal_key ? commands : public_commands
+        end
+
+        # Returns a full list of the visible Command names and aliases combined
+        def visible_command_aliases
+          visible_commands.map(&:aliases).flatten
         end
       end
     end

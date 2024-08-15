@@ -23,6 +23,25 @@ describe Script::Introspection::Commands do
       expect(subject.command_help_data.to_yaml)
         .to match_approval('script/command/exposed_commands')
     end
+
+    context 'with private subcommands' do
+      let(:fixture) { :exposed_private }
+
+      it 'sets the visibility to :private' do
+        expect(subject.command_help_data.to_yaml)
+          .to match_approval('script/command/private_exposed_commands')
+      end
+
+      context 'when Settings.private_reveal_key is set' do
+        before { Settings.private_reveal_key = 'PRIVATE' }
+        after { Settings.private_reveal_key = nil }
+
+        it 'sets the visibility to :semi_private' do
+          expect(subject.command_help_data.to_yaml)
+            .to match_approval('script/command/semi_private_exposed_commands')
+        end
+      end
+    end
   end
 
   describe '#command_names' do
@@ -90,11 +109,49 @@ describe Script::Introspection::Commands do
     end
   end
 
-  describe '#public_commands_aliases' do
+  describe '#public_command_aliases' do
     let(:fixture) { :private_commands }
 
     it 'returns an array of command aliases of public subcommands' do
       expect(subject.public_command_aliases).to eq %w[connect c]
+    end
+  end
+
+  describe '#visible_commands' do
+    let(:fixture) { :private_commands }
+
+    it 'returns public commands only (same as #public_commands)' do
+      expect(subject.visible_commands.size).to eq 1
+      expect(subject.visible_commands.first.name).to eq 'connect'
+    end
+
+    context 'when Settings.private_reveal_key is set' do
+      before { Settings.private_reveal_key = 'SHOW' }
+      after { Settings.private_reveal_key = nil }
+
+      it 'returns all commands (same as #commands)' do
+        expect(subject.visible_commands.size).to eq 3
+        expect(subject.visible_commands[1].name).to eq 'connect-ftp'
+      end
+    end
+  end
+
+  describe '#visible_command_aliases' do
+    let(:fixture) { :private_commands }
+
+    it 'returns an array of command aliases of public subcommands' do
+      expect(subject.visible_command_aliases).to eq %w[connect c]
+    end
+
+    context 'when Settings.private_reveal_key is set' do
+      before { Settings.private_reveal_key = 'SHOW' }
+      after { Settings.private_reveal_key = nil }
+
+      it 'returns an array of command aliases of all subcommands' do
+        expect(subject.visible_command_aliases).to eq %w[
+          connect c connect-ftp cf connect-ssh cs
+        ]
+      end
     end
   end
 end
