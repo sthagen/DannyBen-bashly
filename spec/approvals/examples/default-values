@@ -6,7 +6,7 @@ run ./convert --help to test your bash script
 + ./convert
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'convert' command.
-# The code you write here will be wrapped by a function named 'convert_command()'.
+# The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--format]} = png
@@ -43,7 +43,7 @@ Examples:
 + ./convert '*.bmp'
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'convert' command.
-# The code you write here will be wrapped by a function named 'convert_command()'.
+# The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--format]} = png
@@ -51,7 +51,7 @@ args:
 + ./convert -f pdf
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'convert' command.
-# The code you write here will be wrapped by a function named 'convert_command()'.
+# The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--format]} = pdf
@@ -59,7 +59,7 @@ args:
 + ./convert '*.pdf' --format gif
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'convert' command.
-# The code you write here will be wrapped by a function named 'convert_command()'.
+# The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--format]} = gif
