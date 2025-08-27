@@ -1,6 +1,13 @@
 Changelog
 ========================================
 
+v1.3.2 - 2025-08-27
+----------------------------------------
+
+- Fix function name in root command comment [`5775da6fd`](https://github.com/bashly-framework/bashly/commit/5775da6fd)
+- Compare [`v1.3.1..v1.3.2`](https://github.com/bashly-framework/bashly/compare/v1.3.1..v1.3.2)
+
+
 v1.3.1 - 2025-08-08
 ----------------------------------------
 
