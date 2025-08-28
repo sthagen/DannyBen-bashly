@@ -169,6 +169,7 @@ module Bashly
       assert_boolean "#{key}.required", value['required']
       assert_boolean "#{key}.private", value['private']
       assert_array "#{key}.allowed", value['allowed'], of: :string
+      assert_optional_string "#{key}.validate", value['validate']
 
       refute value['required'] && value['default'], "#{key} cannot have both nub`required` and nub`default`"
     end
