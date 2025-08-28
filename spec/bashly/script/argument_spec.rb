@@ -6,6 +6,15 @@ describe Script::Argument do
 
   let(:fixture) { :basic_argument }
 
+  describe 'composition' do
+    it 'includes the necessary modules' do
+      modules = [Script::Introspection::Validate]
+      modules.each do |mod|
+        expect(described_class.ancestors).to include(mod)
+      end
+    end
+  end
+
   describe '#default_string' do
     context 'when default is an array' do
       let(:fixture) { :default_array }
@@ -56,38 +65,6 @@ describe Script::Argument do
 
       it 'adds a ... suffix' do
         expect(subject.label).to eq 'FILE...'
-      end
-    end
-  end
-
-  describe '#validate' do
-    context 'with a string value' do
-      let(:fixture) { :validate_string }
-
-      it 'returns it as an array' do
-        expect(subject.validate).to eq ['file_exists']
-      end
-    end
-
-    context 'with an array value' do
-      let(:fixture) { :validate_array }
-
-      it 'returns it as is' do
-        expect(subject.validate).to eq ['file_exists', 'file_is_writable']
-      end
-    end
-  end
-
-  describe '#validate?' do
-    it 'returns false' do
-      expect(subject.validate?).to be false
-    end
-
-    context 'when validations are defined' do      
-      let(:fixture) { :validate_string }
-
-      it 'returns true' do
-        expect(subject.validate?).to be true
       end
     end
   end

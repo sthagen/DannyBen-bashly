@@ -3,6 +3,8 @@ require 'shellwords'
 module Bashly
   module Script
     class Argument < Base
+      include Introspection::Validate
+      
       class << self
         def option_keys
           @option_keys ||= %i[
@@ -28,15 +30,6 @@ module Bashly
       def usage_string
         required ? label : "[#{label}]"
       end
-
-      def validate
-        return [] unless options['validate']
-
-        result = options['validate']
-        result.is_a?(Array) ? result : [result]
-      end
-
-      def validate? = validate.any?
     end
   end
 end

@@ -6,6 +6,18 @@ describe Script::Flag do
 
   let(:fixture) { :basic_flag }
 
+  describe 'composition' do
+    it 'includes the necessary modules' do
+      modules = [
+        Script::Introspection::Visibility, Script::Introspection::Validate,
+        Completions::Flag
+      ]
+      modules.each do |mod|
+        expect(described_class.ancestors).to include(mod)
+      end
+    end
+  end
+
   describe '#aliases' do
     context 'with long and short options' do
       it 'returns an array of both long and short values' do
@@ -106,38 +118,6 @@ describe Script::Flag do
         it 'appends (repeatable) to the usage string' do
           expect(subject.usage_string(extended: true)).to eq "#{subject.usage_string} (repeatable)"
         end
-      end
-    end
-  end
-
-  describe '#validate' do
-    context 'with a string value' do
-      let(:fixture) { :validate_string }
-
-      it 'returns it as an array' do
-        expect(subject.validate).to eq ['file_exists']
-      end
-    end
-
-    context 'with an array value' do
-      let(:fixture) { :validate_array }
-
-      it 'returns it as is' do
-        expect(subject.validate).to eq ['file_exists', 'file_is_writable']
-      end
-    end
-  end
-
-  describe '#validate?' do
-    it 'returns false' do
-      expect(subject.validate?).to be false
-    end
-
-    context 'when validations are defined' do      
-      let(:fixture) { :validate_string }
-
-      it 'returns true' do
-        expect(subject.validate?).to be true
       end
     end
   end

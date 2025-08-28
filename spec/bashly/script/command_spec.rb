@@ -8,6 +8,25 @@ describe Script::Command do
   let(:fixtures) { load_fixture 'script/commands' }
   let(:fixture) { :basic_command }
 
+  describe 'composition' do
+    it 'includes the necessary modules' do
+      modules = [
+        Script::Introspection::Arguments,
+        Script::Introspection::Commands,
+        Script::Introspection::Dependencies,
+        Script::Introspection::EnvironmentVariables,
+        Script::Introspection::Examples,
+        Script::Introspection::Flags,
+        Script::Introspection::Variables,
+        Script::Introspection::Visibility,
+        Completions::Command
+      ]
+      modules.each do |mod|
+        expect(described_class.ancestors).to include(mod)
+      end
+    end
+  end
+
   describe '#action_name' do
     context 'when it is the root command' do
       it 'returns root' do
