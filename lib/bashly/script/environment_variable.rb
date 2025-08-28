@@ -6,7 +6,7 @@ module Bashly
       class << self
         def option_keys
           @option_keys ||= %i[
-            allowed default help name required private validate
+            allowed default help name private required validate
           ]
         end
       end

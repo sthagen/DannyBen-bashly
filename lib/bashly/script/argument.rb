@@ -21,12 +21,12 @@ module Bashly
         end
       end
 
-      def usage_string
-        required ? label : "[#{label}]"
-      end
-
       def label
         repeatable ? "#{name.upcase}..." : name.upcase
+      end
+
+      def usage_string
+        required ? label : "[#{label}]"
       end
     end
   end

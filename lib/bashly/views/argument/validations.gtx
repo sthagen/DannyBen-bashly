@@ -14,10 +14,12 @@ if validate
     >   done
     > fi
   else
-    > validation_output="$(validate_{{ validate }} "${args['{{ name }}']:-}")"
-    > if [[ -v args['{{ name }}'] && -n "$validation_output" ]]; then
-    >   printf "{{ strings[:validation_error] }}\n" "{{ name.upcase }}" "$validation_output" >&2
-    >   exit 1
+    > if [[ -v args['{{ name }}'] ]]; then
+    >   validation_output="$(validate_{{ validate }} "${args['{{ name }}']:-}")"
+    >   if [[ -n "$validation_output" ]]; then
+    >     printf "{{ strings[:validation_error] }}\n" "{{ name.upcase }}" "$validation_output" >&2
+    >     exit 1
+    >   fi
     > fi
     >
   end
