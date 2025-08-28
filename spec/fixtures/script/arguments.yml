@@ -23,3 +23,11 @@
   name: file
   repeatable: true
   default: spaced one
+
+:validate_string:
+  name: file
+  validate: file_exists
+
+:validate_array:
+  name: file
+  validate: [file_exists, file_is_writable]

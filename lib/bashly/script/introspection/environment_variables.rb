@@ -28,7 +28,7 @@ module Bashly
 
         # Returns an array of all the environment_variables with a validation
         def validated_environment_variables
-          environment_variables.select(&:validate)
+          environment_variables.select(&:validate?)
         end
 
         # Returns only public environment variables, or both public and private

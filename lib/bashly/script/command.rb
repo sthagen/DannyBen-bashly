@@ -158,7 +158,7 @@ module Bashly
 
       # Returns a mixed array of Argument and Flag objects that have validations
       def validatables
-        @validatables ||= args.select(&:validate) + flags.select(&:validate)
+        @validatables ||= args.select(&:validate?) + flags.select(&:validate?)
       end
 
     private

@@ -1,12 +1,14 @@
-if validate
+if validate?
   = view_marker
 
   > if [[ -v {{ name.upcase }} ]]; then
-  >   validation_output="$(validate_{{ validate }} "${{ name.upcase }}")"
+  validate.each do |funcname|
+  >   validation_output="$(validate_{{ funcname }} "${{ name.upcase }}")"
   >   if [[ -n "${validation_output}" ]]; then
   >     printf "{{ strings[:environment_variable_validation_error] }}\n" "{{ usage_string }}" "$validation_output" >&2
   >     exit 1
   >   fi
+  end
   > fi
   >
 end

@@ -28,6 +28,15 @@ module Bashly
       def usage_string
         required ? label : "[#{label}]"
       end
+
+      def validate
+        return [] unless options['validate']
+
+        result = options['validate']
+        result.is_a?(Array) ? result : [result]
+      end
+
+      def validate? = validate.any?
     end
   end
 end

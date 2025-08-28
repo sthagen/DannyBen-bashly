@@ -46,6 +46,15 @@ module Bashly
         result << strings[:repeatable] if repeatable && extended
         result.join ' '
       end
+
+      def validate
+        return [] unless options['validate']
+
+        result = options['validate']
+        result.is_a?(Array) ? result : [result]
+      end
+
+      def validate? = validate.any?
     end
   end
 end
