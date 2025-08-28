@@ -12,9 +12,7 @@ describe Script::Flag do
         Script::Introspection::Visibility, Script::Introspection::Validate,
         Completions::Flag
       ]
-      modules.each do |mod|
-        expect(described_class.ancestors).to include(mod)
-      end
+      expect(described_class.ancestors).to include(*modules)
     end
   end
 

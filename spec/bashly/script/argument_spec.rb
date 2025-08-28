@@ -9,9 +9,7 @@ describe Script::Argument do
   describe 'composition' do
     it 'includes the necessary modules' do
       modules = [Script::Introspection::Validate]
-      modules.each do |mod|
-        expect(described_class.ancestors).to include(mod)
-      end
+      expect(described_class.ancestors).to include(*modules)
     end
   end
 

@@ -19,7 +19,7 @@ describe Script::Introspection::Validate do
       let(:fixture) { :validate_array }
 
       it 'returns it as is' do
-        expect(subject.validate).to eq ['file_exists', 'file_is_writable']
+        expect(subject.validate).to eq %w[file_exists file_is_writable]
       end
     end
   end
@@ -29,7 +29,7 @@ describe Script::Introspection::Validate do
       expect(subject.validate?).to be false
     end
 
-    context 'when validations are defined' do      
+    context 'when validations are defined' do
       let(:fixture) { :validate_string }
 
       it 'returns true' do
