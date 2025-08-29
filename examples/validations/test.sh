@@ -12,6 +12,7 @@ bashly generate
 
 ./validate calc 1 2 --save README.md
 ./validate calc A
+./validate calc 1 ''
 ./validate calc 1 B
 ./validate calc 1 2 --save no-such-file.txt
 

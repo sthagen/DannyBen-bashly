@@ -21,5 +21,3 @@ describe Commands::Preview do
     end
   end
 end
-
-

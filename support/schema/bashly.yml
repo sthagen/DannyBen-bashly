@@ -73,12 +73,18 @@ definitions:
         description: |-
           A validation function of the current positional argument
           https://bashly.dev/configuration/argument/#validate
-        type: string
+        oneOf:
+          - type: string
+          - type: array
+            minItems: 1
+            items:
+              type: string
         examples:
           - file_exists
           - dir_exists
           - integer
           - non_empty
+          - [file_exists, file_writable]
       unique:
         title: unique
         description: |-
@@ -239,12 +245,18 @@ definitions:
         description: |-
           A validation function of the current flag
           https://bashly.dev/configuration/flag/#validate
-        type: string
+        oneOf:
+          - type: string
+          - type: array
+            minItems: 1
+            items:
+              type: string
         examples:
           - file_exists
           - dir_exists
           - integer
           - non_empty
+          - [file_exists, file_writable]
       unique:
         title: unique
         description: |-
@@ -305,12 +317,18 @@ definitions:
         description: |-
           A validation function for the current environment variable
           https://bashly.dev/configuration/environment-variable/#validate
-        type: string
+        oneOf:
+          - type: string
+          - type: array
+            minItems: 1
+            items:
+              type: string
         examples:
           - file_exists
           - dir_exists
           - integer
           - non_empty
+          - [file_exists, file_writable]
       allowed:
         title: allowed
         description: |-

@@ -1,0 +1,14 @@
+:basic_env_var:
+  name: build_dir
+
+:required:
+  name: build_dir
+  required: true
+
+:validate_string:
+  name: build_dir
+  validate: dir_exists
+
+:validate_array:
+  name: build_dir
+  validate: [dir_exists, dir_is_writable]

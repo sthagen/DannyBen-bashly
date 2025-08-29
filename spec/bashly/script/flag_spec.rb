@@ -6,6 +6,16 @@ describe Script::Flag do
 
   let(:fixture) { :basic_flag }
 
+  describe 'composition' do
+    it 'includes the necessary modules' do
+      modules = [
+        Script::Introspection::Visibility, Script::Introspection::Validate,
+        Completions::Flag
+      ]
+      expect(described_class.ancestors).to include(*modules)
+    end
+  end
+
   describe '#aliases' do
     context 'with long and short options' do
       it 'returns an array of both long and short values' do

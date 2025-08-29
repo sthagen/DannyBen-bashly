@@ -22,6 +22,9 @@ args:
 + ./validate calc A
 validation error in FIRST:
 must be an integer
++ ./validate calc 1 ''
+validation error in SECOND:
+must not be empty
 + ./validate calc 1 B
 validation error in SECOND:
 must be an integer
