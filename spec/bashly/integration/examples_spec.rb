@@ -24,10 +24,10 @@ describe 'generated bash scripts', :slow do
   # Allow up to a certain string distance from the approval text in CI
   leeway = ENV['CI'] ? 40 : 0
 
-  # For certain examples, allow some exceptions (replacements) since they 
+  # For certain examples, allow some exceptions (replacements) since they
   # are too volatile (e.g. line number changes)
   exceptions = {
-    'examples/stacktrace' => [/download:\d+/, 'download:<line>'],
+    'examples/stacktrace'    => [/download:\d+/, 'download:<line>'],
     'examples/render-mandoc' => [/Version 0.1.0.*download\(1\)/, '<footer>'],
   }
 

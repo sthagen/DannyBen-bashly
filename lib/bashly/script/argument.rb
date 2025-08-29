@@ -3,6 +3,8 @@ require 'shellwords'
 module Bashly
   module Script
     class Argument < Base
+      include Introspection::Validate
+
       class << self
         def option_keys
           @option_keys ||= %i[

@@ -44,3 +44,13 @@
   arg: path
   repeatable: true
   default: spaced one
+
+:validate_string:
+  long: --file
+  arg: name
+  validate: file_exists
+
+:validate_array:
+  long: --file
+  arg: name
+  validate: [file_exists, file_is_writable]

@@ -6,6 +6,13 @@ describe Script::Argument do
 
   let(:fixture) { :basic_argument }
 
+  describe 'composition' do
+    it 'includes the necessary modules' do
+      modules = [Script::Introspection::Validate]
+      expect(described_class.ancestors).to include(*modules)
+    end
+  end
+
   describe '#default_string' do
     context 'when default is an array' do
       let(:fixture) { :default_array }

@@ -92,7 +92,7 @@ module Bashly
       assert_string "#{key}.name", value['name']
       assert_optional_string "#{key}.help", value['help']
       assert_string_or_array "#{key}.default", value['default']
-      assert_optional_string "#{key}.validate", value['validate']
+      assert_string_or_array "#{key}.validate", value['validate']
       assert_boolean "#{key}.required", value['required']
       assert_boolean "#{key}.repeatable", value['repeatable']
       assert_boolean "#{key}.unique", value['unique']
@@ -123,7 +123,7 @@ module Bashly
       assert_optional_string "#{key}.help", value['help']
       assert_optional_string "#{key}.arg", value['arg']
       assert_string_or_array "#{key}.default", value['default']
-      assert_optional_string "#{key}.validate", value['validate']
+      assert_string_or_array "#{key}.validate", value['validate']
 
       assert_boolean "#{key}.private", value['private']
       assert_boolean "#{key}.repeatable", value['repeatable']
@@ -169,7 +169,7 @@ module Bashly
       assert_boolean "#{key}.required", value['required']
       assert_boolean "#{key}.private", value['private']
       assert_array "#{key}.allowed", value['allowed'], of: :string
-      assert_optional_string "#{key}.validate", value['validate']
+      assert_string_or_array "#{key}.validate", value['validate']
 
       refute value['required'] && value['default'], "#{key} cannot have both nub`required` and nub`default`"
     end

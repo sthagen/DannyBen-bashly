@@ -2,6 +2,7 @@ module Bashly
   module Script
     class EnvironmentVariable < Base
       include Introspection::Visibility
+      include Introspection::Validate
 
       class << self
         def option_keys
