@@ -160,27 +160,27 @@ module Bashly
     private
 
       def get(key)
-        value_from_env(key) || value_from_config(key)
+        ENV.has_key?(env_var_name(key)) ? value_from_env(key) : value_from_config(key)
+      end
+
+      def env_var_name(key)
+        "BASHLY_#{key.upcase}"
       end
 
       def value_from_config(key)
-        if key != :env
-          config["#{key}_#{env}"] || config["#{key}"]
-        else
-          config["#{key}"]
-        end
+        return config[key.to_s] if key == :env
+
+        result = config["#{key}_#{env}"]
+        result.nil? ? config[key.to_s] : result
       end
 
       def value_from_env(key)
-        case env_value key
-        when '0', 'false', 'no'  then false
-        when '1', 'true', 'yes'  then true
-        else env_value key
+        result = ENV[env_var_name(key)]
+        case result&.strip&.downcase
+        when '0', 'false', 'no' then false
+        when '1', 'true', 'yes' then true
+        else result
         end
-      end
-
-      def env_value(key)
-        ENV["BASHLY_#{key.upcase}"]
       end
 
       def config

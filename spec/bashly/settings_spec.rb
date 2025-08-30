@@ -95,7 +95,6 @@ describe Settings do
         end
       end
     end
-
   end
 
   describe '::env' do
