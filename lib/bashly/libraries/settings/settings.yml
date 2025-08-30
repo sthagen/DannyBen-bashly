@@ -105,7 +105,7 @@ usage_colors:
 # Determines which features are enabled in the rendered script.
 # Use the `enable_*` options below to adjust settings for each environment.
 # It is recommended to leave this set to 'development' and run
-# `bashly generate --production` when the slimmer production script is needed.
+# `bashly generate --env production` when the production version is needed.
 env: development
 
 # Tweak the script output by enabling or disabling some script output.
