@@ -173,7 +173,7 @@ module Bashly
       end
 
       def config
-        @config ||= defsult_settings.merge user_settings
+        @config ||= default_settings.merge user_settings
       end
 
       def user_settings
@@ -190,8 +190,8 @@ module Bashly
         end
       end
 
-      def defsult_settings
-        @defsult_settings ||= Config.new default_settings_path
+      def default_settings
+        @default_settings ||= Config.new default_settings_path
       end
 
       def default_settings_path
