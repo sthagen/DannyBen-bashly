@@ -27,6 +27,7 @@ a [docker image](https://hub.docker.com/r/dannyben/bashly).
 
 - [Bashly Homepage][docs]
 - [Examples][examples]
+- [Bashly AI Assistant][gpt]
 
 ## How it works
 
@@ -73,5 +74,6 @@ Visit the *[How to contribute][contributing]* page for more information.
 [issues]: https://github.com/bashly-framework/bashly/issues
 [discussions]: https://github.com/bashly-framework/bashly/discussions
 [docs]: https://bashly.dev/
+[gpt]: https://bashly.dev/chat
 [examples]: https://github.com/bashly-framework/bashly/tree/master/examples#bashly-examples
 [contributing]: https://github.com/bashly-framework/bashly/blob/master/CONTRIBUTING.md#how-to-contribute
