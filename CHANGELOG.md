@@ -1,10 +1,12 @@
 Changelog
 ========================================
 
+<!-- break v1.3.3 -->
+
 v1.3.3 - 2025-09-24
 ----------------------------------------
 
-- Add misisng validation for `env_var.validate` [`55a3946db`](https://github.com/bashly-framework/bashly/commit/55a3946db)
+- Add missing validation for `env_var.validate` [`55a3946db`](https://github.com/bashly-framework/bashly/commit/55a3946db)
 - Fix validation running twice for environment variables [`4d7e6d68a`](https://github.com/bashly-framework/bashly/commit/4d7e6d68a)
 - Add array syntax to `validate` [`4b3f7410c`](https://github.com/bashly-framework/bashly/commit/4b3f7410c)
 - Add support for per-environment settings [`522d2b895`](https://github.com/bashly-framework/bashly/commit/522d2b895)
