@@ -34,6 +34,7 @@ module Bashly
       assert_optional_string "#{key}.usage", value['usage']
       assert_optional_string "#{key}.handler", value['handler']
       assert_optional_string "#{key}.post_install_message", value['post_install_message']
+      assert_boolean "#{key}.skip_src_check", value['skip_src_check']
 
       return if value['handler']
 
