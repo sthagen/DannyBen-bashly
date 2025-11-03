@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# This fixture tests that catch all with help is displayed even when the
+# configuration file does not have any args defined.
+# It is executed as part of the Runfile examples test
+# Reference issue: https://github.com/bashly-framework/bashly/issues/74
+
+rm -f ./cli
+
+set -x
+
+bundle exec bashly generate
+
+./cli docker --help
+./cli docker --show-help-anyway

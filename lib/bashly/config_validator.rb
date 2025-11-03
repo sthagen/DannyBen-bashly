@@ -35,6 +35,7 @@ module Bashly
       assert_string "#{key}.label", value['label']
       assert_optional_string "#{key}.help", value['help']
       assert_boolean "#{key}.required", value['required']
+      assert_boolean "#{key}.catch_help", value['catch_help']
     end
 
     def assert_default_command(key, value)

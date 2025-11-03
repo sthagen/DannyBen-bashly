@@ -94,6 +94,13 @@
   help: catch_all must be boolean, string, or hash
   catch_all: [1,2]
 
+:command_catch_all_catch_help:
+  name: invalid
+  help: catch_all.catch_help must be boolean
+  catch_all:
+    label: params
+    catch_help: "this is not a help string"
+
 :command_catch_all_valid:
   name: invalid
   catch_all:
