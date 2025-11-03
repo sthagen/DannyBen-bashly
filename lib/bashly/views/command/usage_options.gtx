@@ -6,8 +6,8 @@ if flags.any? || fixed_flags?
     options_caption = strings[:global_options]
   end
 
-  >   printf "%s\n" "{{ options_caption.color(:caption) }}"
+  > printf "%s\n" "{{ options_caption.color(:caption) }}"
   >
-  = render(:usage_flags).indent 2 if flags.any?
-  = render(:usage_fixed_flags).indent 2
+  = render(:usage_flags) if flags.any?
+  = render(:usage_fixed_flags)
 end

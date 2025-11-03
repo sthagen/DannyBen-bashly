@@ -1,4 +1,4 @@
-show_help=${args[--show-help-anyway]-}
+show_help=${args["--show-help-anyway"]-}
 
 if [[ $show_help ]]; then
   long_usage=yes
