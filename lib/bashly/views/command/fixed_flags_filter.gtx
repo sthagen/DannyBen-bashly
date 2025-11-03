@@ -12,12 +12,14 @@ if root_command?
   > 
 end
 
-= (short_flag_exist?("-h") ? "--help)" : "--help | -h)").indent(4)
->       long_usage=yes
->       <%= function_name %>_usage
->       exit
->       ;;
-> 
+unless catch_all.catch_help?
+  = (short_flag_exist?("-h") ? "--help)" : "--help | -h)").indent(4)
+  >       long_usage=yes
+  >       <%= function_name %>_usage
+  >       exit
+  >       ;;
+  > 
+end
 
 if global_flags?
   flags.each do |flag|

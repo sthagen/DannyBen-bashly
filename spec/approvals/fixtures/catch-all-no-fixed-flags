@@ -1,0 +1,22 @@
++ bundle exec bashly generate
+creating user files in src
+skipped src/docker_command.sh (exists)
+created ./cli
+run ./cli --help to test your bash script
++ ./cli docker --help
+args: none
+
+other_args:
+- ${other_args[*]} = --help
+- ${other_args[0]} = --help
++ ./cli docker show-hidden-usage
+cli docker - Pass all arguments to the docker cli
+
+Usage:
+  cli docker [--] [PARAMS...]
+  cli docker --help | -h
+
+Arguments:
+  PARAMS...
+    Parameters to pass to docker
+

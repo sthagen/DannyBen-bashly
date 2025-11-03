@@ -8,7 +8,9 @@ class Example
     end
 
     def fixtures
-      filter_dirs('spec/fixtures/workspaces').map { |dir| new dir, type: :fixture }
+      filter_dirs('spec/fixtures/workspaces')
+        .select { |dir| File.exist? "#{dir}/src/bashly.yml" }
+        .map { |dir| new dir, type: :fixture }
     end
 
     def all

@@ -1,0 +1,13 @@
+name: cli
+help: Showing catch all including the help flag
+version: 0.1.0
+
+commands:
+- name: docker
+  help: Pass all arguments to the docker cli
+  catch_all:
+    label: params
+    help: Parameters to pass to docker
+    required: false
+    # Also catch --help | -h as any other param
+    catch_help: true

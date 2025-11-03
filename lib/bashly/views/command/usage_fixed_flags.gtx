@@ -1,13 +1,15 @@
 = view_marker
 
-if short_flag_exist?("-h")
-  > printf "  %s\n" "{{ '--help'.color(:flag) }}"
-else
-  > printf "  %s\n" "{{ '--help, -h'.color(:flag) }}"
-end
+unless catch_all.catch_help?
+  if short_flag_exist?("-h")
+    > printf "  %s\n" "{{ '--help'.color(:flag) }}"
+  else
+    > printf "  %s\n" "{{ '--help, -h'.color(:flag) }}"
+  end
 
-> printf "    {{ strings[:help_flag_text] }}\n"
-> echo
+  > printf "    {{ strings[:help_flag_text] }}\n"
+  > echo
+end
 
 if root_command?
   if short_flag_exist?("-v")

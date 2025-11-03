@@ -581,6 +581,12 @@ definitions:
               https://bashly.dev/configuration/command/#catch_all
             type: boolean
             default: false
+          catch_help:
+            description: |-
+              Whether to also disable the --help flag and catch it like any other
+              https://bashly.dev/configuration/command/#catch_all
+            type: boolean
+            default: false
         additionalProperties: false
   completions-property:
     title: completions

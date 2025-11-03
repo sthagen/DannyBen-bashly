@@ -1,0 +1,11 @@
+= view_marker
+
+options_caption = strings[:options]
+if commands.any? && (public_flags.any? || (flags.any? && Settings.private_reveal_key))
+  options_caption = strings[:global_options]
+end
+
+> printf "%s\n" "{{ options_caption.color(:caption) }}"
+>
+= render(:usage_flags) if flags.any?
+= render(:usage_fixed_flags)

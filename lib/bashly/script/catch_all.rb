@@ -3,7 +3,7 @@ module Bashly
     class CatchAll
       class << self
         def option_keys
-          @option_keys ||= %i[label help required]
+          @option_keys ||= %i[label help required catch_help]
         end
 
         def from_config(config)
@@ -13,7 +13,7 @@ module Bashly
           when String
             { label: config }
           when Hash
-            { label: config['label'], help: config['help'], required: config['required'] }
+            config.transform_keys(&:to_sym).slice(*option_keys)
           else
             {}
           end
@@ -22,11 +22,12 @@ module Bashly
         end
       end
 
-      def initialize(label: nil, help: nil, required: false, enabled: true)
+      def initialize(label: nil, help: nil, required: false, catch_help: false, enabled: true)
         @label = label
         @help = help
         @required = required
         @enabled = enabled
+        @catch_help = catch_help
       end
 
       def enabled?
@@ -43,6 +44,10 @@ module Bashly
 
       def required?
         @required
+      end
+
+      def catch_help?
+        @catch_help
       end
 
       def usage_string
