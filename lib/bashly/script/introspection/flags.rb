@@ -16,6 +16,13 @@ module Bashly
           end
         end
 
+        # Returns true if there is at least one fixed flag (--version / --help)
+        # Root command always has --version and subcommands always have --help
+        # except when it is consumed by catch_all
+        def fixed_flags?
+          root_command? || !catch_all.catch_help?
+        end
+
         # Returns true if this command's flags should be considered as gloal
         # flags, and cascade to subcommands
         def global_flags?
