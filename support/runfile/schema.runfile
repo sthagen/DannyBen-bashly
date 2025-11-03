@@ -16,6 +16,7 @@ end
 help 'Run all the test actions in this runfile'
 action :all do
   check_examples
+  check_fixtures
   check_settings
   check_strings
   check_arbitrary
@@ -46,6 +47,9 @@ action(:example) { |args| schema_check "examples/#{args['EXAMPLE']}/src/bashly.y
 help 'Test the bashly schema against all examples'
 action(:examples) { check_examples }
 
+help 'Test the bashly schema against all workspace fixtures'
+action(:fixtures) { check_fixtures }
+
 help 'Test the settings schema against the default settings template'
 action(:settings) { check_settings }
 
@@ -62,6 +66,15 @@ helpers do
   def check_examples
     say "\ngub`Examples`"
     Example.examples.each do |example|
+      file = example.yaml_path
+      schema_check file
+    end
+    say "\ngub`Examples PASS`"
+  end
+
+  def check_fixtures
+    say "\ngub`Fixtures`"
+    Example.fixtures.each do |example|
       file = example.yaml_path
       schema_check file
     end

@@ -683,6 +683,11 @@
               "description": "Whether the current argument or flag is required\nhttps://bashly.dev/configuration/command/#catch_all",
               "type": "boolean",
               "default": false
+            },
+            "catch_help": {
+              "description": "Whether to also disable the --help flag and catch it like any other\nhttps://bashly.dev/configuration/command/#catch_all",
+              "type": "boolean",
+              "default": false
             }
           },
           "additionalProperties": false
