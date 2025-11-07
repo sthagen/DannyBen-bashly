@@ -5,6 +5,8 @@ if root_command?
 else
   > {{ function_name }}_parse_requirements() {
 end
+>   local key
+>
 
 = render(:fixed_flags_filter).indent 2
 = render(:environment_variables_filter).indent 2

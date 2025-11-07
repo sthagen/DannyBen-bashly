@@ -1,7 +1,7 @@
 = view_marker
 
 > while [[ $# -gt 0 ]]; do
->   key="$1"
+>   local key="$1"
 >   case "$key" in
 
 if root_command?

@@ -1,0 +1,16 @@
++ bundle exec bashly generate
+creating user files in src
+skipped src/one_command.sh (exists)
+skipped src/two_command.sh (exists)
+skipped src/noop_command.sh (exists)
+created ./cli
+run ./cli --help to test your bash script
++ ./cli 1
+Before key=THIS IS MY VALUE
+noop called
+After key=THIS IS MY VALUE
++ ./cli 2
+Before k=THIS IS MY VALUE
+args:
+- ${args[--user]} = admin
+After k=THIS IS MY VALUE
