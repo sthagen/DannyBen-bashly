@@ -1,0 +1,19 @@
+name: cli
+help: Testing that bashly-defined variables do not leak to the global scope
+version: 0.1.0
+
+commands:
+- name: one
+  alias: "1"
+  help: Testing 'key' leakage when calling 'run' internally
+
+- name: two
+  alias: "2"
+  help: Testing 'k' leak when calling 'inspect_args'
+  flags:
+  - long: --user
+    arg: name
+    default: admin
+
+- name: noop
+  help: Does nothing except declare it was called
