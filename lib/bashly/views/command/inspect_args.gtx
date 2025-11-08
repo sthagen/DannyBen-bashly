@@ -1,6 +1,8 @@
 = view_marker
 
 > inspect_args() {
+>   local k
+>
 >   if ((${#args[@]})); then
 >     readarray -t sorted_keys < <(printf '%s\n' "${!args[@]}" | sort)
 >     echo args:
@@ -17,8 +19,8 @@ if catch_all_used_anywhere?
 >     echo
 >     echo other_args:
 >     echo "- \${other_args[*]} = ${other_args[*]}"
->     for i in "${!other_args[@]}"; do
->       echo "- \${other_args[$i]} = ${other_args[$i]}"
+>     for k in "${!other_args[@]}"; do
+>       echo "- \${other_args[$k]} = ${other_args[$k]}"
 >     done
 >   fi
 >
