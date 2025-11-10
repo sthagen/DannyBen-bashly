@@ -58,6 +58,7 @@ Each of these examples demonstrates one aspect or feature of bashly.
 - [command-paths](command-paths#readme) - configuring nested paths for your source scripts
 - [command-function](command-function#readme) - configuring custom internal function names
 - [split-config](split-config#readme) - splitting your `bashly.yml` into several smaller files
+- [multiple-lib-dirs](multiple-lib-dirs#readme) - loading libraries from multiple locations
 
 ## Bashly library features
 

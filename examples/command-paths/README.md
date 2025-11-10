@@ -79,7 +79,7 @@ commands:
 # The path to use for command files, relative to source_dir
 # When set to nil (~), command files will be placed directly under source_dir
 # When set to any other string, command files will be placed under this
-# directory, and each command will get its own subdirectory
+# directory, and each command will get its own sub-directory
 
 # commands_dir: ~
 commands_dir: commands

@@ -1,0 +1,5 @@
+# An array or comma delimited string of additional directories to search for
+# bash functions. Any bash script found in any of these directories
+# (or sub-directories) will be merged into the final script.
+# Note that this is relative to the working directory.
+extra_lib_dirs: [common_lib, cloud_lib]
