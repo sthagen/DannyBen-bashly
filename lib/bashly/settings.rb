@@ -15,6 +15,7 @@ module Bashly
         :enable_inspect_args,
         :enable_sourcing,
         :enable_view_markers,
+        :extra_lib_dirs,
         :formatter,
         :function_names,
         :lib_dir,
@@ -105,6 +106,21 @@ module Bashly
 
       def lib_dir
         @lib_dir ||= get :lib_dir
+      end
+
+      def extra_lib_dirs
+        @extra_lib_dirs ||= begin
+          dirs = get :extra_lib_dirs
+          case dirs
+          when Array then dirs
+          when String then dirs.split(',').map(&:strip)
+          else []
+          end
+        end
+      end
+
+      def all_lib_dirs
+        @all_lib_dirs = [full_lib_dir] + extra_lib_dirs
       end
 
       def partials_extension
