@@ -2,7 +2,7 @@
 
 set -x
 
-# bashly generate
+bashly generate
 
 ### Try Me ###
 
