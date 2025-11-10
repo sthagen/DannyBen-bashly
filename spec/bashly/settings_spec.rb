@@ -107,7 +107,7 @@ describe Settings do
     context 'when set using env var as a comma delimited string' do
       before { ENV['BASHLY_EXTRA_LIB_DIRS'] = 'one,two' }
       after { ENV['BASHLY_EXTRA_LIB_DIRS'] = nil }
-      
+
       it 'converts comma delimited string to an array' do
         expect(subject.extra_lib_dirs).to match_array %w[one two]
       end
@@ -115,7 +115,7 @@ describe Settings do
 
     context 'when provided as an array' do
       let(:config) { Config.new({ 'extra_lib_dirs' => %w[item1 item2] }) }
-      
+
       it 'returns the array as is' do
         allow(subject).to receive(:user_settings).and_return(config)
         expect(subject.extra_lib_dirs).to match_array %w[item1 item2]
