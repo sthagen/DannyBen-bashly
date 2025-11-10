@@ -53,10 +53,16 @@ target_dir: .
 # The path to use for common library files, relative to source_dir
 lib_dir: lib
 
+# An array or comma delimited string of additional directories to search for
+# bash functions. Any bash script found in any of these directories
+# (or sub-directories) will be merged into the final script.
+# Note that this is relative to the working directory.
+extra_lib_dirs: ~
+
 # The path to use for command files, relative to source_dir
 # When set to nil (~), command files will be placed directly under source_dir
 # When set to any other string, command files will be placed under this
-# directory, and each command will get its own subdirectory
+# directory, and each command will get its own sub-directory
 commands_dir: ~
 
 # The extension to use when reading/writing partial script snippets

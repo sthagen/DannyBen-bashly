@@ -66,6 +66,37 @@
       "minLength": 1,
       "default": "lib"
     },
+    "extra_lib_dirs": {
+      "title": "extra lib dirs",
+      "description": "One or more paths to use for common library files, relative to the working directory.\nMay be provided as an array or a comma delimited string.\nhttps://bashly.dev/usage/settings/#extra_lib_dirs",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "examples": [
+            "common, org_lib",
+            "lib"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "examples": [
+            [
+              "common",
+              "org_lib"
+            ]
+          ]
+        }
+      ],
+      "default": null
+    },
     "commands_dir": {
       "title": "commands dir",
       "description": "The path to use for command files, relative to source_dir\nhttps://bashly.dev/usage/settings/#commands_dir",

@@ -153,7 +153,13 @@ module Bashly
       # This is meant to provide the user with the ability to add custom
       # functions
       def user_lib
-        @user_lib ||= Dir["#{Settings.full_lib_dir}/**/*.#{Settings.partials_extension}"]
+        @user_lib ||= begin
+          result = Settings.all_lib_dirs.map do |dir|
+            Dir["#{dir}/**/*.#{Settings.partials_extension}"]
+          end
+
+          result.flatten
+        end
       end
 
       # Returns a mixed array of Argument and Flag objects that have validations
