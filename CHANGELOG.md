@@ -1,6 +1,14 @@
 Changelog
 ========================================
 
+v1.3.4 - 2025-11-17
+----------------------------------------
+
+- Add support for captuing `--help` when using `catch_all` [`26d6f19c5`](https://github.com/bashly-framework/bashly/commit/26d6f19c5)
+- Fix local variables leaking from internal functions [`42cb20bbf`](https://github.com/bashly-framework/bashly/commit/42cb20bbf)
+- Add `Settings.extra_lib_dirs` to allow loading files from multiple locations [`27d4305d9`](https://github.com/bashly-framework/bashly/commit/27d4305d9)
+- Compare [`v1.3.3..v1.3.4`](https://github.com/bashly-framework/bashly/compare/v1.3.3..v1.3.4)
+
 <!-- break v1.3.3 -->
 
 v1.3.3 - 2025-09-24
