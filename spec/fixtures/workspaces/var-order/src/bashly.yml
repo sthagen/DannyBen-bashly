@@ -1,0 +1,12 @@
+name: cli
+help: Ensure env var / var order
+version: 0.1.0
+
+environment_variables:
+- name: cli_config_file
+  help: Path to config file
+  default: config.yaml
+
+variables:
+- name: config_file
+  value: $CLI_CONFIG_FILE

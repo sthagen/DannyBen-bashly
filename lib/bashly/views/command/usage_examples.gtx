@@ -3,7 +3,7 @@
 > printf "%s\n" "{{ strings[:examples].color(:caption) }}"
 
 examples.each do |example|
-  > printf "{{ example.wrap(78).indent(2).sanitize_for_print }}\n"
+  > printf "{{ user_string example, indent: 2 }}\n"
 end
 
 > echo

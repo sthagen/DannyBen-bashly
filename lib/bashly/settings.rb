@@ -27,7 +27,8 @@ module Bashly
         :tab_indent,
         :target_dir,
         :usage_colors,
-        :var_aliases
+        :var_aliases,
+        :word_wrap
       )
 
       def commands_dir
@@ -171,6 +172,10 @@ module Bashly
 
       def var_aliases
         @var_aliases ||= get :var_aliases
+      end
+
+      def word_wrap
+        @word_wrap ||= get :word_wrap
       end
 
     private

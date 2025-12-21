@@ -9,7 +9,7 @@ else
     = help_header_override.indent 4
   else
     >     printf "{{ full_name }}\n\n"
-    >     printf "{{ help.wrap(78).indent(2).sanitize_for_print }}\n\n"
+    >     printf "{{ user_string help, indent: 2 }}\n\n"
   end
   >   else
   >     printf "{{ caption_string.sanitize_for_print }}\n\n"

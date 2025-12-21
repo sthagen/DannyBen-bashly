@@ -1,6 +1,14 @@
 Changelog
 ========================================
 
+v1.3.5 - 2025-12-12
+----------------------------------------
+
+- Move global variable declarations after environment variable declarations [`cc5a29d88`](https://github.com/bashly-framework/bashly/commit/cc5a29d88)
+- Add word_wrap option to settings [`f6d6c7dac`](https://github.com/bashly-framework/bashly/commit/f6d6c7dac)
+- Compare [`v1.3.4..v1.3.5`](https://github.com/bashly-framework/bashly/compare/v1.3.4..v1.3.5)
+
+
 v1.3.4 - 2025-11-17
 ----------------------------------------
 

@@ -132,6 +132,12 @@
       "type": "boolean",
       "default": false
     },
+    "word_wrap": {
+      "title": "word wrap",
+      "description": "Configure the character width used to wrap help and example messages\nhttps://bashly.dev/usage/settings/#word_wrap",
+      "type": "integer",
+      "default": 80
+    },
     "compact_short_flags": {
       "title": "compact short flags",
       "description": "Whether to expand -abc to -a -b -c in the input line\nhttps://bashly.dev/usage/settings/#compact_short_flags",

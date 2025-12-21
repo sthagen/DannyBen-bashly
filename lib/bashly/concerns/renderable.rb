@@ -51,6 +51,13 @@ module Bashly
       File.exist? user_file_path(file)
     end
 
+    # Returns a wrapped, indented and sanitized string
+    # Designed to place help and example messages inside bash's 'printf'
+    def user_string(text, indent: 0)
+      wrap = Settings.word_wrap - indent
+      text.wrap(wrap).indent(indent).sanitize_for_print
+    end
+
   private
 
     def view_path(view)

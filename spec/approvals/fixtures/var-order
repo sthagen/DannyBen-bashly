@@ -1,0 +1,11 @@
++ bundle exec bashly generate
+creating user files in src
+skipped src/root_command.sh (exists)
+created ./cli
+run ./cli --help to test your bash script
++ ./cli
+args: none
+
+environment variables:
+- $CLI_CONFIG_FILE = config.yaml
+$config_file == $CLI_CONFIG_FILE == config.yaml

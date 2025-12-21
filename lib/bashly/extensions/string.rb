@@ -33,7 +33,7 @@ class String
     tr(' ', '/').downcase
   end
 
-  def wrap(length = 80)
+  def wrap(length)
     strip!
     split("\n").collect! do |line|
       if line.length > length

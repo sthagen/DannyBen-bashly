@@ -1,7 +1,7 @@
 = view_marker
 
 > printf "  %s\n" "{{ label.color(:arg) }}"
-> printf "{{ help.wrap(76).indent(4).sanitize_for_print }}\n"
+> printf "{{ user_string help, indent: 4 }}\n"
 
 if allowed
   > printf "    %s\n" "{{ strings[:allowed] % { values: allowed.join(', ') } }}"

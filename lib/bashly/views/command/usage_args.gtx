@@ -12,7 +12,7 @@ end
 if catch_all.help
   >
   > echo "  {{ catch_all.label }}"
-  > printf "{{ catch_all.help.wrap(76).indent(4).sanitize_for_print }}\n"
+  > printf "{{ user_string catch_all.help, indent: 4 }}\n"
   > echo
 end
 

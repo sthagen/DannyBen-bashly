@@ -111,6 +111,13 @@ properties:
       https://bashly.dev/usage/settings/#tab_indent
     type: boolean
     default: false
+  word_wrap:
+    title: word wrap
+    description: |-
+      Configure the character width used to wrap help and example messages
+      https://bashly.dev/usage/settings/#word_wrap
+    type: integer
+    default: 80
   compact_short_flags:
     title: compact short flags
     description: |-

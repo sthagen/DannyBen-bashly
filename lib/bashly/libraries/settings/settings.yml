@@ -84,6 +84,9 @@ strict: false
 # (every 2 leading spaces will be converted to a tab character)
 tab_indent: false
 
+# Set the character width used to wrap help and example messages
+word_wrap: 80
+
 # Choose a post-processor for the generated script:
 # formatter: internal     # Use Bashly’s built-in formatter (removes extra newlines)
 # formatter: external     # Run the external command `shfmt --case-indent --indent 2`
