@@ -13,12 +13,13 @@ describe LibrarySourceConfig do
 
   describe '#validate' do
     fixtures.each do |path|
-      fixture_name = File.basename path, '.yml'
-      config = described_class.new path
+      context "with #{File.basename(path)}" do
+        let(:fixture_name) { File.basename(path, '.yml') }
+        let(:config)       { described_class.new(path) }
 
-      context "with #{fixture_name}.yml" do
         it 'raises an error' do
-          expect { config.validate }.to raise_approval("libraries_validation/#{fixture_name}")
+          expect { config.validate }
+            .to raise_approval("libraries_validation/#{fixture_name}")
         end
       end
     end

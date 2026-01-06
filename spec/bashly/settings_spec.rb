@@ -50,7 +50,7 @@ describe Settings do
     end
 
     context 'when its corresponding env var is set' do
-      original_value = ENV['BASHLY_TAB_INDENT']
+      let(:original_value) { ENV['BASHLY_TAB_INDENT'] }
 
       before { described_class.tab_indent = nil }
       after { ENV['BASHLY_TAB_INDENT'] = original_value }

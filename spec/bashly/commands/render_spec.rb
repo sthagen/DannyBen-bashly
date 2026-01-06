@@ -68,11 +68,11 @@ describe Commands::Render do
   describe 'SOURCE TARGET --watch' do
     let(:bashly_config_path) { "#{source_dir}/bashly.yml" }
     let(:bashly_config) { YAML.load_file bashly_config_path }
-    let(:watcher_double) { instance_double Filewatcher, watch: nil }
+    let(:watch_double) { instance_double Watch, on_change: nil }
 
     it 'generates immediately and on change' do
-      allow(Filewatcher).to receive(:new).and_return(watcher_double)
-      allow(watcher_double).to receive(:watch).and_yield
+      allow(Watch).to receive(:new).and_return(watch_double)
+      allow(watch_double).to receive(:on_change).and_yield
 
       expect(subject).to receive(:render).twice
 

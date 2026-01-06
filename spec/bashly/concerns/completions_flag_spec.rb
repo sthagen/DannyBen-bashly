@@ -1,8 +1,7 @@
 describe Script::Flag do
-  fixtures = load_fixture 'script/flags'
-
   subject { described_class.new fixtures[fixture] }
 
+  let(:fixtures) { load_fixture 'script/flags' }
   let(:fixture) { :basic_flag }
   let(:command) { 'some command' }
 

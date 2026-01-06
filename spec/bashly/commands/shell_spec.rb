@@ -20,7 +20,7 @@ describe Commands::Shell do
   describe 'in-terminal commands' do
     before do
       ENV['BASHLY_SHELL'] = nil
-      allow(Readline).to receive(:readline).and_return(*input)
+      allow(Reline).to receive(:readline).and_return(*input)
     end
 
     context 'with exit command' do

@@ -12,7 +12,7 @@ module Bashly
 
   autoloads 'bashly', %i[
     CLI Config ConfigValidator Library LibrarySource LibrarySourceConfig
-    MessageStrings RenderContext RenderSource Settings VERSION
+    MessageStrings RenderContext RenderSource Settings VERSION Watch
   ]
 
   autoloads 'bashly/concerns', %i[

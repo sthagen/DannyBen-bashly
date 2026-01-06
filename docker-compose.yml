@@ -12,5 +12,4 @@ services:
 
   pandoc-test:
     <<: *default
-    command: sh -c "pandoc --version | grep 'pandoc 3.1'"
-
+    command: sh -ec "command -v pandoc >/dev/null"

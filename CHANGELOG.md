@@ -1,6 +1,14 @@
 Changelog
 ========================================
 
+v1.3.6 - 2026-01-06
+----------------------------------------
+
+- Switch from `filewatcher` to `listen` [`0b32b694d`](https://github.com/bashly-framework/bashly/commit/0b32b694d)
+- Fix filewatcher interrupt [`b3f84ae3c`](https://github.com/bashly-framework/bashly/commit/b3f84ae3c)
+- Compare [`v1.3.5..v1.3.6`](https://github.com/bashly-framework/bashly/compare/v1.3.5..v1.3.6)
+
+
 v1.3.5 - 2025-12-12
 ----------------------------------------
 

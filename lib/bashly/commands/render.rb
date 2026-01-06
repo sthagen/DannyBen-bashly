@@ -1,4 +1,3 @@
-require 'filewatcher'
 require 'tty-markdown'
 
 module Bashly
@@ -75,7 +74,7 @@ module Bashly
       def watch
         say "g`watching`\n"
 
-        Filewatcher.new(watchables).watch do
+        Watch.new(*watchables).on_change do
           render
           say "g`waiting`\n"
         end

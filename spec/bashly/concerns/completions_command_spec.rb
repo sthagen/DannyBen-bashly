@@ -1,8 +1,7 @@
 describe Script::Command do
-  fixtures = load_fixture 'script/commands'
-
   subject { described_class.new fixtures[fixture] }
 
+  let(:fixtures) { load_fixture('script/commands') }
   let(:fixture) { :completions_simple }
 
   describe '#completion_data' do

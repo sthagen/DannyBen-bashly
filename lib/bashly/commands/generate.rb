@@ -1,5 +1,3 @@
-require 'filewatcher'
-
 module Bashly
   module Commands
     class Generate < Base
@@ -41,7 +39,7 @@ module Bashly
       def watch
         quiet_say "g`watching` #{Settings.source_dir}\n"
 
-        Filewatcher.new([Settings.source_dir]).watch do
+        Watch.new(Settings.source_dir).on_change do
           reset
           generate
         rescue Bashly::ConfigurationError => e

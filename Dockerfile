@@ -1,9 +1,9 @@
-FROM dannyben/alpine-ruby:3.3.3
+FROM dannyben/alpine-ruby:4.0
 
 LABEL io.whalebrew.name=bashly
 
 ENV PS1="\n\n>> bashly \W \$ "
-ENV BASHLY_VERSION=1.3.5
+ENV BASHLY_VERSION=1.3.6
 
 WORKDIR /app
 

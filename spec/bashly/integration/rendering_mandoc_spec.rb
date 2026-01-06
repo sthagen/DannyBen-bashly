@@ -4,8 +4,9 @@ describe 'rendering mandoc', :stable do
   subject { Commands::Render.new }
 
   let(:source_dir) { Settings.source_dir }
+  let(:leeway) { ENV['CI'] ? 20 : 0 }
+  let(:target) { 'spec/tmp' }
 
-  target = 'spec/tmp'
   examples = %w[
     catch-all-advanced
     dependencies-alt
@@ -14,9 +15,6 @@ describe 'rendering mandoc', :stable do
     minimal
     render-mandoc
   ]
-
-  # Allow up to a certain string distance from the approval text in CI
-  leeway = ENV['CI'] ? 20 : 0
 
   examples.each do |example|
     describe example do

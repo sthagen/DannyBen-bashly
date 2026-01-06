@@ -4,8 +4,9 @@ describe 'rendering markdown', :stable do
   subject { Commands::Render.new }
 
   let(:source_dir) { Settings.source_dir }
+  let(:target) { 'spec/tmp' }
+  let(:leeway) { ENV['CI'] ? 20 : 0 }
 
-  target = 'spec/tmp'
   examples = %w[
     catch-all-advanced
     dependencies-alt
@@ -14,9 +15,6 @@ describe 'rendering markdown', :stable do
     minimal
     render-markdown
   ]
-
-  # Allow up to a certain string distance from the approval text in CI
-  leeway = ENV['CI'] ? 20 : 0
 
   examples.each do |example|
     describe example do
@@ -31,8 +29,10 @@ describe 'rendering markdown', :stable do
 
         Dir["#{target}/*.md"].each do |file|
           puts "    => #{file}"
-          basename = File.basename file
-          expect(File.read file).to match_approval("rendering/markdown/#{example}/#{basename}")
+          basename = File.basename(file)
+
+          expect(File.read(file))
+            .to match_approval("rendering/markdown/#{example}/#{basename}")
             .diff(leeway)
         end
       end

@@ -17,16 +17,17 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'colsole', '~> 1.0'
   s.add_dependency 'completely', '~> 0.7.0'
-  s.add_dependency 'filewatcher', '~> 2.0'
   s.add_dependency 'gtx', '~> 0.1.1'
+  s.add_dependency 'listen', '~> 3.9'
   s.add_dependency 'lp', '~> 0.2.0'
-  s.add_dependency 'mister_bin', '~> 0.8.1'
+  s.add_dependency 'mister_bin', '~> 0.9.0'
   s.add_dependency 'requires', '~> 1.1'
   s.add_dependency 'tty-markdown', '~> 0.7.2'
 
-  # Sub-dependenceis (Ruby 3.3.5 warnings)
-  s.add_dependency 'logger', '>= 1', '< 3'    # required by filewatcher
-  s.add_dependency 'ostruct', '>= 0', '< 2'   # required by json
+  # Missing sub-dependencies
+  # logger: required and not bundled by `listen` 3.9.0
+  #         ref: https://github.com/guard/listen/issues/591
+  s.add_dependency 'logger', '~> 1.7'
 
   s.metadata = {
     'bug_tracker_uri'       => 'https://github.com/bashly-framework/bashly/issues',
