@@ -237,6 +237,20 @@ properties:
       The name of the environment variable (case sensitive) that, if set, will reveal private commands, flags and environment variables
       https://bashly.dev/usage/settings/#private_reveal_key
     oneOf: *optional_string
+  watch_evented:
+    title: watch evented
+    description: |-
+      Whether to use evented file system watch instead of the default polling
+      https://bashly.dev/usage/settings/#watch_evented
+    type: boolean
+    default: false
+  watch_latency:
+    title: watch latency
+    description: |-
+      The latency in seconds for the file system changes watcher
+      https://bashly.dev/usage/settings/#watch_latency
+    type: number
+    default: 1.0
   usage_colors:
     title: usage colors
     description: |-

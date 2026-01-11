@@ -160,6 +160,17 @@ enable_sourcing: development
 
 
 #-------------------------------------------------------------------------------
+# DEVELOPER OPTIONS
+#-------------------------------------------------------------------------------
+
+# When true, use filesystem evented watching instead of polling
+watch_evented: false
+
+# File change detection latency (seconds)
+watch_latency: 1.0
+
+
+#-------------------------------------------------------------------------------
 # SCRIPTING OPTIONS
 #-------------------------------------------------------------------------------
 

@@ -12,6 +12,7 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - dev/**/*
+    - spec/fixtures/**/*
 
 # The `ConfigValidator` class is a DSL, let it be
 Metrics/AbcSize:              { Exclude: [lib/bashly/config_validator.rb] }
@@ -43,3 +44,8 @@ RSpec/ExampleLength:
     - 'spec/bashly/integration/**/*'
     - 'spec/bashly/libraries/render*'
     - 'spec/bashly/script/command_spec.rb'
+
+# Allow `puts` in some specs
+RSpec/Output:
+  Exclude:
+    - spec/bashly/integration/**/*

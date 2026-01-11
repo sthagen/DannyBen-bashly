@@ -28,8 +28,14 @@ module Bashly
         :target_dir,
         :usage_colors,
         :var_aliases,
+        :watch_evented,
+        :watch_latency,
         :word_wrap
       )
+
+      def all_lib_dirs
+        @all_lib_dirs = [full_lib_dir] + extra_lib_dirs
+      end
 
       def commands_dir
         @commands_dir ||= get :commands_dir
@@ -89,6 +95,17 @@ module Bashly
         @env = value&.to_sym
       end
 
+      def extra_lib_dirs
+        @extra_lib_dirs ||= begin
+          dirs = get :extra_lib_dirs
+          case dirs
+          when Array then dirs
+          when String then dirs.split(',').map(&:strip)
+          else []
+          end
+        end
+      end
+
       def formatter
         @formatter ||= get :formatter
       end
@@ -107,21 +124,6 @@ module Bashly
 
       def lib_dir
         @lib_dir ||= get :lib_dir
-      end
-
-      def extra_lib_dirs
-        @extra_lib_dirs ||= begin
-          dirs = get :extra_lib_dirs
-          case dirs
-          when Array then dirs
-          when String then dirs.split(',').map(&:strip)
-          else []
-          end
-        end
-      end
-
-      def all_lib_dirs
-        @all_lib_dirs = [full_lib_dir] + extra_lib_dirs
       end
 
       def partials_extension
@@ -172,6 +174,14 @@ module Bashly
 
       def var_aliases
         @var_aliases ||= get :var_aliases
+      end
+
+      def watch_evented
+        @watch_evented ||= get :watch_evented
+      end
+
+      def watch_latency
+        @watch_latency ||= get :watch_latency
       end
 
       def word_wrap

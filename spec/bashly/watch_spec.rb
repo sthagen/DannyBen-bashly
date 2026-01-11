@@ -45,11 +45,14 @@ describe Watch do
       let(:options) { { latency: 0.25 } }
 
       it 'passes them through to Listen' do
-        expect(listen).to receive(:to).with(
-          'lib',
-          'spec',
-          **described_class::DEFAULT_OPTIONS, **options
-        )
+        expect(listen).to receive(:to) do |*passed_dirs, **passed_options|
+          expect(passed_dirs).to eq(dirs)
+          expect(passed_options[:latency]).to eq(options[:latency])
+          expect(passed_options).to have_key(:force_polling)
+
+          # instead of rspec's 'and_return' which cannot be used with a block
+          listener
+        end
 
         subject.on_change { |_| nil }
       end

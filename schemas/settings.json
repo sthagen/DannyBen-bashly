@@ -289,6 +289,18 @@
         }
       ]
     },
+    "watch_evented": {
+      "title": "watch evented",
+      "description": "Whether to use evented file system watch instead of the default polling\nhttps://bashly.dev/usage/settings/#watch_evented",
+      "type": "boolean",
+      "default": false
+    },
+    "watch_latency": {
+      "title": "watch latency",
+      "description": "The latency in seconds for the file system changes watcher\nhttps://bashly.dev/usage/settings/#watch_latency",
+      "type": "number",
+      "default": 1
+    },
     "usage_colors": {
       "title": "usage colors",
       "description": "Enable and configure colorful output for --help\nhttps://bashly.dev/usage/settings/#usage_colors",

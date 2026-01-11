@@ -5,13 +5,8 @@ module Bashly
   class Watch
     attr_reader :dirs, :options
 
-    DEFAULT_OPTIONS = {
-      force_polling: true,
-      latency:       1.0,
-    }.freeze
-
     def initialize(*dirs, **options)
-      @options = DEFAULT_OPTIONS.merge(options).freeze
+      @options = default_options.merge(options).freeze
       @dirs = dirs.empty? ? ['.'] : dirs
     end
 
@@ -24,10 +19,20 @@ module Bashly
 
   private
 
-    def build_listener
-      listen.to(*dirs, **options) do |modified, added, removed|
-        yield changes(modified, added, removed)
-      end
+    def default_options
+      {
+        force_polling: force_polling?,
+        latency:       latency,
+      }
+    end
+
+    def force_polling?
+      !Settings.watch_evented
+    end
+
+    def latency
+      value = Settings.watch_latency.to_f
+      value.positive? ? value : 0.1
     end
 
     def start(&block)
@@ -42,14 +47,20 @@ module Bashly
       @listener = nil
     end
 
-    def changes(modified, added, removed)
-      { modified:, added:, removed: }
-    end
-
     def wait
       sleep
     rescue ::Interrupt => e
       raise Bashly::Interrupt, cause: e
+    end
+
+    def build_listener
+      listen.to(*dirs, **options) do |modified, added, removed|
+        yield changes(modified, added, removed)
+      end
+    end
+
+    def changes(modified, added, removed)
+      { modified:, added:, removed: }
     end
 
     def listen = Listen
