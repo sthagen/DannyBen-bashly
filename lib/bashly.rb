@@ -1,8 +1,3 @@
-if ENV['DEBUGGER']
-  require 'debug'
-  require 'lp'
-end
-
 require 'requires'
 requires 'bashly/extensions'
 requires 'bashly/exceptions'

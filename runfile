@@ -1,4 +1,8 @@
-require 'debug'
+begin
+  require 'debug'
+rescue LoadError
+end
+
 require 'bashly/version'
 require_relative 'support/runfile/example'
 

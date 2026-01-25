@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'debug'
-gem 'lp'
+# gem 'debug'
 gem 'rspec'
 gem 'rspec_approvals'
 gem 'runfile', '~> 1.0', require: false
