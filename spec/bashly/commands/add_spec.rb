@@ -181,17 +181,6 @@ describe Commands::Add do
     end
   end
 
-  describe 'add test' do
-    let(:lib_file) { "#{target_dir}/test/approvals.bash" }
-
-    before { reset_tmp_dir create_src: true }
-
-    it 'copies the test folder to the user space' do
-      expect { subject.execute %w[add test] }.to output_approval('cli/add/test')
-      expect(File).to exist(lib_file)
-    end
-  end
-
   describe 'add validations' do
     let(:lib_file) { "#{source_dir}/lib/validations/validate_integer.sh" }
 

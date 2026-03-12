@@ -49,9 +49,6 @@ strings
   Copy an additional configuration file to your project, allowing you to
   customize all the tips and error strings.
 
-test
-  Add approval testing.
-
 validations
   Add argument validation functions to the lib directory.
 
