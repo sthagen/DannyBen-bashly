@@ -121,21 +121,6 @@ strings:
     - source: "strings/strings.yml"
       target: "%{user_source_dir}/bashly-strings.yml"
 
-test:
-  help: Add approval testing.
-  files:
-    - source: "test/approvals.bash"
-      target: "%{user_target_dir}/test/approvals.bash"
-    - source: "test/approve"
-      target: "%{user_target_dir}/test/approve"
-
-  post_install_message: |
-    Edit your tests in g`test/approve` and then run:
-
-      m`$ test/approve`
-
-    Docs: bu`https://github.com/DannyBen/approvals.bash`
-
 validations:
   help: Add argument validation functions to the lib directory.
   files:
