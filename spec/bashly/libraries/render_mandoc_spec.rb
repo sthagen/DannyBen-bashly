@@ -28,7 +28,8 @@ describe 'libraries/render/mandoc' do
           .to match_approval('libraries/render/mandoc/render-1-download.md')
           .except(/\w{3,9} 202\d/, 'MONTH YEAR')
 
-        expect(`man "#{target}/download.1" | col -bx | sed '$d'`)
+        # man output differs from system to system, so we normalize
+        expect(`man "#{target}/download.1" | col -bx | sed '$d' | sed 's/^[[:space:]][[:space:]]*/ /'`)
           .to match_approval('libraries/render/mandoc/render-1-download.1')
           .diff(leeway)
       end
