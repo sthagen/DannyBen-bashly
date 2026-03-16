@@ -47,7 +47,7 @@ ini_load() {
     elif [[ $line =~ $key_regex ]]; then
       key="${BASH_REMATCH[1]}"
       value="${BASH_REMATCH[2]}"
-      [[ $value == *\$* ]] && value=$(envsubst <<< "$value")
+      [[ $value == *\$* ]] && value=$(envsubst <<<"$value")
       ini["${section}${key}"]="$value"
     fi
   done <"$ini_file"
