@@ -8,7 +8,7 @@ This example was generated with:
 ```bash
 $ bashly init --minimal
 # ... now edit src/bashly.yml to match the example
-# ... now create .download to match te example
+# ... now create .download to match the example
 $ bashly generate
 ```
 
