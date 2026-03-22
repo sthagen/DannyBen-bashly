@@ -14,7 +14,7 @@ module Bashly
       class << self
         def option_keys
           @option_keys ||= %i[
-            alias args catch_all commands completions
+            alias argfile args catch_all commands completions
             default dependencies environment_variables examples
             extensible expose filename filters flags
             footer function group help help_header_override name

@@ -1,0 +1,5 @@
+= view_marker
+
+> load_command_argfile "{{ argfile }}" "$@"
+> set -- "${argfile_input[@]}"
+>

@@ -193,6 +193,7 @@ module Bashly
       assert_optional_string "#{key}.group", value['group']
       assert_optional_string "#{key}.filename", value['filename']
       assert_optional_string "#{key}.function", value['function']
+      assert_optional_string "#{key}.argfile", value['argfile']
 
       assert_boolean "#{key}.private", value['private']
       assert_default_command "#{key}.default", value['default']
