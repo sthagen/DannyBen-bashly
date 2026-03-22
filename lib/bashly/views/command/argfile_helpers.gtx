@@ -29,7 +29,7 @@
 >       [[ "$arg" =~ ^\"(.*)\"$ || "$arg" =~ ^\'(.*)\'$ ]] && arg="${BASH_REMATCH[1]}"
 >       argfile_input+=("$arg")
 >     fi
->   done < "$argfile_path"
+>   done <"$argfile_path"
 >
 >   argfile_input+=("$@")
 > }
