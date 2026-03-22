@@ -854,6 +854,15 @@
         "dir_commands/list.sh"
       ]
     },
+    "argfile-property": {
+      "title": "argfile",
+      "description": "A file containing additional arguments to autoload for the current script or sub-command\nhttps://bashly.dev/configuration/command/#argfile",
+      "type": "string",
+      "minLength": 1,
+      "examples": [
+        ".mycli"
+      ]
+    },
     "filters-property": {
       "title": "filters",
       "description": "Filters of the current script or sub-command\nhttps://bashly.dev/configuration/command/#filters",
@@ -951,6 +960,9 @@
         "filename": {
           "$ref": "#/definitions/filename-property"
         },
+        "argfile": {
+          "$ref": "#/definitions/argfile-property"
+        },
         "filters": {
           "$ref": "#/definitions/filters-property"
         },
@@ -1027,6 +1039,9 @@
     },
     "filename": {
       "$ref": "#/definitions/filename-property"
+    },
+    "argfile": {
+      "$ref": "#/definitions/argfile-property"
     },
     "filters": {
       "$ref": "#/definitions/filters-property"
