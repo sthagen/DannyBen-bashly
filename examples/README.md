@@ -39,7 +39,7 @@ Each of these examples demonstrates one aspect or feature of bashly.
 - [private-reveal](private-reveal#readme) - allowing users to reveal private commands, flags or environment variables
 - [stdin](stdin#readme) - reading input from stdin
 - [filters](filters#readme) - preventing commands from running unless custom conditions are met
-- [argfile](argfile#readme) - auto-load arguments from a file
+- [argfile](argfile#readme) - auto-load flag defaults from a file
 - [commands-expose](commands-expose#readme) - showing subcommands in the parent's help
 - [key-value-pairs](key-value-pairs#readme) - parsing key=value arguments and flags
 - [command-examples-on-error](command-examples-on-error#readme) - showing examples on error

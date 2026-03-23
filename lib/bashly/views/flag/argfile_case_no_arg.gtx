@@ -1,0 +1,7 @@
+= view_marker
+
+if repeatable
+  > ((args['{{ name }}'] += 1))
+else
+  > [[ -n ${args['{{ name }}']+x} ]] || args['{{ name }}']=1
+end

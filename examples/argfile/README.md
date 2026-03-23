@@ -1,7 +1,7 @@
 # Argfile Example
 
-Demonstrates how to autoload additional arguments from a file using the
-`argfile` command option.
+Demonstrates how to autoload flag defaults from a file using the `argfile`
+command option.
 
 This example was generated with:
 
@@ -23,7 +23,7 @@ name: download
 help: Sample application with autoloaded arguments
 version: 0.1.0
 
-# Allow users to configure args and flags in a file named '.download'
+# Allow users to configure flag defaults in a file named '.download'
 argfile: .download
 
 args:
@@ -49,6 +49,9 @@ flags:
 
 ````
 
+Only flag lines are loaded from the argfile. Each flag value must appear on the
+same line as the flag. Non-flag lines are ignored.
+
 
 ## Output
 
@@ -67,6 +70,17 @@ args:
 
 ````
 
+### `$ ./download --help`
+
+````shell
+download - Sample application with autoloaded arguments
+
+Usage:
+  download SOURCE [OPTIONS]
+  download --help | -h
+  download --version | -v
+````
+
 ### `$ ./download somesource --log cli.log`
 
 ````shell
@@ -81,6 +95,5 @@ args:
 
 
 ````
-
 
 
