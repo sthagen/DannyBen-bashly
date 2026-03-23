@@ -4,6 +4,7 @@ module Bashly
       include AssetHelper
 
       attr_writer(
+        :argfile_var,
         :commands_dir,
         :compact_short_flags,
         :conjoined_flag_args,
@@ -35,6 +36,10 @@ module Bashly
 
       def all_lib_dirs
         @all_lib_dirs = [full_lib_dir] + extra_lib_dirs
+      end
+
+      def argfile_var
+        @argfile_var ||= get :argfile_var
       end
 
       def commands_dir

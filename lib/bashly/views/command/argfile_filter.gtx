@@ -1,18 +1,29 @@
 = view_marker
 
-> local argfile_line argfile_key argfile_value escaped
-> [[ -f "{{ argfile }}" ]] || return
+> local argfile argfile_line argfile_key argfile_value escaped env_argfile env_argfile_var
+> argfile="{{ argfile }}"
+> env_argfile_var="{{ Settings.argfile_var }}"
+> env_argfile="${!env_argfile_var:-}"
 >
-> while IFS= read -r argfile_line || [[ -n "$argfile_line" ]]; do
->   [[ "$argfile_line" =~ ^[[:space:]]*(-{1,2}[^[:space:]]+)([[:space:]]+(.+))?[[:space:]]*$ ]] || continue
->   argfile_key="${BASH_REMATCH[1]}"
->   argfile_value="${BASH_REMATCH[3]:-}"
->   argfile_value="${argfile_value#"${argfile_value%%[![:space:]]*}"}"
->   argfile_value="${argfile_value%"${argfile_value##*[![:space:]]}"}"
->   [[ "$argfile_value" =~ ^\"(.*)\"$ || "$argfile_value" =~ ^\'(.*)\'$ ]] && argfile_value="${BASH_REMATCH[1]}"
+> case "${env_argfile,,}" in
+>   0 | off | no | false)
+>     argfile=''
+>     ;;
+> esac
 >
->   case "$argfile_key" in
+> [[ -n "$env_argfile" ]] && argfile="$env_argfile"
+> if [[ -f "$argfile" ]]; then
+>   while IFS= read -r argfile_line || [[ -n "$argfile_line" ]]; do
+>     [[ "$argfile_line" =~ ^[[:space:]]*(-{1,2}[^[:space:]]+)([[:space:]]+(.+))?[[:space:]]*$ ]] || continue
+>     argfile_key="${BASH_REMATCH[1]}"
+>     argfile_value="${BASH_REMATCH[3]:-}"
+>     argfile_value="${argfile_value#"${argfile_value%%[![:space:]]*}"}"
+>     argfile_value="${argfile_value%"${argfile_value##*[![:space:]]}"}"
+>     [[ "$argfile_value" =~ ^\"(.*)\"$ || "$argfile_value" =~ ^\'(.*)\'$ ]] && argfile_value="${BASH_REMATCH[1]}"
+>
+>     case "$argfile_key" in
 = flags.map { |flag| flag.render(:argfile_case) }.join.indent 4
->   esac
-> done <"{{ argfile }}"
+>     esac
+>   done <"$argfile"
+> fi
 >
