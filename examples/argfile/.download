@@ -1,2 +1,14 @@
+# Boolean flags in the argfile are loaded as defaults
 --force
+
+# Flag values must appear on the same line
 --log "some path with spaces.log"
+
+# Arguments in argfile also work for repeatable flags
+--header "x-from-file: 1"
+
+# Unknown flags in the argfile are ignored
+--no-such-flag
+
+# Non-flag lines in the argfile are ignored
+this line is ignored
