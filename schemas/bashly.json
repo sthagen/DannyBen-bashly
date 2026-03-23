@@ -856,7 +856,7 @@
     },
     "argfile-property": {
       "title": "argfile",
-      "description": "A file containing additional arguments to autoload for the current script or sub-command\nhttps://bashly.dev/configuration/command/#argfile",
+      "description": "A file containing flag defaults to autoload for the current script or sub-command.\nEach supported flag must appear on a single line, optionally followed by its value.\nNon-flag lines are ignored.\nhttps://bashly.dev/configuration/command/#argfile",
       "type": "string",
       "minLength": 1,
       "examples": [
