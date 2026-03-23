@@ -1,0 +1,2 @@
+--force
+--log "some path with spaces.log"

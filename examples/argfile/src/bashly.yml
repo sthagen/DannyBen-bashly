@@ -1,0 +1,20 @@
+name: download
+help: Sample application with autoloaded arguments
+version: 0.1.0
+
+# Allow users to configure args and flags in a file named '.download'
+argfile: .download
+
+args:
+- name: source
+  required: true
+  help: URL to download from
+
+flags:
+- long: --force
+  short: -f
+  help: Overwrite existing files
+- long: --log
+  short: -l
+  arg: path
+  help: Path to log file

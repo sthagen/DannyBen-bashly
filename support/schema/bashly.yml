@@ -721,6 +721,15 @@ definitions:
     minLength: 1
     examples:
       - dir_commands/list.sh
+  argfile-property:
+    title: argfile
+    description: |-
+      A file containing additional arguments to autoload for the current script or sub-command
+      https://bashly.dev/configuration/command/#argfile
+    type: string
+    minLength: 1
+    examples:
+      - .mycli
   filters-property:
     title: filters
     description: |-
@@ -802,6 +811,8 @@ definitions:
         $ref: '#/definitions/sub-command-expose-property'
       filename:
         $ref: '#/definitions/filename-property'
+      argfile:
+        $ref: '#/definitions/argfile-property'
       filters:
         $ref: '#/definitions/filters-property'
       function:
@@ -850,6 +861,8 @@ properties:
     $ref: '#/definitions/root-extensible-property'
   filename:
     $ref: '#/definitions/filename-property'
+  argfile:
+    $ref: '#/definitions/argfile-property'
   filters:
     $ref: '#/definitions/filters-property'
   function:
