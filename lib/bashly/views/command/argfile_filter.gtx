@@ -14,5 +14,5 @@
 >   case "$argfile_key" in
 = flags.map { |flag| flag.render(:argfile_case) }.join.indent 4
 >   esac
-> done < "{{ argfile }}"
+> done <"{{ argfile }}"
 >

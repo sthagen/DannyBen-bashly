@@ -2,5 +2,5 @@
 
 > {{ aliases.join " | " }})
 = render(arg ? :argfile_case_arg : :argfile_case_no_arg).indent 2
-> ;;
+>   ;;
 >
