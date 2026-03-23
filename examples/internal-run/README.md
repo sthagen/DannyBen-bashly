@@ -15,10 +15,6 @@ $ bashly generate
 $ bashly generate
 ```
 
-Note that while this pattern of calling `run` internally is supported, you may
-want to consider using [lib functions]
-instead, for a more robust codebase.
-
 While this pattern of calling run internally is supported, you may want to
 consider using [lib functions](https://bashly.dev/usage/writing-your-scripts/#adding-common-functions)
 instead. lib functions can help create a more robust and maintainable codebase
