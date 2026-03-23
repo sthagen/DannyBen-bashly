@@ -3,7 +3,7 @@ FROM dannyben/alpine-ruby:4.0
 LABEL io.whalebrew.name=bashly
 
 ENV PS1="\n\n>> bashly \W \$ "
-ENV BASHLY_VERSION=1.3.7
+ENV BASHLY_VERSION=1.3.8
 
 WORKDIR /app
 
