@@ -120,6 +120,12 @@ show_examples_on_error: false
 # all the private elements in the usage texts, as if they were public.
 private_reveal_key: ~
 
+# When enabling argfile for any command, this setting controls the name of the
+# environment variable that can override or disable argfile loading at runtime.
+# Set the variable to `0`, `off`, `no` or `false` to disable argfile loading,
+# or to a different path to load another argfile instead.
+argfile_var: ARGFILE
+
 # Display various usage elements in color by providing the name of the color
 # function. The value for each property is a name of a function that is
 # available in your script, for example: `green` or `bold`.

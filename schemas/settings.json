@@ -289,6 +289,13 @@
         }
       ]
     },
+    "argfile_var": {
+      "title": "argfile var",
+      "description": "The name of the environment variable that can override or disable command argfiles at runtime\nhttps://bashly.dev/usage/settings/#argfile_var",
+      "type": "string",
+      "minLength": 1,
+      "default": "ARGFILE"
+    },
     "watch_evented": {
       "title": "watch evented",
       "description": "Whether to use evented file system watch instead of the default polling\nhttps://bashly.dev/usage/settings/#watch_evented",

@@ -237,6 +237,14 @@ properties:
       The name of the environment variable (case sensitive) that, if set, will reveal private commands, flags and environment variables
       https://bashly.dev/usage/settings/#private_reveal_key
     oneOf: *optional_string
+  argfile_var:
+    title: argfile var
+    description: |-
+      The name of the environment variable that can override or disable command argfiles at runtime
+      https://bashly.dev/usage/settings/#argfile_var
+    type: string
+    minLength: 1
+    default: ARGFILE
   watch_evented:
     title: watch evented
     description: |-
