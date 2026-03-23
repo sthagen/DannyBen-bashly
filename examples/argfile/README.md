@@ -40,11 +40,12 @@ flags:
   arg: path
   help: Path to log file
 
-# Arguments in argfile also work for repeatable flags
+# Arguments in argfile also work for repeatable and unique flags
 - long: --header
   short: -H
   arg: value
   repeatable: true
+  unique: true
   help: Add an HTTP header
 ````
 
@@ -121,6 +122,22 @@ args:
 args:
 - ${args[--force]} = 1
 - ${args[--header]} = x-from-file:\ 1 x-from-cli:\ 2
+- ${args[--log]} = some path with spaces.log
+- ${args[source]} = somesource
+
+
+````
+
+### `$ ./download somesource --header "x-from-file: 1"`
+
+````shell
+# This file is located at 'src/root_command.sh'.
+# It contains the implementation for the 'download' command.
+# The code you write here will be wrapped by a function named 'root_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args:
+- ${args[--force]} = 1
+- ${args[--header]} = x-from-file:\ 1
 - ${args[--log]} = some path with spaces.log
 - ${args[source]} = somesource
 
