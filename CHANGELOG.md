@@ -1,6 +1,14 @@
 Changelog
 ========================================
 
+v1.3.8 - 2026-03-23
+----------------------------------------
+
+- Change `command.argfile` to apply defaults instead of prepending the command line [`736ced8e`](https://github.com/bashly-framework/bashly/commit/736ced8e)
+- Allow disabling and overriding argfile with env var [`ad82d59d`](https://github.com/bashly-framework/bashly/commit/ad82d59d)
+- Compare [`v1.3.7..v1.3.8`](https://github.com/bashly-framework/bashly/compare/v1.3.7..v1.3.8)
+
+
 v1.3.7 - 2026-03-22
 ----------------------------------------
 

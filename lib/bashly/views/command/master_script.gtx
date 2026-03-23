@@ -4,7 +4,6 @@
 = render :version_command
 = render :usage
 = render :normalize_input
-= render :argfile_helpers if argfile_used_anywhere?
 = render :inspect_args if Settings.enabled? :inspect_args
 = render :user_lib if user_lib.any?
 = render :command_functions

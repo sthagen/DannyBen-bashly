@@ -724,7 +724,9 @@ definitions:
   argfile-property:
     title: argfile
     description: |-
-      A file containing additional arguments to autoload for the current script or sub-command
+      A file containing flag defaults to autoload for the current script or sub-command.
+      Each supported flag must appear on a single line, optionally followed by its value.
+      Non-flag lines are ignored.
       https://bashly.dev/configuration/command/#argfile
     type: string
     minLength: 1

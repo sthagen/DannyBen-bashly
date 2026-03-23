@@ -1,0 +1,23 @@
+= view_marker
+
+> if [[ -n "$argfile_value" ]]; then
+
+if repeatable
+  >   escaped="$(printf '%q' "$argfile_value")"
+  >   if [[ -z ${args['{{ name }}']+x} ]]; then
+  >     args['{{ name }}']="$escaped"
+  if unique
+    >     unique_lookup["{{ name }}:$escaped"]=1
+    >   elif [[ -z "${unique_lookup["{{ name }}:$escaped"]:-}" ]]; then
+    >     args['{{ name }}']="${args['{{ name }}']} $escaped"
+    >     unique_lookup["{{ name }}:$escaped"]=1
+  else
+    >   else
+    >     args['{{ name }}']="${args['{{ name }}']} $escaped"
+  end
+  >   fi
+else
+  >   [[ -n ${args['{{ name }}']+x} ]] || args['{{ name }}']="$argfile_value"
+end
+
+> fi
