@@ -102,7 +102,7 @@ describe LibrarySource do
       expect(subject.libraries.keys).to match_array %i[
         colors completions completions_script completions_yaml config
         help hooks ini lib settings stacktrace strings validations yaml
-        render_markdown render_mandoc
+        render_markdown render_markdown_github render_mandoc
       ]
     end
 

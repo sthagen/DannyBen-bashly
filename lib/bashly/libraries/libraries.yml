@@ -79,6 +79,21 @@ render_markdown:
 
       m`$ bashly render templates/markdown docs`
 
+render_markdown_github:
+  help: Copy the github markdown templates to your project, allowing you to customize the markdown documentation output.
+  skip_src_check: true
+  files:
+    - source: "render/markdown_github/README.md"
+      target: "templates/markdown_github/README.md"
+    - source: "render/markdown_github/markdown.gtx"
+      target: "templates/markdown_github/markdown.gtx"
+    - source: "render/markdown_github/render.rb"
+      target: "templates/markdown_github/render.rb"
+  post_install_message: |
+    Generate your markdown documentation by running:
+
+      m`$ bashly render templates/markdown_github docs`
+
 render_mandoc:
   help: Copy the mandoc templates to your project, allowing you to customize the man documentation output.
   skip_src_check: true
