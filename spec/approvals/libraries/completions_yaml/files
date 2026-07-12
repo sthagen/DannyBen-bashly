@@ -2,10 +2,13 @@
 - :path: spec/tmp/completions.yml
   :content: |
     ---
-    download:
-    - "--force"
-    - "--help"
-    - "--version"
-    - "-f"
-    - "-h"
-    - "-v"
+    patterns:
+    - download [root options] <source> <target>
+    options:
+      root:
+      - "--help|-h"
+      - "--version|-v"
+      - "--force|-f"
+    tokens:
+      source:
+      target:

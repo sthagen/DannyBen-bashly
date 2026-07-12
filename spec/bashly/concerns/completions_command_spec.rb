@@ -3,6 +3,7 @@ describe Script::Command do
 
   let(:fixtures) { load_fixture('script/commands') }
   let(:fixture) { :completions_simple }
+  let(:completion_generator) { instance_double Completely::Completions }
 
   describe '#completion_data' do
     it 'returns a data structure for completely' do
@@ -11,9 +12,18 @@ describe Script::Command do
   end
 
   describe '#completion_function' do
-    it 'returns a bash completion script wrapped in a function' do
+    before do
+      allow(Completely::Completions).to receive(:new)
+        .with(subject.completion_data)
+        .and_return completion_generator
+      allow(completion_generator).to receive(:wrapper_function)
+        .with('custom_name')
+        .and_return 'wrapped completion script'
+    end
+
+    it 'returns the generated bash completion script wrapped in a function' do
       expect(subject.completion_function('custom_name'))
-        .to match_approval('completions/function')
+        .to eq 'wrapped completion script'
     end
   end
 
@@ -28,9 +38,17 @@ describe Script::Command do
     end
 
     describe '#completion_script' do
-      it 'returns a bash completion script' do
+      before do
+        allow(Completely::Completions).to receive(:new)
+          .with(subject.completion_data)
+          .and_return completion_generator
+        allow(completion_generator).to receive(:script)
+          .and_return 'completion script'
+      end
+
+      it 'returns the generated bash completion script' do
         expect(subject.completion_script)
-          .to match_approval('completions/script')
+          .to eq 'completion script'
       end
     end
   end
@@ -42,6 +60,17 @@ describe Script::Command do
       it 'returns a data structure that includes the whitelist' do
         expect(subject.completion_data.to_yaml)
           .to match_approval('completions/whitelist')
+      end
+    end
+  end
+
+  context 'with a command that uses pattern completion sources' do
+    let(:fixture) { :completions_pattern_sources }
+
+    describe '#completion_data' do
+      it 'returns pattern config data with tokens and options' do
+        expect(subject.completion_data.to_yaml)
+          .to match_approval('completions/pattern_sources')
       end
     end
   end

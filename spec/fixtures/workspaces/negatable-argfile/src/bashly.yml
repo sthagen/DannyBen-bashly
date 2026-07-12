@@ -1,0 +1,11 @@
+name: colorize
+help: Test negatable argfile behavior
+version: 0.1.0
+
+argfile: .colorize
+
+flags:
+- long: --color
+  short: -c
+  help: Enable color output
+  negatable: true

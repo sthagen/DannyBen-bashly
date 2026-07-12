@@ -27,7 +27,7 @@ module Bashly
       def initialize(label: nil, commands: nil, help: nil)
         @label = label
         @commands = commands.is_a?(String) ? [commands] : commands
-        @help = help&.empty? ? nil : help
+        @help = help && help.empty? ? nil : help
       end
 
       def multi?

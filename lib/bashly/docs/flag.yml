@@ -13,6 +13,17 @@ flag:
       help: Repository user name
       required: true
 
+flag.alias:
+  help: Specify one or more aliases for this flag. Each alias must include the `--` or `-` prefix.
+  url: https://bashly.dev/configuration/flag/#alias
+  example: |-
+    flags:
+    - long: --container
+      short: -c
+      alias: [--pod, -p]
+      arg: name
+      help: Container name
+
 flag.allowed:
   help: Specify a list of allowed values. Can be used in conjunction with `default` and `required`, and must be accompanied by `arg`.
   url: https://bashly.dev/configuration/flag/#allowed
@@ -135,6 +146,15 @@ flag.needs:
       arg: target
       help: Where to add the alias
       needs: [--add]
+
+flag.negatable:
+  help: Allow a boolean long flag to also be disabled with its `--no-` form.
+  url: https://bashly.dev/configuration/flag/#negatable
+  example: |-
+    flags:
+    - long: --color
+      help: Enable color output
+      negatable: true
 
 flag.private:
   help: Specify that this flag should not be displayed in the help text.

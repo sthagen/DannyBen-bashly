@@ -75,7 +75,7 @@ module Bashly
         @raw_data ||= begin
           result = {}
           Dir["#{docs_dir}/*.yml"].each do |path|
-            result.merge! YAML.load_file(path)
+            result.merge! YAML.trusted_load_file(path)
           end
           result
         end

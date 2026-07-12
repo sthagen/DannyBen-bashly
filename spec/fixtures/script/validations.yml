@@ -4,6 +4,14 @@
   args:
   - name: --user
 
+:arg_allowed_and_completions:
+  name: invalid
+  help: arg with both allowed and completions
+  args:
+  - name: path
+    allowed: [one, two]
+    completions: [<file>]
+
 :arg_default_array_without_repeatable:
   name: invalid
   help: default cannot be an array without repeatable
@@ -249,6 +257,27 @@
   - long: --user
     arg: --name
 
+:flag_alias:
+  name: invalid
+  help: flag.alias should be a string or array of strings
+  flags:
+  - long: --user
+    alias: 1
+
+:flag_alias_array:
+  name: invalid
+  help: flag.alias array values should be strings
+  flags:
+  - long: --user
+    alias: [--person, 1]
+
+:flag_alias_format:
+  name: invalid
+  help: flag.alias values should be valid flag names
+  flags:
+  - long: --user
+    alias: user
+
 :flag_allowed_and_completions:
   name: invalid
   help: flag with both allowed and completions
@@ -314,6 +343,44 @@
   help: the long flag is not in the form of --force
   flags:
   - long: force
+
+:flag_negatable_type:
+  name: invalid
+  help: flag.negatable should be boolean
+  flags:
+  - long: --color
+    negatable: maybe
+
+:flag_negatable_without_long:
+  name: invalid
+  help: flag.negatable requires long
+  flags:
+  - short: -c
+    negatable: true
+
+:flag_negatable_with_arg:
+  name: invalid
+  help: flag.negatable cannot be used with arg
+  flags:
+  - long: --color
+    arg: mode
+    negatable: true
+
+:flag_negatable_with_repeatable:
+  name: invalid
+  help: flag.negatable cannot be used with repeatable
+  flags:
+  - long: --color
+    repeatable: true
+    negatable: true
+
+:flag_negatable_with_required:
+  name: invalid
+  help: flag.negatable cannot be used with required
+  flags:
+  - long: --color
+    required: true
+    negatable: true
 
 :flag_required_and_default:
   name: invalid
@@ -411,6 +478,23 @@
   flags:
   - short: -f
   - short: -f
+
+:non_uniq_flags_aliases:
+  name: invalid
+  help: flag aliases conflict with other flag names
+  flags:
+  - long: --container
+    alias: [--pod, -p]
+  - long: --podman
+    short: -p
+
+:non_uniq_flags_negatable:
+  name: invalid
+  help: generated negatable flag conflicts with another flag
+  flags:
+  - long: --color
+    negatable: true
+  - long: --no-color
   
 :non_uniq_arg_names:
   name: invalid

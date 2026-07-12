@@ -90,6 +90,8 @@ module Bashly
 
     def assert_arg(key, value)
       assert_hash key, value, keys: Script::Argument.option_keys
+      refute value['allowed'] && value['completions'], "#{key} cannot have both nub`allowed` and nub`completions`"
+
       assert_string "#{key}.name", value['name']
       assert_optional_string "#{key}.help", value['help']
       assert_string_or_array "#{key}.default", value['default']
@@ -99,6 +101,7 @@ module Bashly
       assert_boolean "#{key}.unique", value['unique']
 
       assert_array "#{key}.allowed", value['allowed'], of: :string
+      assert_array "#{key}.completions", value['completions'], of: :string
 
       refute value['name'].match(/^-/), "#{key}.name must not start with '-'"
 
@@ -123,9 +126,11 @@ module Bashly
       assert_optional_string "#{key}.short", value['short']
       assert_optional_string "#{key}.help", value['help']
       assert_optional_string "#{key}.arg", value['arg']
+      assert_string_or_array "#{key}.alias", value['alias']
       assert_string_or_array "#{key}.default", value['default']
       assert_string_or_array "#{key}.validate", value['validate']
 
+      assert_boolean "#{key}.negatable", value['negatable']
       assert_boolean "#{key}.private", value['private']
       assert_boolean "#{key}.repeatable", value['repeatable']
       assert_boolean "#{key}.unique", value['unique']
@@ -136,9 +141,20 @@ module Bashly
 
       assert value['long'].match(/^--[a-zA-Z0-9_-]+$/), "#{key}.long must be in the form of '--name'" if value['long']
       assert value['short'].match(/^-[a-zA-Z0-9]$/), "#{key}.short must be in the form of '-n'" if value['short']
+      Array(value['alias']).each_with_index do |flag_alias, index|
+        alias_key = value['alias'].is_a?(Array) ? "#{key}.alias[#{index}]" : "#{key}.alias"
+        assert_flag_alias alias_key, flag_alias
+      end
       refute value['arg'].match(/^-/), "#{key}.arg must not start with '-'" if value['arg']
 
       refute value['required'] && value['default'], "#{key} cannot have both nub`required` and nub`default`"
+
+      if value['negatable']
+        assert value['long'], "#{key}.negatable requires nub`long`"
+        refute value['arg'], "#{key}.negatable does not make sense with nub`arg`"
+        refute value['repeatable'], "#{key}.negatable does not make sense with nub`repeatable`"
+        refute value['required'], "#{key}.negatable does not make sense with nub`required`"
+      end
 
       if value['default']
         assert value['arg'], "#{key}.default does not make sense without nub`arg`"
@@ -160,6 +176,13 @@ module Bashly
       if value['default'].is_a? Array
         assert value['repeatable'], "#{key}.default array does not make sense without nub`repeatable`"
       end
+    end
+
+    def assert_flag_alias(key, value)
+      assert(
+        value.match(/^--[a-zA-Z0-9_-]+$/) || value.match(/^-[a-zA-Z0-9]$/),
+        "#{key} must be in the form of '--name' or '-n'"
+      )
     end
 
     def assert_env_var(key, value)
@@ -219,8 +242,7 @@ module Bashly
       assert_array "#{key}.variables", value['variables'], of: :var
 
       assert_uniq "#{key}.commands", value['commands'], %w[name alias]
-      assert_uniq "#{key}.flags", value['flags'], 'long'
-      assert_uniq "#{key}.flags", value['flags'], 'short'
+      assert_uniq_flags key, value['flags']
       assert_uniq "#{key}.args", value['args'], 'name'
 
       if value['function']
@@ -261,6 +283,24 @@ module Bashly
         refute value['version'], "#{key}.version makes no sense"
         refute value['extensible'], "#{key}.extensible makes no sense"
       end
+    end
+
+    def assert_uniq_flags(key, flags)
+      return unless flags
+
+      list = flags.flat_map do |flag|
+        [flag['long'], flag['short'], *Array(flag['alias']), negated_flag_name(flag)].compact
+      end
+
+      nonuniqs = list.nonuniq
+      assert nonuniqs.empty?,
+        "#{key}.flags contains non-unique elements (#{nonuniqs.join ', '}) in long or short or alias"
+    end
+
+    def negated_flag_name(flag)
+      return unless flag['negatable'] == true && flag['long']
+
+      "--no-#{flag['long'].delete_prefix '--'}"
     end
   end
 end

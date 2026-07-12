@@ -2,14 +2,21 @@ require 'erb'
 require 'yaml'
 
 module YAML
-  # We trust our loaded YAMLs
-  # This patch is due to https://bugs.ruby-lang.org/issues/17866
-  # StackOverflow: https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias/71192990#71192990
   class << self
-    alias load unsafe_load if YAML.respond_to? :unsafe_load
+    def trusted_load(content)
+      if YAML.respond_to? :unsafe_load
+        YAML.unsafe_load content
+      else
+        YAML.load content
+      end
+    end
+
+    def trusted_load_file(path)
+      trusted_load File.read(path)
+    end
 
     def load_erb_file(path)
-      YAML.load ERB.new(File.read(path)).result
+      YAML.trusted_load ERB.new(File.read(path)).result
     end
   end
 end

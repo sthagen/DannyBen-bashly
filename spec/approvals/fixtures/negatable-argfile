@@ -1,0 +1,32 @@
+creating user files in src
+created src/root_command.sh
+created ./colorize
+run ./colorize --help to test your bash script
++ ./colorize
+# This file is located at 'src/root_command.sh'.
+# It contains the implementation for the 'colorize' command.
+# The code you write here will be wrapped by a function named 'root_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args:
+- ${args[--color]} = 1
++ ./colorize --no-color
+# This file is located at 'src/root_command.sh'.
+# It contains the implementation for the 'colorize' command.
+# The code you write here will be wrapped by a function named 'root_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args: none
++ ARGFILE=.colorize-off
++ ./colorize
+# This file is located at 'src/root_command.sh'.
+# It contains the implementation for the 'colorize' command.
+# The code you write here will be wrapped by a function named 'root_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args: none
++ ARGFILE=.colorize-off
++ ./colorize --color
+# This file is located at 'src/root_command.sh'.
+# It contains the implementation for the 'colorize' command.
+# The code you write here will be wrapped by a function named 'root_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args:
+- ${args[--color]} = 1

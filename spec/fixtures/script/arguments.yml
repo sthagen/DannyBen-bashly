@@ -1,6 +1,10 @@
 :basic_argument:
   name: file
 
+:completions:
+  name: file
+  completions: [<file>, README.md]
+
 :required:
   name: file
   required: true

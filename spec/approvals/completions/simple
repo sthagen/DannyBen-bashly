@@ -1,9 +1,9 @@
 ---
-get:
-- "--force"
-- "--help"
-- "--verbose"
-- "--version"
-- "-h"
-- "-v"
-- "<file>"
+patterns:
+- get [root options]
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  - "--force"
+  - "--verbose"

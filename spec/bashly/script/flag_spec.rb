@@ -38,6 +38,30 @@ describe Script::Flag do
         expect(subject.aliases).to eq ['-s']
       end
     end
+
+    context 'with aliases' do
+      let(:fixture) { :aliases }
+
+      it 'returns an array with the long, short and alias values' do
+        expect(subject.aliases).to eq ['--container', '-c', '--pod', '-p']
+      end
+    end
+
+    context 'with one alias' do
+      let(:fixture) { :alias_string }
+
+      it 'returns an array with the long and alias values' do
+        expect(subject.aliases).to eq ['--container', '--pod']
+      end
+    end
+
+    context 'with a negatable flag' do
+      let(:fixture) { :negatable }
+
+      it 'includes the negated long option' do
+        expect(subject.aliases).to eq ['--color', '--no-color', '-c']
+      end
+    end
   end
 
   describe '#default_string' do
@@ -95,6 +119,22 @@ describe Script::Flag do
       expect(subject.usage_string).to eq '--help, -h'
     end
 
+    context 'with aliases' do
+      let(:fixture) { :aliases }
+
+      it 'includes all aliases inline' do
+        expect(subject.usage_string).to eq '--container, -c, --pod, -p NAME'
+      end
+    end
+
+    context 'with a negatable flag' do
+      let(:fixture) { :negatable_with_alias }
+
+      it 'uses bracket notation for the negated long option' do
+        expect(subject.usage_string).to eq '--[no-]color, -c, --colour'
+      end
+    end
+
     context 'with extended: true' do
       context 'when the flag is optional' do
         it 'returns the same string as it does without extended' do
@@ -116,6 +156,32 @@ describe Script::Flag do
         it 'appends (repeatable) to the usage string' do
           expect(subject.usage_string(extended: true)).to eq "#{subject.usage_string} (repeatable)"
         end
+      end
+    end
+  end
+
+  describe '#render' do
+    context 'with aliases' do
+      let(:fixture) { :aliases }
+
+      it 'matches every alias and assigns to the canonical flag name' do
+        result = subject.render(:case)
+
+        expect(result).to include '--container | -c | --pod | -p)'
+        expect(result).to include "args['--container']=\"$2\""
+      end
+    end
+
+    context 'with a negatable flag' do
+      let(:fixture) { :negatable }
+
+      it 'assigns and unsets the canonical flag name' do
+        result = subject.render(:case)
+
+        expect(result).to include '--color | -c)'
+        expect(result).to include "args['--color']=1"
+        expect(result).to include '--no-color)'
+        expect(result).to include 'unset "args[--color]"'
       end
     end
   end

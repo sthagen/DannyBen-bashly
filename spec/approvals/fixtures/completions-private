@@ -5,20 +5,13 @@ This file can be converted to a completions script using the completely gem.
 
 + cat completions.yml
 ---
-private:
-- "--help"
-- "--version"
-- "-h"
-- "-v"
-- c
-- connect
-private connect:
-- "--force"
-- "--help"
-- "-f"
-- "-h"
-private c:
-- "--force"
-- "--help"
-- "-f"
-- "-h"
+patterns:
+- private [root options]
+- private connect|c [connect options]
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  connect:
+  - "--help|-h"
+  - "--force|-f"

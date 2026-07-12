@@ -1,19 +1,23 @@
 ---
-download:
-- "--help"
-- "--method"
-- "--role"
-- "--version"
-- "-h"
-- "-v"
-- '22'
-- '3000'
-- '80'
-- https
-- ssh
-download*--role:
-- user
-- admin
-download*--method:
-- get
-- post
+patterns:
+- download [root options] <protocol> <port>
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  - "--role <name>"
+  - "--method <root_name>"
+tokens:
+  name:
+  - user
+  - admin
+  root_name:
+  - get
+  - post
+  protocol:
+  - https
+  - ssh
+  port:
+  - '80'
+  - '22'
+  - '3000'

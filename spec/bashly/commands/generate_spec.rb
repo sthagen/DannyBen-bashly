@@ -228,7 +228,7 @@ describe Commands::Generate, :slow do
     end
 
     let(:bashly_config_path) { "#{source_dir}/bashly.yml" }
-    let(:bashly_config) { YAML.load_file bashly_config_path }
+    let(:bashly_config) { YAML.trusted_load_file bashly_config_path }
     let(:watch_double) { instance_double Watch, on_change: nil }
 
     it 'generates immediately and on change' do

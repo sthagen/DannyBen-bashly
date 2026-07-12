@@ -3,6 +3,27 @@
   short: -h
   help: show this help
 
+:aliases:
+  long: --container
+  short: -c
+  alias: [--pod, -p]
+  arg: name
+
+:alias_string:
+  long: --container
+  alias: --pod
+
+:negatable:
+  long: --color
+  short: -c
+  negatable: true
+
+:negatable_with_alias:
+  long: --color
+  short: -c
+  alias: --colour
+  negatable: true
+
 :long_only:
   long: --long
 

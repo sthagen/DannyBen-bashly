@@ -39,6 +39,14 @@ describe Script::Argument do
     end
   end
 
+  describe '#completions' do
+    let(:fixture) { :completions }
+
+    it 'returns the completion suggestions' do
+      expect(subject.completions).to eq ['<file>', 'README.md']
+    end
+  end
+
   describe '#usage_string' do
     it 'returns a string suitable to be used as a usage pattern' do
       expect(subject.usage_string).to eq '[FILE]'

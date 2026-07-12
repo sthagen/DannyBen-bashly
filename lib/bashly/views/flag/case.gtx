@@ -1,6 +1,14 @@
 = view_marker
 
-> {{ aliases.join " | " }})
+> {{ positive_aliases.join " | " }})
 = render(:conflicts).indent 2
 = render(arg ? :case_arg : :case_no_arg).indent 2
 >
+
+if negatable
+  > {{ negated_long }})
+  >   unset "args[{{ name }}]"
+  >   shift
+  >   ;;
+  >
+end

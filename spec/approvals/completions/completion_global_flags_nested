@@ -1,15 +1,16 @@
 ---
-cli:
-- "--help"
-- "--version"
-- "-h"
-- "-v"
-- images
-cli images:
-- "--help"
-- "--verbose"
-- "-h"
-- ls
-cli images*ls*:
-- "--help"
-- "-h"
+patterns:
+- cli [root options]
+- cli images [images options]
+- cli images ls [images_global options] [images_ls options]
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  images:
+  - "--help|-h"
+  - "--verbose"
+  images_global:
+  - "--verbose"
+  images_ls:
+  - "--help|-h"

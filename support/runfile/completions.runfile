@@ -1,4 +1,5 @@
 require 'bashly'
+require 'completely'
 
 summary 'Generate bash completions for bashly itself'
 
@@ -30,15 +31,17 @@ action do
 end
 
 helpers do
-  def help_flags = "- --help\n- -h"
+  def help_flags = "    - --help|-h"
   
   def libs = Bashly::LibrarySource.new.config.keys
 
   def commands = Bashly::CLI.runner.commands.keys
+
+  def render_sources = Bashly::RenderSource.internal.keys.map { |key| ":#{key}" }
   
   def docs
     Dir['lib/bashly/docs/*.yml'].each_with_object({}) do |path, hash|
-      hash.merge!(YAML.load_file(path))
+      hash.merge!(YAML.trusted_load_file(path))
     end.keys
   end
 

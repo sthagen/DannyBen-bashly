@@ -33,6 +33,17 @@ arg.allowed:
       allowed: [stage, production, development]
       default: development
 
+arg.completions:
+  help: Specify a list of additional completion suggestions when used in conjunction with `bashly add completions`.
+  url: https://bashly.dev/configuration/argument/#completions
+  example: |-
+    args:
+    - name: path
+      help: File or directory to process
+      completions:
+      - <file>
+      - <directory>
+
 arg.default:
   help: Specify the value to apply when not provided by the user.
   url: https://bashly.dev/configuration/argument/#default

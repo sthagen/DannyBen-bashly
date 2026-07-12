@@ -103,6 +103,12 @@ describe Settings do
     end
   end
 
+  describe '::argfile_var' do
+    it 'returns its default value' do
+      expect(subject.argfile_var).to eq 'ARGFILE'
+    end
+  end
+
   describe '::extra_lib_dirs' do
     context 'when set using env var as a comma delimited string' do
       before { ENV['BASHLY_EXTRA_LIB_DIRS'] = 'one,two' }

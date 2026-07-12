@@ -98,6 +98,30 @@
     arg: name
     allowed: [get, post]
 
+:completions_pattern_sources:
+  name: cli
+  commands:
+  - name: upload
+    alias: up
+    completions: [<file>, README.md]
+    args:
+    - name: source
+      completions: [<directory>, README.md, $(git branch), +literal]
+    - name: target
+      repeatable: true
+    flags:
+    - long: --user
+      short: -u
+      arg: user
+      completions: [<user>]
+    - long: --tag
+      arg: tag
+    - long: --verbose
+      repeatable: true
+  - name: inspect
+    args:
+    - name: object
+
 :completions_global_flags:
   name: cli
   flags:
@@ -518,4 +542,3 @@
 
   - long: --protocol
     arg: type
-

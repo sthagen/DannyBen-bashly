@@ -1,1 +1,1 @@
-#<Bashly::ConfigurationError: root.flags contains non-unique elements (-f) in short>
+#<Bashly::ConfigurationError: root.flags contains non-unique elements (-f) in long or short or alias>

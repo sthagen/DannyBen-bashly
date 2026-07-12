@@ -1,0 +1,14 @@
+patterns:
+- bashly [root options]
+- bashly generate [generate options]
+
+options:
+  root:
+    - --help|-h
+  generate:
+    - --env|-e <env>
+
+tokens:
+  env:
+    - development
+    - production

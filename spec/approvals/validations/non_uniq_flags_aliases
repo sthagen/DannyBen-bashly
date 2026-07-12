@@ -1,0 +1,1 @@
+#<Bashly::ConfigurationError: root.flags contains non-unique elements (-p) in long or short or alias>

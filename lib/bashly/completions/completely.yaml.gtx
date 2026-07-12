@@ -1,85 +1,72 @@
-> bashly:
+> patterns:
+> - bashly [root options]
+> - bashly init|i [init options]
+> - bashly preview|p [preview options]
+> - bashly validate|v [validate options]
+> - bashly generate|build|g [generate options]
+> - bashly add|a [add options] <library>
+> - bashly doc [doc options] <doc>
+> - bashly completions|c [completions options]
+> - bashly render [render options] <render_source>
+> - bashly shell|s [shell options]
+>
+> options:
+>   root:
 = help_flags
-> - --version
-> - -v
-commands.each do |command|
-  = "- #{command}"
-end
-> 
-> bashly init: &init
+>     - --version|-v
+>   init:
 = help_flags
-> - --minimal
-> - -m
-> 
-> bashly i: *init
-> 
-> bashly preview: &preview
+>     - --minimal|-m
+>   preview:
 = help_flags
-> 
-> bashly p: *preview
-> 
-> bashly validate: &validate
+>   validate:
 = help_flags
-> - --verbose
-> - -v
-> 
-> bashly v: *validate
-> 
-> bashly generate: &generate
+>     - --verbose|-v
+>   generate:
 = help_flags
-> - --env
-> - --force
-> - --quiet
-> - --upgrade
-> - --watch
-> - --wrap
-> - -e
-> - -f
-> - -q
-> - -r
-> - -u
-> - -w
-> 
-> bashly g: *generate
-> 
-> bashly generate*--env: &env
-> - development
-> - production
-> 
-> bashly generate*-e: *env
-> bashly g*--env: *env
-> bashly g*-e: *env
-> 
-> bashly add: &add
+>     - --env|-e <env>
+>     - --force|-f
+>     - --quiet|-q
+>     - --upgrade|-u
+>     - --watch|-w
+>     - --wrap|-r <function>
+>   add:
 = help_flags
-> - --force
-> - --list
-> - --source
-> - -f
-> - -l
-> - -s
+>     - --force|-f
+>     - --list|-l
+>     - --source|-s <source>
+>   doc:
+= help_flags
+>     - --index|-i
+>   completions:
+= help_flags
+>     - --install|-i
+>     - --uninstall|-u
+>   render:
+= help_flags
+>     - --watch|-w
+>     - --show|-s <path>
+>     - --list|-l
+>     - --about|-a
+>   shell:
+= help_flags
+>
+> tokens:
+>   env:
+>     - development
+>     - production
+>   function:
+>   source:
+>   path:
+>   library:
 libs.each do |lib|
-  = "- #{lib}"
+  = "    - #{lib}"
 end
-> 
-> bashly a: *add
-> 
-> bashly doc: &doc
-= help_flags
-> - --index
-> - -i
+>   doc:
 docs.each do |doc|
-  = "- #{doc}"
+  = "    - #{doc}"
 end
->
-> bashly completions: &completions
-= help_flags
-> - --install
-> - -i
-> 
-> bashly c: *completions
->
-> bashly shell: &shell
-= help_flags
-> 
-> bashly s: *shell
+>   render_source:
+render_sources.each do |source|
+  = "    - #{source.inspect}"
+end

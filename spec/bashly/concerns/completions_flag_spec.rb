@@ -28,4 +28,14 @@ describe Script::Flag do
       end
     end
   end
+
+  describe '#completion_option_entry' do
+    context 'when the flag has aliases' do
+      let(:fixture) { :aliases }
+
+      it 'includes all aliases in the option entry' do
+        expect(subject.completion_option_entry('name')).to eq '--container|-c|--pod|-p <name>'
+      end
+    end
+  end
 end

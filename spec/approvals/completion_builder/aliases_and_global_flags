@@ -1,0 +1,25 @@
+---
+patterns:
+- cli [root options]
+- cli images|img [root_global options] [images options]
+- cli images|img list|ls [root_global options] [images_global options] [images_list
+  options]
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  - "--debug"
+  root_global:
+  - "--debug"
+  images:
+  - "--help|-h"
+  - "--verbose"
+  images_global:
+  - "--verbose"
+  images_list:
+  - "--help|-h"
+  - "--env <env>"
+tokens:
+  env:
+  - prod
+  - dev

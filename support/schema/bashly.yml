@@ -61,6 +61,20 @@ definitions:
           minLength: 1
           examples:
             - eu
+      completions:
+        title: completions
+        description: |-
+          Completions of the current positional argument
+          https://bashly.dev/configuration/argument/#completions
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          description: A completion value or action of the current positional argument
+          type: string
+          minLength: 1
+          examples:
+            - <file>
       repeatable:
         title: repeatable
         description: |-
@@ -134,6 +148,25 @@ definitions:
         pattern: ^-[^-]
         examples:
           - -s
+      alias:
+        title: alias
+        description: |-
+          One or more aliases for the current flag
+          https://bashly.dev/configuration/flag/#alias
+        oneOf:
+          - type: string
+            pattern: ^(--[a-zA-Z0-9_-]+|-[a-zA-Z0-9])$
+            examples:
+              - --pod
+          - type: array
+            minItems: 1
+            uniqueItems: true
+            items:
+              description: An alias of the current flag
+              type: string
+              pattern: ^(--[a-zA-Z0-9_-]+|-[a-zA-Z0-9])$
+              examples:
+                - -p
       help:
         title: help
         description: |-
@@ -214,6 +247,13 @@ definitions:
           minLength: 1
           examples:
             - --command
+      negatable:
+        title: negatable
+        description: |-
+          Whether the current flag also accepts its --no- form
+          https://bashly.dev/configuration/flag/#negatable
+        type: boolean
+        default: false
       completions:
         title: completions
         description: |-

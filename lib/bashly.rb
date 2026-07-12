@@ -6,8 +6,9 @@ module Bashly
   autoloads 'bashly/refinements', %i[ComposeRefinements]
 
   autoloads 'bashly', %i[
-    CLI Config ConfigValidator Library LibrarySource LibrarySourceConfig
-    MessageStrings RenderContext RenderSource Settings VERSION Watch
+    CLI CompletionBuilder Config ConfigValidator Library LibrarySource
+    LibrarySourceConfig MessageStrings RenderContext RenderSource Settings
+    VERSION Watch
   ]
 
   autoloads 'bashly/concerns', %i[

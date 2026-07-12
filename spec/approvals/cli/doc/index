@@ -1,5 +1,6 @@
 arg
 arg.allowed
+arg.completions
 arg.default
 arg.help
 arg.name
@@ -38,6 +39,7 @@ environment_variable.private
 environment_variable.required
 environment_variable.validate
 flag
+flag.alias
 flag.allowed
 flag.arg
 flag.completions
@@ -46,6 +48,7 @@ flag.default
 flag.help
 flag.long
 flag.needs
+flag.negatable
 flag.private
 flag.repeatable
 flag.required

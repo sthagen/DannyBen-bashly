@@ -1,4 +1,4 @@
-source 'https://rubygems.org', cooldown: 7
+source 'https://rubygems.org'
 
 # gem 'debug'
 gem 'rspec'

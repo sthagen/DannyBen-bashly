@@ -1,0 +1,27 @@
+---
+patterns:
+- cli [root options]
+- cli upload [upload options] <source> <target> <extra>
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  upload:
+  - "--help|-h"
+  - "--user|-u <user>"
+  - "--tag <tag>"
+tokens:
+  user:
+  - "+user"
+  tag:
+  source:
+  - "+directory"
+  - README.md
+  - "$(git branch)"
+  - "++literal"
+  target:
+  - "+file"
+  - README.md
+  extra:
+  - "+file"
+  - README.md

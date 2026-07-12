@@ -1,0 +1,29 @@
+---
+patterns:
+- cli [root options]
+- cli upload|up [upload options] <source> <target>...
+- cli inspect [inspect options] <object>
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  upload:
+  - "--help|-h"
+  - "--user|-u <user>"
+  - "--tag <tag>"
+  - "--verbose (repeatable)"
+  inspect:
+  - "--help|-h"
+tokens:
+  user:
+  - "+user"
+  tag:
+  source:
+  - "+directory"
+  - README.md
+  - "$(git branch)"
+  - "++literal"
+  target:
+  - "+file"
+  - README.md
+  object:

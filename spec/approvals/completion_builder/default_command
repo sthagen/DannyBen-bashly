@@ -1,0 +1,26 @@
+---
+patterns:
+- cli [root_get_default options] <package>
+- cli get [get options] <get_package>
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  get:
+  - "--help|-h"
+  - "--source <source>"
+  root_get_default:
+  - "--help|-h"
+  - "--version|-v"
+  - "--source <source>"
+tokens:
+  source:
+  - local
+  - remote
+  package:
+  - get
+  - hello
+  - world
+  get_package:
+  - hello
+  - world

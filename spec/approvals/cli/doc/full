@@ -38,6 +38,20 @@ arg.allowed
 
   See https://bashly.dev/configuration/argument/#allowed
 
+arg.completions
+
+  Specify a list of additional completion suggestions when used in conjunction
+  with bashly add completions.
+
+    args:
+    - name: path
+      help: File or directory to process
+      completions:
+      - <file>
+      - <directory>
+
+  See https://bashly.dev/configuration/argument/#completions
+
 arg.default
 
   Specify the value to apply when not provided by the user.
@@ -612,6 +626,20 @@ flag
 
   See https://bashly.dev/configuration/flag/
 
+flag.alias
+
+  Specify one or more aliases for this flag. Each alias must include the -- or
+  - prefix.
+
+    flags:
+    - long: --container
+      short: -c
+      alias: [--pod, -p]
+      arg: name
+      help: Container name
+
+  See https://bashly.dev/configuration/flag/#alias
+
 flag.allowed
 
   Specify a list of allowed values. Can be used in conjunction with default
@@ -755,6 +783,17 @@ flag.needs
       needs: [--add]
 
   See https://bashly.dev/configuration/flag/#needs
+
+flag.negatable
+
+  Allow a boolean long flag to also be disabled with its --no- form.
+
+    flags:
+    - long: --color
+      help: Enable color output
+      negatable: true
+
+  See https://bashly.dev/configuration/flag/#negatable
 
 flag.private
 

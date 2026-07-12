@@ -1,19 +1,21 @@
 ---
-cli:
-- "--debug"
-- "--help"
-- "--version"
-- "-h"
-- "-v"
-- images
-cli*images*:
-- "--help"
-- "-h"
-- ls
-cli*images ls*:
-- "--env"
-- "--help"
-- "-h"
-cli*images ls*--env:
-- prod
-- dev
+patterns:
+- cli [root options]
+- cli images [root_global options] [images options]
+- cli images ls [root_global options] [images_ls options]
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  - "--debug"
+  root_global:
+  - "--debug"
+  images:
+  - "--help|-h"
+  images_ls:
+  - "--help|-h"
+  - "--env <env>"
+tokens:
+  env:
+  - prod
+  - dev

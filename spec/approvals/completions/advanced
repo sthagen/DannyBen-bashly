@@ -1,38 +1,30 @@
 ---
-say:
-- "--help"
-- "--version"
-- "-h"
-- "-v"
-- goodbye
-- hello
-say hello:
-- "--help"
-- "-h"
-- world
-say hello world:
-- "--force"
-- "--help"
-- "--verbose"
-- "-h"
-- "<directory>"
-- "<user>"
-say goodbye:
-- "--help"
-- "-h"
-- universe
-say goodbye universe:
-- "$(git branch)"
-- "--color"
-- "--help"
-- "--path"
-- "--verbose"
-- "-c"
-- "-h"
-- "-v"
-say goodbye universe*--color: &1
-- green
-- red
-say goodbye universe*-c: *1
-say goodbye universe*--path:
-- "<file>"
+patterns:
+- say [root options]
+- say hello [hello options]
+- say hello world [hello_world options]
+- say goodbye [goodbye options]
+- say goodbye universe [goodbye_universe options]
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  hello:
+  - "--help|-h"
+  hello_world:
+  - "--help|-h"
+  - "--force"
+  - "--verbose"
+  goodbye:
+  - "--help|-h"
+  goodbye_universe:
+  - "--help|-h"
+  - "--color|-c <color>"
+  - "--path <path>"
+  - "--verbose|-v"
+tokens:
+  color:
+  - green
+  - red
+  path:
+  - "+file"

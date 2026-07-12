@@ -9,7 +9,7 @@ module Bashly
     end
 
     def data
-      @data ||= YAML.load_file path
+      @data ||= YAML.trusted_load_file path
     end
 
     def validated_data

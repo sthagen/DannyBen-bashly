@@ -1,34 +1,21 @@
 ---
-cli:
-- "--help"
-- "--version"
-- "-h"
-- "-v"
-- d
-- download
-- u
-- upload
-cli download:
-- "--force"
-- "--help"
-- "-f"
-- "-h"
-cli d:
-- "--force"
-- "--help"
-- "-f"
-- "-h"
-cli upload:
-- "--help"
-- "--password"
-- "--user"
-- "-h"
-- "-p"
-- "-u"
-cli u:
-- "--help"
-- "--password"
-- "--user"
-- "-h"
-- "-p"
-- "-u"
+patterns:
+- cli [root options]
+- cli download|d [download options] <source> <target>
+- cli upload|u [upload options] <source>
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  download:
+  - "--help|-h"
+  - "--force|-f"
+  upload:
+  - "--help|-h"
+  - "--user|-u <user>"
+  - "--password|-p <password>"
+tokens:
+  source:
+  target:
+  user:
+  password:

@@ -1,0 +1,19 @@
+---
+patterns:
+- cli [root options] <root_file_3>
+options:
+  root:
+  - "--help|-h"
+  - "--version|-v"
+  - "--file <file>"
+  - "--root-file <root_file>"
+  - "--root-file-2 <root_file_2>"
+tokens:
+  file:
+  - one
+  root_file:
+  - two
+  root_file_2:
+  - three
+  root_file_3:
+  - four

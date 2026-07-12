@@ -10,4 +10,5 @@ bashly generate
 ./cli
 ./cli -h
 ./cli completions -h
-./cli completions
+./cli completions | head -n6
+

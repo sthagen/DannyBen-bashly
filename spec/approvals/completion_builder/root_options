@@ -1,0 +1,8 @@
+---
+patterns:
+- cli [root options]
+options:
+  root:
+  - "--help|-h"
+  - "--force|-f"
+  - "--verbose"
