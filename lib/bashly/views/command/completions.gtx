@@ -1,0 +1,42 @@
+= view_marker
+
+> completion_run() {
+>   local -a completion_words=("$@")
+>   local -A completion_blocked_flags=()
+>   local completion_count=${#completion_words[@]}
+>   local completion_current=""
+>
+>   if [[ $completion_count -gt 0 ]]; then
+>     completion_current="${completion_words[$((completion_count - 1))]}"
+>     unset 'completion_words[completion_count - 1]'
+>   fi
+>
+>   {{ function_name }}_completion "$completion_current" "${completion_words[@]}"
+> }
+>
+> completion_candidates() {
+>   local completion_current="$1"
+>   shift
+>
+>   local completion_candidate
+>   for completion_candidate in "$@"; do
+>     if [[ $completion_candidate == "$completion_current"* ]]; then
+>       printf '%s\n' "$completion_candidate"
+>     fi
+>   done
+> }
+>
+> completion_flag_candidates() {
+>   local completion_flag="$1"
+>   local completion_current="$2"
+>   shift 2
+>
+>   if [[ -z "${completion_blocked_flags[$completion_flag]:-}" ]]; then
+>     completion_candidates "$completion_current" "$@"
+>   fi
+> }
+>
+= render :completion_function
+deep_commands.each do |command|
+  = command.render :completion_function
+end

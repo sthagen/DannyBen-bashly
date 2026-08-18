@@ -1,0 +1,3 @@
+if public_command_aliases.any?
+  > completion_candidates "$completion_current" {{ public_command_aliases.join ' ' }}
+end

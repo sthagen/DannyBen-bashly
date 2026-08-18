@@ -1,0 +1,13 @@
+if fixed_flags? || public_flags.any?
+  > if [[ $completion_current == -* ]]; then
+  if fixed_flags?
+    >   completion_flag_candidates --help "$completion_current" --help -h
+    if root_command?
+      >   completion_flag_candidates --version "$completion_current" --version -v
+    end
+  end
+  public_flags.each do |flag|
+    = flag.render(:completion).indent 2
+  end
+  > fi
+end

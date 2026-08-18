@@ -1,0 +1,133 @@
+root commands:
+  words: ['']
+  expected: [server, s, config, cfg, deploy, convert]
+
+root command prefix:
+  words: [s]
+  expected: [server, s]
+
+root flags:
+  words: ['--']
+  expected: [--help, --version]
+
+nested commands:
+  words: [server, '']
+  expected: [start, up, stop, down, status]
+
+nested command prefix:
+  words: [server, st]
+  expected: [start, stop, status]
+
+command alias navigation:
+  words: [s, st]
+  expected: [start, stop, status]
+
+flag names:
+  words: [server, start, '--']
+  expected:
+  - --help
+  - --environment
+  - --env
+  - --force
+  - --dry-run
+  - --verbose
+  - --color
+  - --no-color
+
+short flag names:
+  words: [server, start, '-']
+  expected:
+  - --help
+  - -h
+  - --environment
+  - -e
+  - --env
+  - --force
+  - -f
+  - --dry-run
+  - -n
+  - --verbose
+  - -V
+  - --color
+  - --no-color
+  - -c
+
+flag prefix:
+  words: [server, start, --c]
+  expected: [--color]
+
+flag allowed values:
+  words: [server, start, --environment, '']
+  expected: [development, staging, production]
+
+short flag allowed values:
+  words: [server, start, -e, pro]
+  expected: [production]
+
+alternate flag allowed values:
+  words: [server, start, --env, st]
+  expected: [staging]
+
+completed flag with value is blocked:
+  words: [server, start, --environment, production, '--']
+  expected: [--help, --force, --dry-run, --verbose, --color, --no-color]
+
+non-repeatable flag is blocked:
+  words: [server, start, --force, '--']
+  expected: [--help, --environment, --env, --verbose, --color, --no-color]
+
+conflicting flag is blocked:
+  words: [server, start, --dry-run, '--']
+  expected: [--help, --environment, --env, --verbose, --color, --no-color]
+
+repeatable flag remains:
+  words: [server, start, --verbose, '--']
+  expected:
+  - --help
+  - --environment
+  - --env
+  - --force
+  - --dry-run
+  - --verbose
+  - --color
+  - --no-color
+
+negated flag blocks every spelling:
+  words: [server, start, --no-color, '--']
+  expected: [--help, --environment, --env, --force, --dry-run, --verbose]
+
+first positional argument:
+  words: [deploy, '']
+  expected: [development, staging, production]
+
+positional argument prefix:
+  words: [deploy, st]
+  expected: [staging]
+
+second positional argument:
+  words: [deploy, staging, '']
+  expected: [api, worker, web]
+
+repeatable positional argument:
+  words: [deploy, staging, api, blue, '']
+  expected: [blue, green, canary]
+
+repeatable positional argument prefix:
+  words: [deploy, staging, api, blue, green, c]
+  expected: [canary]
+
+all positional arguments consumed:
+  words: [convert, one, three, '']
+  expected: []
+
+private command is not reachable:
+  words: [internal, '']
+  expected: []
+
+unknown command is not reachable:
+  words: [missing, '']
+  expected: []
+
+unknown prefix returns nothing:
+  words: [xyz]
+  expected: []

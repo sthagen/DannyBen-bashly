@@ -1,0 +1,13 @@
+if args.last.repeatable
+  last_arg_index = args.length - 1
+  > if [[ $completion_arg_index -lt {{ last_arg_index }} ]]; then
+  >   completion_arg_index=$((completion_arg_index + 1))
+  > fi
+  > shift
+else
+  > if [[ $completion_arg_index -ge {{ args.length }} ]]; then
+  >   return
+  > fi
+  > completion_arg_index=$((completion_arg_index + 1))
+  > shift
+end

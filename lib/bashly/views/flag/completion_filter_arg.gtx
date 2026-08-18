@@ -1,0 +1,7 @@
+> shift
+> if [[ $# -eq 0 ]]; then
+= render(:completion_value_candidates).indent 2
+>   return
+> fi
+> shift
+= render :completion_filter_block

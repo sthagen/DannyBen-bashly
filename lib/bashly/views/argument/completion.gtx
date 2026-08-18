@@ -1,0 +1,8 @@
+if allowed
+  > local -a completion_values=(
+  allowed.each do |value|
+    >   "{{ value }}"
+  end
+  > )
+  > completion_candidates "$completion_current" "${completion_values[@]}"
+end

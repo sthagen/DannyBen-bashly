@@ -1,5 +1,9 @@
 = view_marker
 
 > command_line_args=("$@")
-> {{ Settings.function_name :initialize }}
-> {{ Settings.function_name :run }} "${command_line_args[@]}"
+> if [[ "${command_line_args[0]:-}" == "__complete" ]]; then
+>   completion_run "${command_line_args[@]:1}"
+> else
+>   {{ Settings.function_name :initialize }}
+>   {{ Settings.function_name :run }} "${command_line_args[@]}"
+> fi

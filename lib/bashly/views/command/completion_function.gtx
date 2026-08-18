@@ -1,0 +1,15 @@
+= view_marker
+
+> {{ function_name }}_completion() {
+>   local completion_current="$1"
+if args.any?
+  >   local completion_arg_index=0
+end
+>   shift
+>
+= render(:completion_word_filter).indent 2
+= render(:completion_command_candidates).indent 2
+= render(:completion_flag_candidates).indent 2
+= render(:completion_argument_candidates).indent 2
+> }
+>

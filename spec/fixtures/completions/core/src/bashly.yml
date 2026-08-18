@@ -1,0 +1,81 @@
+name: cli
+help: Runtime completion fixture
+version: 0.1.0
+
+commands:
+- name: server
+  alias: s
+  help: Manage servers
+  commands:
+  - name: start
+    alias: up
+    help: Start a server
+    flags:
+    - long: --environment
+      short: -e
+      alias: --env
+      arg: environment
+      allowed: [development, staging, production]
+      help: Select an environment
+    - long: --force
+      short: -f
+      help: Force the server to start
+      conflicts: [--dry-run]
+    - long: --dry-run
+      short: -n
+      help: Show what would happen
+      conflicts: [--force]
+    - long: --verbose
+      short: -V
+      repeatable: true
+      help: Increase verbosity
+    - long: --color
+      short: -c
+      negatable: true
+      help: Enable color output
+  - name: stop
+    alias: down
+    help: Stop a server
+  - name: status
+    help: Show server status
+
+- name: config
+  alias: cfg
+  help: Manage configuration
+  commands:
+  - name: get
+    help: Read a configuration value
+  - name: set
+    help: Set a configuration value
+
+- name: deploy
+  help: Deploy a component
+  args:
+  - name: environment
+    allowed: [development, staging, production]
+    help: Environment to deploy to
+    required: true
+  - name: component
+    allowed: [api, worker, web]
+    help: Component to deploy
+    required: true
+  - name: label
+    allowed: [blue, green, canary]
+    help: Labels to apply
+    repeatable: true
+
+- name: convert
+  help: Convert a document
+  args:
+  - name: source
+    allowed: [one, two]
+    help: Source document
+    required: true
+  - name: target
+    allowed: [three, four]
+    help: Target document
+    required: true
+
+- name: internal
+  help: Internal command that must not be suggested
+  private: true
