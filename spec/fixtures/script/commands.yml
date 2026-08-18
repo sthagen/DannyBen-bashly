@@ -8,6 +8,15 @@
   - name: update
     alias: upgrade
 
+:completion_aliases:
+  name: cli
+  commands:
+  - name: download
+    alias: [d, down*]
+  - name: upload
+  - name: internal
+    private: true
+
 :basic_command:
   name: get
   alias: g

@@ -37,6 +37,7 @@ commands:
     alias: down
     help: Stop a server
   - name: status
+    alias: stat*
     help: Show server status
 
 - name: config
