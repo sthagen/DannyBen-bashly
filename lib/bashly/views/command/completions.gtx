@@ -3,6 +3,7 @@
 > completion_run() {
 >   local -a completion_words=("$@")
 >   local -A completion_blocked_flags=()
+>   local -A completion_emitted=()
 >   local completion_count=${#completion_words[@]}
 >   local completion_current=""
 >
@@ -20,8 +21,10 @@
 >
 >   local completion_candidate
 >   for completion_candidate in "$@"; do
->     if [[ $completion_candidate == "$completion_current"* ]]; then
+>     if [[ $completion_candidate == "$completion_current"* ]] &&
+>       [[ -z "${completion_emitted[$completion_candidate]:-}" ]]; then
 >       printf '%s\n' "$completion_candidate"
+>       completion_emitted["$completion_candidate"]=1
 >     fi
 >   done
 > }

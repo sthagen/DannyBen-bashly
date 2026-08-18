@@ -25,6 +25,9 @@ end
 >     *)
 if args.any?
   = render(:completion_argument_filter).indent 6
+elsif default_command
+  >       {{ default_command.function_name }}_completion "$completion_current" "$@"
+  >       return
 else
   >       return
 end
