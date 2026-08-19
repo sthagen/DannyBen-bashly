@@ -169,6 +169,14 @@ properties:
     type: string
     enum: *feature_toggles
     default: always
+  enable_completions:
+    title: enable_completions
+    description: |-
+      Whether to include runtime completion functions in the generated script
+      https://bashly.dev/usage/settings/#enable_completions
+    type: string
+    enum: *feature_toggles
+    default: never
   enable_view_markers:
     title: enable_view_markers
     description: |-

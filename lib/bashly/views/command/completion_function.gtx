@@ -5,6 +5,9 @@
 if args.any?
   >   local completion_arg_index=0
 end
+if args.any?(&:unique)
+  >   local -A completion_used_arguments=()
+end
 >   shift
 >
 = render(:completion_word_filter).indent 2

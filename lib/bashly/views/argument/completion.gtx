@@ -4,5 +4,14 @@ if allowed
     >   "{{ value }}"
   end
   > )
-  > completion_candidates "$completion_current" "${completion_values[@]}"
+  if unique
+    > local completion_value
+    > for completion_value in "${completion_values[@]}"; do
+    >   if [[ -z "${completion_used_arguments["{{ name }}:$completion_value"]:-}" ]]; then
+    >     completion_candidates "$completion_current" "$completion_value"
+    >   fi
+    > done
+  else
+    > completion_candidates "$completion_current" "${completion_values[@]}"
+  end
 end

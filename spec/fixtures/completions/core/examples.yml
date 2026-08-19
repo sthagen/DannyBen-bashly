@@ -1,6 +1,6 @@
 root commands:
   words: ['']
-  expected: [server, s, config, cfg, deploy, convert]
+  expected: [server, s, config, cfg, deploy, convert, release]
 
 root command prefix:
   words: [s]
@@ -119,6 +119,14 @@ repeatable positional argument prefix:
 all positional arguments consumed:
   words: [convert, one, three, '']
   expected: []
+
+unique positional argument:
+  words: [release, stable, '']
+  expected: [beta, edge]
+
+unique positional argument prefix:
+  words: [release, stable, e]
+  expected: [edge]
 
 private command is not reachable:
   words: [internal, '']

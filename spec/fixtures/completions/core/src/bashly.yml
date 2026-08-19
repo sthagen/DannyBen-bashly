@@ -77,6 +77,15 @@ commands:
     help: Target document
     required: true
 
+- name: release
+  help: Release to channels
+  args:
+  - name: channel
+    allowed: [stable, beta, edge]
+    help: Channels to release to
+    repeatable: true
+    unique: true
+
 - name: internal
   help: Internal command that must not be suggested
   private: true

@@ -1,3 +1,15 @@
+if args.any?(&:unique)
+  > case "$completion_arg_index" in
+  args.each_with_index do |arg, index|
+    next unless arg.unique
+
+    >   {{ index }})
+    = arg.render(:completion_filter).indent 4
+    >     ;;
+  end
+  > esac
+end
+
 if args.last.repeatable
   last_arg_index = args.length - 1
   > if [[ $completion_arg_index -lt {{ last_arg_index }} ]]; then
