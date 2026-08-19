@@ -154,7 +154,7 @@
       "title": "show examples on error",
       "description": "Whether to show command examples when the input line is missing required arguments\nhttps://bashly.dev/usage/settings/#show_examples_on_error",
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "env": {
       "title": "env",
