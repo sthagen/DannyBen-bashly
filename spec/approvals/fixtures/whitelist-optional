@@ -43,5 +43,5 @@ action must be one of: push, commit
 # The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
-- ${args[action]} = push
 - ${args[--notify]} = slack
+- ${args[action]} = push
