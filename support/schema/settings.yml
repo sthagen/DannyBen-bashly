@@ -348,6 +348,12 @@ properties:
       https://bashly.dev/usage/settings/#function_names
     type: object
     properties:
+      start:
+        title: start
+        description: |-
+          Name for the start() function
+          https://bashly.dev/usage/settings/#function_names
+        oneOf: *optional_string
       run:
         title: run
         description: |-

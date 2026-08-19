@@ -13,12 +13,14 @@
 = render :initialize
 = render :run
 
-> 
+>
+= render :start
+>
 if Settings.enabled? :sourcing
   > if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  = render(:start).indent 2
+  >   {{ Settings.function_name :start }} "$@"
   > fi
 else
-  = render :start
+  > {{ Settings.function_name :start }} "$@"
 end
-> 
+>

@@ -52,4 +52,5 @@ Examples:
 Stack trace:
 	from ./download:<line> in `root_command`
 	from ./download:<line> in `run`
+	from ./download:<line> in `start`
 	from ./download:<line> in `main`

@@ -1,14 +1,14 @@
 = view_marker
 
-> command_line_args=("$@")
+> {{ Settings.function_name :start }}() {
 if Settings.completions?
-> if [[ "${command_line_args[0]:-}" == "__complete" ]]; then
->   completion_run "${command_line_args[@]:1}"
-> else
+>   if [[ ${1:-} == "__complete" ]]; then
+>     completion_run "${@:2}"
+>     return
+>   fi
+end
+>
+>   command_line_args=("$@")
 >   {{ Settings.function_name :initialize }}
 >   {{ Settings.function_name :run }} "${command_line_args[@]}"
-> fi
-else
-> {{ Settings.function_name :initialize }}
-> {{ Settings.function_name :run }} "${command_line_args[@]}"
-end
+> }

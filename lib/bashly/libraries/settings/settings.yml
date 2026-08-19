@@ -200,5 +200,6 @@ var_aliases:
 
 # Choose different names for some of the internal functions.
 function_names:
+  start: ~
   run: ~
   initialize: ~

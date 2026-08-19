@@ -423,6 +423,19 @@
       "description": "Choose different names for some of the internal functions.\nhttps://bashly.dev/usage/settings/#function_names",
       "type": "object",
       "properties": {
+        "start": {
+          "title": "start",
+          "description": "Name for the start() function\nhttps://bashly.dev/usage/settings/#function_names",
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "run": {
           "title": "run",
           "description": "Name for the run() function\nhttps://bashly.dev/usage/settings/#function_names",

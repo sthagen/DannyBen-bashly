@@ -11,7 +11,7 @@ describe Script::Wrapper do
         lines = subject.code.split "\n"
         expect(lines[0..13].join("\n")).to match_approval('script/wrapper/code')
           .except(/\d+\.\d+\.\d+(\.rc\d)?/)
-        expect(lines[-3]).to eq '  run "${command_line_args[@]}"'
+        expect(lines).to include '  start "$@"'
       end
     end
 
@@ -40,6 +40,21 @@ describe Script::Wrapper do
         expect(lines[0]).to eq header_text
         expect(lines[1]).to eq '# :command.master_script'
         expect(lines[2]).to eq '# :command.root_command'
+      end
+    end
+
+    context 'with a custom start function name' do
+      around do |example|
+        original_function_names = Settings.function_names
+        Settings.function_names = { 'start' => 'custom_start' }
+        example.run
+      ensure
+        Settings.function_names = original_function_names
+      end
+
+      it 'uses the configured name for the definition and invocation' do
+        expect(subject.code).to include "custom_start() {\n"
+        expect(subject.code).to include "\n  custom_start \"$@\"\n"
       end
     end
   end
