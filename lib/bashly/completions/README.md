@@ -15,10 +15,6 @@ Note that for production use, only the `bashly-completions.bash` is used.
 
 ## For users
 
-Install completions in one of two ways:
-
-1. Run `bashly completions --install`. This will make a best effort to copy
-   the completions script to your completions directory.
-2. If the above fails, run `bashly completions > out.bash`, then copy the file
-   manually to your completions directory (or simply get the
-   `bashly-completions.bash` from this directory).
+Run `bashly completions > out.bash`, then copy the file manually to your
+completions directory (or simply get the `bashly-completions.bash` from this
+directory).

@@ -60,9 +60,6 @@ tokens:
   path:
   library:
     - colors
-    - completions
-    - completions_script
-    - completions_yaml
     - config
     - help
     - hooks

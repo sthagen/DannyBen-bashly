@@ -34,7 +34,7 @@ arg.allowed:
       default: development
 
 arg.completions:
-  help: Specify a list of additional completion suggestions when used in conjunction with `bashly add completions`.
+  help: Specify a list of additional completion suggestions.
   url: https://bashly.dev/configuration/argument/#completions
   example: |-
     args:

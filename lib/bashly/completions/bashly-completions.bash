@@ -297,7 +297,7 @@ _bashly_completions() {
 
   case "$node_id:$positional_index" in
     5:0)
-      while read -r; do COMPREPLY+=("$REPLY"); done < <(compgen -W "colors completions completions_script completions_yaml config help hooks ini lib render_markdown render_markdown_github render_mandoc settings stacktrace strings validations yaml" -- "$cur")
+      while read -r; do COMPREPLY+=("$REPLY"); done < <(compgen -W "colors config help hooks ini lib render_markdown render_markdown_github render_mandoc settings stacktrace strings validations yaml" -- "$cur")
       return
       ;;
     6:0)

@@ -40,8 +40,7 @@ arg.allowed
 
 arg.completions
 
-  Specify a list of additional completion suggestions when used in conjunction
-  with bashly add completions.
+  Specify a list of additional completion suggestions.
 
     args:
     - name: path
@@ -211,8 +210,7 @@ command.commands
 
 command.completions
 
-  Specify a list of additional completion suggestions when used in conjunction
-  with bashly add completions.
+  Specify a list of additional completion suggestions.
 
     commands:
     - name: view
@@ -680,8 +678,8 @@ flag.arg
 
 flag.completions
 
-  Specify a list of additional completion suggestions when used in conjunction
-  with bashly add completions. Must be accompanied by arg.
+  Specify a list of additional completion suggestions. Must be accompanied by
+  arg.
 
     flags:
     - long: --user

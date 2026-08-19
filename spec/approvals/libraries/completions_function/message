@@ -1,5 +1,0 @@
-In order to enable completions in your script, create a command or a flag (for example: g`download completions` or g`download --completions`) that calls the g`send_completions` function.
-
-Your users can then run something like this to enable completions:
-
-  m`$ eval "$(download completions)"`

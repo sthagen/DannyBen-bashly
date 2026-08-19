@@ -9,8 +9,7 @@ describe Script::Flag do
   describe 'composition' do
     it 'includes the necessary modules' do
       modules = [
-        Script::Introspection::Visibility, Script::Introspection::Validate,
-        Completions::Flag
+        Script::Introspection::Visibility, Script::Introspection::Validate
       ]
       expect(described_class.ancestors).to include(*modules)
     end

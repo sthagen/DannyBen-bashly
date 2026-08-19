@@ -19,7 +19,6 @@ describe Script::Command do
         Script::Introspection::Flags,
         Script::Introspection::Variables,
         Script::Introspection::Visibility,
-        Completions::Command,
       ]
       expect(described_class.ancestors).to include(*modules)
     end

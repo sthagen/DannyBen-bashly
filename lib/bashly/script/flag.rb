@@ -3,7 +3,6 @@ require 'shellwords'
 module Bashly
   module Script
     class Flag < Base
-      include Completions::Flag
       include Introspection::Visibility
       include Introspection::Validate
 

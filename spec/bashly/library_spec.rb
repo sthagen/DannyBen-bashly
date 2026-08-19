@@ -17,17 +17,6 @@ describe Library do
       expect(matter[:content]).to eq File.read("#{lib_dir}/colors.sh")
     end
 
-    context 'when the library has a custom handler' do
-      let(:name) { :completions }
-
-      before { reset_tmp_dir example: 'minimal' }
-
-      it 'delegaes the request to a custom handler' do
-        expect(subject.files).to be_an Array
-        expect(subject.files.first).to be_a Hash
-        expect(subject.files.first.keys).to match_array %i[path content]
-      end
-    end
   end
 
   describe '#post_install_message' do
@@ -48,15 +37,6 @@ describe Library do
       end
     end
 
-    context 'when the library has a custom handler' do
-      let(:name) { :completions_yaml }
-
-      before { reset_tmp_dir example: 'minimal' }
-
-      it 'returns the message form the handler' do
-        expect(subject.post_install_message).to include 'completely'
-      end
-    end
   end
 
   describe '#find_file' do

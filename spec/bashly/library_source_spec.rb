@@ -100,8 +100,7 @@ describe LibrarySource do
 
     it 'returns all libraries as keys' do
       expect(subject.libraries.keys).to match_array %i[
-        colors completions completions_script completions_yaml config
-        help hooks ini lib settings stacktrace strings validations yaml
+        colors config help hooks ini lib settings stacktrace strings validations yaml
         render_markdown render_markdown_github render_mandoc
       ]
     end

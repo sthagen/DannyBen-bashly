@@ -58,7 +58,7 @@ flag.arg:
       help: Specify the user name
 
 flag.completions:
-  help: Specify a list of additional completion suggestions when used in conjunction with `bashly add completions`. Must be accompanied by `arg`.
+  help: Specify a list of additional completion suggestions. Must be accompanied by `arg`.
   url: https://bashly.dev/configuration/flag/#completions
   example: |-
     flags:

@@ -12,21 +12,6 @@ colors:
 
       m`$ bashly add hooks`
 
-completions: 
-  help: Generate a bash completions function.
-  usage: '[PATH]'
-  handler: Bashly::Libraries::CompletionsFunction
-
-completions_script:
-  help: Generate a standalone bash completions script.
-  usage: '[PATH]'
-  handler: Bashly::Libraries::CompletionsScript
-
-completions_yaml:
-  help: Generate a completions YAML configuration for Completely.
-  usage: '[PATH]'
-  handler: Bashly::Libraries::CompletionsYAML
-
 config:
   help: Add functions for handling INI configuration files to the lib directory.
   files:

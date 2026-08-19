@@ -1,7 +1,6 @@
 module Bashly
   module Script
     class Command < Base
-      include Completions::Command
       include Introspection::Arguments
       include Introspection::Commands
       include Introspection::Dependencies
