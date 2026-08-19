@@ -5,10 +5,14 @@ dynamic external commands and internal functions, file and directory sources,
 and the `no-space` option.
 
 Runtime completions are enabled in `settings.yml`. Users can load the generated
-Bash wrapper with:
+wrapper for their shell with:
 
 ```bash
+# Bash
 source <(cli completions)
+
+# Zsh
+source <(cli completions zsh)
 ```
 
 <!-- include: settings.yml src/completions_command.sh src/lib/completions.sh -->
@@ -28,7 +32,7 @@ commands:
   args:
   - name: shell
     help: Shell to generate completions for
-    allowed: [bash]
+    allowed: [bash, zsh]
     default: bash
 
 - name: deploy

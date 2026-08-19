@@ -8,7 +8,7 @@ commands:
   args:
   - name: shell
     help: Shell to generate completions for
-    allowed: [bash]
+    allowed: [bash, zsh]
     default: bash
 
 - name: deploy
