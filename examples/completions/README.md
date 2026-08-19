@@ -59,7 +59,7 @@ commands:
 ## `settings.yml`
 
 ````yaml
-enable_completions: always
+completions: full
 
 ````
 
@@ -104,5 +104,3 @@ download
 
 
 ````
-
-

@@ -48,14 +48,14 @@ describe 'Zsh completion script', :slow do
     let(:cli) { File.expand_path 'spec/tmp/cli' }
 
     before(:context) do
-      Settings.enable_completions = 'always'
+      Settings.completions = 'full'
       reset_tmp_dir
       FileUtils.cp_r Dir['spec/fixtures/completions/core/*'], 'spec/tmp'
       Commands::Generate.new.execute %w[generate --quiet]
     end
 
     after(:context) do
-      Settings.enable_completions = 'never'
+      Settings.completions = nil
     end
 
     it 'prints Zsh completions' do
@@ -89,14 +89,14 @@ describe 'Zsh completion script', :slow do
 
   context 'configured options' do
     before(:context) do
-      Settings.enable_completions = 'always'
+      Settings.completions = 'full'
       reset_tmp_dir
       FileUtils.cp_r Dir['spec/fixtures/completions/configured/*'], 'spec/tmp'
       Commands::Generate.new.execute %w[generate --quiet]
     end
 
     after(:context) do
-      Settings.enable_completions = 'never'
+      Settings.completions = nil
     end
 
     it 'preserves literal candidates' do

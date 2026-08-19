@@ -169,14 +169,18 @@ properties:
     type: string
     enum: *feature_toggles
     default: always
-  enable_completions:
-    title: enable_completions
+  completions:
+    title: completions
     description: |-
-      Whether to include runtime completion functions in the generated script
-      https://bashly.dev/usage/settings/#enable_completions
-    type: string
-    enum: *feature_toggles
-    default: never
+      Which runtime completion functions and shell adapters to include in the generated script.
+      Use minimal for the runtime engine only, full for all available adapters, or a comma-separated shell list.
+      https://bashly.dev/usage/settings/#completions
+    oneOf:
+      - type: "null"
+      - const: false
+      - type: string
+        pattern: '^(minimal|full|(bash|zsh)(\s*,\s*(bash|zsh))*)$'
+    default: null
   enable_view_markers:
     title: enable_view_markers
     description: |-

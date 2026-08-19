@@ -129,6 +129,64 @@ describe Settings do
     end
   end
 
+  describe '::completion_shells' do
+    it 'disables completions by default' do
+      expect(subject.completions?).to be false
+      expect(subject.completion_shells).to be_empty
+    end
+
+    it 'disables completions when set to false' do
+      subject.completions = false
+
+      expect(subject.completions?).to be false
+      expect(subject.completion_shells).to be_empty
+    end
+
+    it 'enables only the runtime engine when set to minimal' do
+      subject.completions = 'minimal'
+
+      expect(subject.completions?).to be true
+      expect(subject.completion_shells).to be_empty
+    end
+
+    it 'enables every supported shell when set to full' do
+      subject.completions = 'full'
+
+      expect(subject.completion_shells).to eq %w[bash zsh]
+    end
+
+    it 'accepts one shell' do
+      subject.completions = 'zsh'
+
+      expect(subject.completion_shells).to eq %w[zsh]
+    end
+
+    it 'accepts comma-separated shells with optional whitespace' do
+      subject.completions = 'bash, zsh'
+
+      expect(subject.completion_shells).to eq %w[bash zsh]
+    end
+
+    it 'accepts the setting from the environment' do
+      original_value = ENV['BASHLY_COMPLETIONS']
+      ENV['BASHLY_COMPLETIONS'] = 'zsh,bash'
+      subject.completions = nil
+
+      expect(subject.completion_shells).to eq %w[zsh bash]
+    ensure
+      ENV['BASHLY_COMPLETIONS'] = original_value
+    end
+
+    it 'rejects invalid values' do
+      invalid_values = [true, '', 'all', 'bash+zsh', 'fish', 'bash,', 'bash,,zsh', 'bash,bash']
+
+      invalid_values.each do |value|
+        subject.completions = value
+        expect { subject.completion_shells }.to raise_error ConfigurationError
+      end
+    end
+  end
+
   describe '::production?' do
     it 'returns false by default' do
       expect(subject.production?).to be false
