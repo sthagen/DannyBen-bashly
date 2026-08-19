@@ -1,70 +1,63 @@
 = view_marker
 
 > send_completions_bash() {
->   cat <<'BASHLY_COMPLETIONS'
-> _{{ name.to_underscore }}_completions() {
->   local completion_command="${COMP_WORDS[0]}"
->   local completion_current="${COMP_WORDS[COMP_CWORD]:-}"
->   local completion_word_count=$((COMP_CWORD - 1))
->   local -a completion_words=()
->   local -a completion_response=()
->   local -a completion_options=()
->   local -A completion_seen=()
->
->   if [[ $completion_word_count -gt 0 ]]; then
->     completion_words=("${COMP_WORDS[@]:1:completion_word_count}")
->   fi
->
->   COMPREPLY=()
->   while IFS= read -r completion_line; do
->     completion_response+=("$completion_line")
->   done < <(
->     "$completion_command" __complete \
->       "${completion_words[@]}" \
->       "$completion_current"
->   )
->
->   local completion_directive="${completion_response[-1]:-}"
->   if [[ $completion_directive == :options=* ]]; then
->     unset 'completion_response[-1]'
->     IFS=, read -r -a completion_options <<< "${completion_directive#:options=}"
->   fi
->
->   COMPREPLY=("${completion_response[@]}")
->   local completion_candidate
->   for completion_candidate in "${COMPREPLY[@]}"; do
->     completion_seen["$completion_candidate"]=1
->   done
->
->   local completion_option
->   local completion_files=false
->   local completion_directories=false
->   for completion_option in "${completion_options[@]}"; do
->     case "$completion_option" in
->       files) completion_files=true ;;
->       directories) completion_directories=true ;;
->       no-space) compopt -o nospace ;;
->     esac
->   done
->
->   if [[ $completion_files == true ]]; then
->     while IFS= read -r completion_candidate; do
->       if [[ -z "${completion_seen[$completion_candidate]:-}" ]]; then
->         COMPREPLY+=("$completion_candidate")
->         completion_seen["$completion_candidate"]=1
->       fi
->     done < <(compgen -f -- "$completion_current")
->   elif [[ $completion_directories == true ]]; then
->     while IFS= read -r completion_candidate; do
->       if [[ -z "${completion_seen[$completion_candidate]:-}" ]]; then
->         COMPREPLY+=("$completion_candidate")
->         completion_seen["$completion_candidate"]=1
->       fi
->     done < <(compgen -d -- "$completion_current")
->   fi
+>   echo $'_{{ name.to_underscore }}_completions() {'
+>   echo $'  local completion_command="${COMP_WORDS[0]}"'
+>   echo $'  local completion_current="${COMP_WORDS[COMP_CWORD]:-}"'
+>   echo $'  local completion_word_count=$((COMP_CWORD - 1))'
+>   echo $'  local -a completion_words=()'
+>   echo $'  local -a completion_response=()'
+>   echo $'  local -a completion_options=()'
+>   echo $'  local -A completion_seen=()'
+>   echo $''
+>   echo $'  if [[ $completion_word_count -gt 0 ]]; then'
+>   echo $'    completion_words=("${COMP_WORDS[@]:1:completion_word_count}")'
+>   echo $'  fi'
+>   echo $''
+>   echo $'  COMPREPLY=()'
+>   echo $'  while IFS= read -r completion_line; do'
+>   echo $'    completion_response+=("$completion_line")'
+>   echo $'  done < <("$completion_command" __complete "${completion_words[@]}" "$completion_current")'
+>   echo $''
+>   echo $'  local completion_directive="${completion_response[-1]:-}"'
+>   echo $'  if [[ $completion_directive == :options=* ]]; then'
+>   echo $'    unset "completion_response[-1]"'
+>   echo $'    IFS=, read -r -a completion_options <<< "${completion_directive#:options=}"'
+>   echo $'  fi'
+>   echo $''
+>   echo $'  COMPREPLY=("${completion_response[@]}")'
+>   echo $'  local completion_candidate'
+>   echo $'  for completion_candidate in "${COMPREPLY[@]}"; do'
+>   echo $'    completion_seen["$completion_candidate"]=1'
+>   echo $'  done'
+>   echo $''
+>   echo $'  local completion_option'
+>   echo $'  local completion_files=false'
+>   echo $'  local completion_directories=false'
+>   echo $'  for completion_option in "${completion_options[@]}"; do'
+>   echo $'    case "$completion_option" in'
+>   echo $'      files) completion_files=true ;;'
+>   echo $'      directories) completion_directories=true ;;'
+>   echo $'      no-space) compopt -o nospace ;;'
+>   echo $'    esac'
+>   echo $'  done'
+>   echo $''
+>   echo $'  if [[ $completion_files == true ]]; then'
+>   echo $'    while IFS= read -r completion_candidate; do'
+>   echo $'      if [[ -z "${completion_seen[$completion_candidate]:-}" ]]; then'
+>   echo $'        COMPREPLY+=("$completion_candidate")'
+>   echo $'        completion_seen["$completion_candidate"]=1'
+>   echo $'      fi'
+>   echo $'    done < <(compgen -f -- "$completion_current")'
+>   echo $'  elif [[ $completion_directories == true ]]; then'
+>   echo $'    while IFS= read -r completion_candidate; do'
+>   echo $'      if [[ -z "${completion_seen[$completion_candidate]:-}" ]]; then'
+>   echo $'        COMPREPLY+=("$completion_candidate")'
+>   echo $'        completion_seen["$completion_candidate"]=1'
+>   echo $'      fi'
+>   echo $'    done < <(compgen -d -- "$completion_current")'
+>   echo $'  fi'
+>   echo $'}'
+>   echo $''
+>   echo $'complete -F _{{ name.to_underscore }}_completions {{ name }}'
 > }
->
-> complete -F _{{ name.to_underscore }}_completions {{ name }}
-> BASHLY_COMPLETIONS
-> }
->

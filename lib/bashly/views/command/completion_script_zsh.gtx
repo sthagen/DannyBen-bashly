@@ -1,58 +1,52 @@
 = view_marker
 
 > send_completions_zsh() {
->   cat <<'BASHLY_COMPLETIONS'
-> #compdef {{ name }}
->
-> _{{ name.to_underscore }}_completions() {
->   local completion_command="${words[1]}"
->   local completion_current="${words[CURRENT]:-}"
->   local completion_output
->   local completion_directive
->   local -a completion_words=()
->   local -a completion_response=()
->   local -a completion_options=()
->   local -a completion_add_args=()
->
->   if (( CURRENT > 2 )); then
->     completion_words=("${words[2,$((CURRENT - 1))]}")
->   fi
->
->   completion_output="$(
->     "$completion_command" __complete \
->       "${completion_words[@]}" \
->       "$completion_current"
->   )"
->   completion_response=("${(@f)completion_output}")
->
->   completion_directive="${completion_response[-1]:-}"
->   if [[ $completion_directive == :options=* ]]; then
->     completion_response[-1]=()
->     completion_options=("${(@s:,:)${completion_directive#:options=}}")
->   fi
->
->   local completion_option
->   local completion_files=false
->   local completion_directories=false
->   for completion_option in "${completion_options[@]}"; do
->     case "$completion_option" in
->       files) completion_files=true ;;
->       directories) completion_directories=true ;;
->       no-space) completion_add_args=(-S '') ;;
->     esac
->   done
->
->   if (( ${#completion_response[@]} > 0 )); then
->     compadd "${completion_add_args[@]}" -- "${completion_response[@]}"
->   fi
->
->   if [[ $completion_files == true ]]; then
->     _files "${completion_add_args[@]}"
->   elif [[ $completion_directories == true ]]; then
->     _files -/ "${completion_add_args[@]}"
->   fi
-> }
->
-> compdef _{{ name.to_underscore }}_completions {{ name }}
-> BASHLY_COMPLETIONS
+>   echo $'#compdef {{ name }}'
+>   echo $''
+>   echo $'_{{ name.to_underscore }}_completions() {'
+>   echo $'  local completion_command="${words[1]}"'
+>   echo $'  local completion_current="${words[CURRENT]:-}"'
+>   echo $'  local completion_output'
+>   echo $'  local completion_directive'
+>   echo $'  local -a completion_words=()'
+>   echo $'  local -a completion_response=()'
+>   echo $'  local -a completion_options=()'
+>   echo $'  local -a completion_add_args=()'
+>   echo $''
+>   echo $'  if (( CURRENT > 2 )); then'
+>   echo $'    completion_words=("${words[2,$((CURRENT - 1))]}")'
+>   echo $'  fi'
+>   echo $''
+>   echo $'  completion_output="$("$completion_command" __complete "${completion_words[@]}" "$completion_current")"'
+>   echo $'  completion_response=("${(@f)completion_output}")'
+>   echo $''
+>   echo $'  completion_directive="${completion_response[-1]:-}"'
+>   echo $'  if [[ $completion_directive == :options=* ]]; then'
+>   echo $'    completion_response[-1]=()'
+>   echo $'    completion_options=("${(@s:,:)${completion_directive#:options=}}")'
+>   echo $'  fi'
+>   echo $''
+>   echo $'  local completion_option'
+>   echo $'  local completion_files=false'
+>   echo $'  local completion_directories=false'
+>   echo $'  for completion_option in "${completion_options[@]}"; do'
+>   echo $'    case "$completion_option" in'
+>   echo $'      files) completion_files=true ;;'
+>   echo $'      directories) completion_directories=true ;;'
+>   echo $'      no-space) completion_add_args=(-S "") ;;'
+>   echo $'    esac'
+>   echo $'  done'
+>   echo $''
+>   echo $'  if (( ${#completion_response[@]} > 0 )); then'
+>   echo $'    compadd "${completion_add_args[@]}" -- "${completion_response[@]}"'
+>   echo $'  fi'
+>   echo $''
+>   echo $'  if [[ $completion_files == true ]]; then'
+>   echo $'    _files "${completion_add_args[@]}"'
+>   echo $'  elif [[ $completion_directories == true ]]; then'
+>   echo $'    _files -/ "${completion_add_args[@]}"'
+>   echo $'  fi'
+>   echo $'}'
+>   echo $''
+>   echo $'compdef _{{ name.to_underscore }}_completions {{ name }}'
 > }
