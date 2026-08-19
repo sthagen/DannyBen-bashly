@@ -35,6 +35,11 @@ module Bashly
         completions&.fetch('options', []) || []
       end
 
+      def completion?
+        allowed&.any? || completion_static.any? ||
+          completion_dynamic.any? || completion_options.any?
+      end
+
       def label
         repeatable ? "#{name.upcase}..." : name.upcase
       end

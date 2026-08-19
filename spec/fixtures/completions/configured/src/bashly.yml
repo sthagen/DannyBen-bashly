@@ -55,6 +55,14 @@ commands:
     completions:
       options: [files, directories, no-space]
 
+- name: mixed
+  help: Complete only selected arguments
+  args:
+  - name: source
+  - name: target
+    completions:
+      options: [directories]
+
 - name: flag
   help: Complete a flag value
   flags:

@@ -1,9 +1,10 @@
-if args.any?
+completion_args = args.each_with_index.select { |arg, _index| arg.completion? }
+if completion_args.any?
   > if [[ $completion_current != -* ]]; then
   >   case "$completion_arg_index" in
-  args.each_with_index do |arg, index|
+  completion_args.each do |arg, index|
     >     {{ index }})
-    = arg.render(:completion).indent 6
+    = arg.render(:completion).strip.indent 6
     >       ;;
   end
   >   esac

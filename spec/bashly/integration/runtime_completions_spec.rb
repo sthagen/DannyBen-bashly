@@ -17,6 +17,11 @@ describe 'runtime completions', :slow do
         Settings.completions = nil
       end
 
+      it 'does not generate empty positional candidate branches' do
+        empty_case = /^[ \t]+\d+\)\n[ \t]*\n[ \t]*;;$/
+        expect(File.read(cli)).not_to match empty_case
+      end
+
       examples.each do |name, example|
         describe name do
           it 'works' do

@@ -8,6 +8,10 @@
     dynamic: [recent_files]
     options: [files, no-space]
 
+:allowed:
+  name: file
+  allowed: [README.md]
+
 :required:
   name: file
   required: true
