@@ -1,0 +1,23 @@
+name: cli
+help: Runtime completions example
+version: 0.1.0
+
+commands:
+- name: completions
+  help: Generate a shell completion script
+  args:
+  - name: shell
+    help: Shell to generate completions for
+    allowed: [bash]
+    default: bash
+
+- name: download
+  help: Download a file
+  args:
+  - name: source
+    help: URL to download
+    required: true
+  flags:
+  - long: --force
+    short: -f
+    help: Overwrite an existing file

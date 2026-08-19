@@ -133,7 +133,7 @@ region must be one of: eu, us
 ````shell
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'login' command.
-# The code you write here will be wrapped by a function named 'login_command()'.
+# The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[environment]} = development
@@ -157,7 +157,7 @@ args:
 ````shell
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'login' command.
-# The code you write here will be wrapped by a function named 'login_command()'.
+# The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[environment]} = production

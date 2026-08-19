@@ -21,6 +21,7 @@ Each of these examples demonstrates one aspect or feature of bashly.
 - [default-values](default-values#readme) - arguments and flags with default values
 - [minus-v](minus-v#readme) - using `-v` and `-h` in your script
 - [multiline](multiline#readme) - help messages with multiple lines
+- [completions](completions#readme) - exposing runtime shell completions
 
 ## Advanced configuration features
 

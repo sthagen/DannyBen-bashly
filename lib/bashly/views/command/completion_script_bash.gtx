@@ -1,0 +1,28 @@
+= view_marker
+
+> send_completions_bash() {
+>   cat <<'BASHLY_COMPLETIONS'
+> _{{ name.to_underscore }}_completions() {
+>   local completion_command="${COMP_WORDS[0]}"
+>   local completion_current="${COMP_WORDS[COMP_CWORD]:-}"
+>   local completion_word_count=$((COMP_CWORD - 1))
+>   local -a completion_words=()
+>
+>   if [[ $completion_word_count -gt 0 ]]; then
+>     completion_words=("${COMP_WORDS[@]:1:completion_word_count}")
+>   fi
+>
+>   COMPREPLY=()
+>   while IFS= read -r completion_candidate; do
+>     COMPREPLY+=("$completion_candidate")
+>   done < <(
+>     "$completion_command" __complete \
+>       "${completion_words[@]}" \
+>       "$completion_current"
+>   )
+> }
+>
+> complete -F _{{ name.to_underscore }}_completions {{ name }}
+> BASHLY_COMPLETIONS
+> }
+>

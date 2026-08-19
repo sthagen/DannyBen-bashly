@@ -39,6 +39,7 @@
 >   fi
 > }
 >
+= render :completion_script
 = render :completion_function
 deep_commands.each do |command|
   = command.render :completion_function
