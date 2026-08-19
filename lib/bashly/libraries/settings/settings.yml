@@ -157,7 +157,7 @@ env: development
 # - always          # render this feature in any environment
 # - never           # do not render this feature
 enable_header_comment: always
-enable_bash3_bouncer: always
+enable_bash_version_bouncer: always
 enable_completions: never
 enable_view_markers: development
 enable_inspect_args: development

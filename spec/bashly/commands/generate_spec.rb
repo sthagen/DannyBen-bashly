@@ -103,7 +103,7 @@ describe Commands::Generate, :slow do
       cp 'lib/bashly/templates/bashly.yml', "#{source_dir}/bashly.yml"
     end
 
-    it 'generates the cli script wrapped in a function without bash3 bouncer' do
+    it 'generates the cli script wrapped in a function without bash version bouncer' do
       expect { subject.execute %w[generate --wrap function] }.to output_approval('cli/generate/wrap-function')
       expect(File).to exist(cli_script)
       lines = File.readlines cli_script

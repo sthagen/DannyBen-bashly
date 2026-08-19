@@ -178,9 +178,9 @@
       ],
       "default": "always"
     },
-    "enable_bash3_bouncer": {
-      "title": "enable_bash3_bouncer",
-      "description": "Whether to include the code snippet that aborts when an old version of bash is detected in the generated script\nhttps://bashly.dev/usage/settings/#enable_bash3_bouncer",
+    "enable_bash_version_bouncer": {
+      "title": "enable_bash_version_bouncer",
+      "description": "Whether to include the code snippet that aborts when an old version of bash is detected in the generated script\nhttps://bashly.dev/usage/settings/#enable_bash_version_bouncer",
       "type": "string",
       "enum": [
         "development",

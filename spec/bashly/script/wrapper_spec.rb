@@ -18,7 +18,7 @@ describe Script::Wrapper do
     context 'with function name' do
       subject { described_class.new command, 'my_super_function' }
 
-      it 'returns the complete script wrapped in a function without a bash3 bouncer' do
+      it 'returns the complete script wrapped in a function without a bash version bouncer' do
         lines = subject.code.split "\n"
         expect(lines[0..13].join("\n")).to match_approval('script/wrapper/code-wrapped')
           .except(/\d+\.\d+\.\d+(\.rc\d)?/)
