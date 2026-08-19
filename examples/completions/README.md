@@ -3,10 +3,14 @@
 Demonstrates how to expose the generated `send_completions` function through
 an application command. Runtime completions are enabled in `settings.yml`.
 
-Users can load the Bash wrapper with:
+Users can load the wrapper for their shell with:
 
 ```bash
+# Bash
 source <(cli completions)
+
+# Zsh
+source <(cli completions zsh)
 ```
 
 This example was generated with:
@@ -37,7 +41,7 @@ commands:
   args:
   - name: shell
     help: Shell to generate completions for
-    allowed: [bash]
+    allowed: [bash, zsh]
     default: bash
 
 - name: download
@@ -100,6 +104,5 @@ download
 
 
 ````
-
 
 

@@ -5,6 +5,7 @@
 >
 >   case "$completion_shell" in
 >     bash) send_completions_bash ;;
+>     zsh) send_completions_zsh ;;
 >     *)
 >       printf 'unsupported shell: %s\n' "$completion_shell" >&2
 >       return 1
@@ -13,3 +14,4 @@
 > }
 >
 = render :completion_script_bash
+= render :completion_script_zsh
