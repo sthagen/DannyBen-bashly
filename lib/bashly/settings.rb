@@ -10,6 +10,7 @@ module Bashly
         :conjoined_flag_args,
         :config_path,
         :enable_bash3_bouncer,
+        :enable_completions,
         :enable_deps_array,
         :enable_env_var_names_array,
         :enable_header_comment,
@@ -66,6 +67,10 @@ module Bashly
 
       def enable_bash3_bouncer
         @enable_bash3_bouncer ||= get :enable_bash3_bouncer
+      end
+
+      def enable_completions
+        @enable_completions ||= get :enable_completions
       end
 
       def enable_deps_array

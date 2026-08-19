@@ -1,5 +1,3 @@
-require 'open3'
-
 describe 'runtime completions', :slow do
   workspaces = Dir['spec/fixtures/completions/*'].select { |path| File.directory? path }
 
@@ -9,9 +7,14 @@ describe 'runtime completions', :slow do
       cli = File.expand_path 'spec/tmp/cli'
 
       before(:context) do
+        Settings.enable_completions = 'always'
         reset_tmp_dir
         FileUtils.cp_r Dir["#{workspace}/*"], 'spec/tmp'
         Commands::Generate.new.execute %w[generate --quiet]
+      end
+
+      after(:context) do
+        Settings.enable_completions = 'never'
       end
 
       examples.each do |name, example|
