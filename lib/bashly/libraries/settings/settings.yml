@@ -158,12 +158,19 @@ env: development
 # - never           # do not render this feature
 enable_header_comment: always
 enable_bash_version_bouncer: always
-enable_completions: never
 enable_view_markers: development
 enable_inspect_args: development
 enable_deps_array: always
 enable_env_var_names_array: always
 enable_sourcing: development
+
+# Generate native runtime completions. Supported values:
+# - ~ or false     # disable completions (default)
+# - minimal        # generate the runtime completion engine without shell adapters
+# - bash or zsh    # generate the runtime engine and one shell adapter
+# - bash,zsh       # generate the runtime engine and selected shell adapters
+# - full           # generate the runtime engine and all available shell adapters
+completions: ~
 
 
 #-------------------------------------------------------------------------------

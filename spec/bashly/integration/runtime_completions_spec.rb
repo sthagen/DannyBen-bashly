@@ -7,14 +7,14 @@ describe 'runtime completions', :slow do
       cli = File.expand_path 'spec/tmp/cli'
 
       before(:context) do
-        Settings.enable_completions = 'always'
+        Settings.completions = 'minimal'
         reset_tmp_dir
         FileUtils.cp_r Dir["#{workspace}/*"], 'spec/tmp'
         Commands::Generate.new.execute %w[generate --quiet]
       end
 
       after(:context) do
-        Settings.enable_completions = 'never'
+        Settings.completions = nil
       end
 
       examples.each do |name, example|

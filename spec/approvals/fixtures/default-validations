@@ -18,5 +18,5 @@ must be an existing file
 # The code you write here will be wrapped by a function named 'root_command()'.
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
-- ${args[file]} = README.md
 - ${args[--template]} = cli
+- ${args[file]} = README.md

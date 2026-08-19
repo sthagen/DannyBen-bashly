@@ -1,7 +1,7 @@
 = view_marker
 
 > command_line_args=("$@")
-if Settings.enabled? :completions
+if Settings.completions?
 > if [[ "${command_line_args[0]:-}" == "__complete" ]]; then
 >   completion_run "${command_line_args[@]:1}"
 > else

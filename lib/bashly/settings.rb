@@ -1,5 +1,7 @@
 module Bashly
   class Settings
+    COMPLETION_SHELLS = %w[bash zsh].freeze
+
     class << self
       include AssetHelper
 
@@ -7,10 +9,10 @@ module Bashly
         :argfile_var,
         :commands_dir,
         :compact_short_flags,
+        :completions,
         :conjoined_flag_args,
         :config_path,
         :enable_bash_version_bouncer,
-        :enable_completions,
         :enable_deps_array,
         :enable_env_var_names_array,
         :enable_header_comment,
@@ -51,6 +53,28 @@ module Bashly
         @compact_short_flags ||= get :compact_short_flags
       end
 
+      def completions
+        @completions ||= get :completions
+      end
+
+      def completions?
+        completions == 'minimal' || completion_shells.any?
+      end
+
+      def completion_shells
+        value = completions
+        return [] if value.nil? || value == false || value == 'minimal'
+        return COMPLETION_SHELLS if value == 'full'
+
+        shells = value.split(',', -1).map(&:strip) if value.is_a? String
+        valid = shells&.any? && shells.all? { |shell| COMPLETION_SHELLS.include? shell }
+        unique = shells&.uniq == shells
+        return shells if valid && unique
+
+        raise ConfigurationError,
+          "completions must be false, minimal, full, or a comma-separated list of: #{COMPLETION_SHELLS.join ', '}"
+      end
+
       def conjoined_flag_args
         @conjoined_flag_args ||= get :conjoined_flag_args
       end
@@ -67,10 +91,6 @@ module Bashly
 
       def enable_bash_version_bouncer
         @enable_bash_version_bouncer ||= get :enable_bash_version_bouncer
-      end
-
-      def enable_completions
-        @enable_completions ||= get :enable_completions
       end
 
       def enable_deps_array

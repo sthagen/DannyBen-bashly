@@ -1,11 +1,14 @@
 = view_marker
 
+completion_shells = Settings.completion_shells
+
 > send_completions() {
->   local completion_shell="${1:-bash}"
+>   local completion_shell="${1:-{{ completion_shells.first }}}"
 >
 >   case "$completion_shell" in
->     bash) send_completions_bash ;;
->     zsh) send_completions_zsh ;;
+completion_shells.each do |shell|
+  >     {{ shell }}) send_completions_{{ shell }} ;;
+end
 >     *)
 >       printf 'unsupported shell: %s\n' "$completion_shell" >&2
 >       return 1
@@ -13,5 +16,6 @@
 >   esac
 > }
 >
-= render :completion_script_bash
-= render :completion_script_zsh
+completion_shells.each do |shell|
+  = render :"completion_script_#{shell}"
+end
