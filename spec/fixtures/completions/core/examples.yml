@@ -128,6 +128,18 @@ unique positional argument prefix:
   words: [release, stable, e]
   expected: [edge]
 
+unique flag value:
+  words: [release, --label, blue, --label, '']
+  expected: [green, canary]
+
+unique flag value prefix:
+  words: [release, --label, blue, --label, c]
+  expected: [canary]
+
+unique repeatable flag remains:
+  words: [release, --label, blue, '--']
+  expected: [--help, --label]
+
 private command is not reachable:
   words: [internal, '']
   expected: []

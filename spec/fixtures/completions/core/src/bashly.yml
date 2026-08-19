@@ -33,6 +33,9 @@ commands:
       short: -c
       negatable: true
       help: Enable color output
+    - long: --secret
+      help: Internal flag that must not be suggested
+      private: true
   - name: stop
     alias: down
     help: Stop a server
@@ -79,6 +82,14 @@ commands:
 
 - name: release
   help: Release to channels
+  flags:
+  - long: --label
+    short: -l
+    arg: label
+    allowed: [blue, green, canary]
+    help: Labels to apply
+    repeatable: true
+    unique: true
   args:
   - name: channel
     allowed: [stable, beta, edge]

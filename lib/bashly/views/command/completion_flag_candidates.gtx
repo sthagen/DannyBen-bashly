@@ -1,9 +1,17 @@
 if fixed_flags? || public_flags.any?
   > if [[ $completion_current == -* ]]; then
   if fixed_flags?
-    >   completion_flag_candidates --help "$completion_current" --help -h
+    if short_flag_exist? '-h'
+      >   completion_flag_candidates --help "$completion_current" --help
+    else
+      >   completion_flag_candidates --help "$completion_current" --help -h
+    end
     if root_command?
-      >   completion_flag_candidates --version "$completion_current" --version -v
+      if short_flag_exist? '-v'
+        >   completion_flag_candidates --version "$completion_current" --version
+      else
+        >   completion_flag_candidates --version "$completion_current" --version -v
+      end
     end
   end
   public_flags.each do |flag|

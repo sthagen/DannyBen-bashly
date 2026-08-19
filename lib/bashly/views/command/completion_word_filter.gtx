@@ -8,12 +8,20 @@ public_commands.each do |command|
   >       ;;
 end
 if fixed_flags?
-  >     --help | -h)
+  if short_flag_exist? '-h'
+    >     --help)
+  else
+    >     --help | -h)
+  end
   >       completion_blocked_flags["--help"]=1
   >       shift
   >       ;;
   if root_command?
-    >     --version | -v)
+    if short_flag_exist? '-v'
+      >     --version)
+    else
+      >     --version | -v)
+    end
     >       completion_blocked_flags["--version"]=1
     >       shift
     >       ;;

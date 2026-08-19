@@ -1,0 +1,27 @@
+global flag names:
+  words: ['--']
+  expected: [--help, --version, --profile, --verbose, --host]
+
+global short flag names:
+  words: ['-']
+  expected: [--help, --version, --profile, -p, --verbose, -v, --host, -h]
+
+global flag allowed values:
+  words: [--profile, pro]
+  expected: [production]
+
+command after global flag:
+  words: [--profile, production, '']
+  expected: [deploy]
+
+local flags after global flag and command:
+  words: [--profile, production, deploy, '--']
+  expected: [--help, --force]
+
+custom version short flag remains repeatable:
+  words: [-v, '--']
+  expected: [--help, --version, --profile, --verbose, --host]
+
+custom help short flag accepts its value:
+  words: [-h, us]
+  expected: [user]

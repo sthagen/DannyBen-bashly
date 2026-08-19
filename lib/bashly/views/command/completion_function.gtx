@@ -8,6 +8,9 @@ end
 if args.any?(&:unique)
   >   local -A completion_used_arguments=()
 end
+if flags.any?(&:unique)
+  >   local -A completion_used_flag_values=()
+end
 >   shift
 >
 = render(:completion_word_filter).indent 2
