@@ -18,7 +18,10 @@
 >
 >   local completion_options_string=""
 >   if [[ ${#completion_options[@]} -gt 0 ]]; then
->     completion_options_string="$(IFS=,; printf '%s' "${completion_options[*]}")"
+>     completion_options_string="$(
+>       IFS=,
+>       printf '%s' "${completion_options[*]}"
+>     )"
 >   fi
 >   printf ':options=%s\n' "$completion_options_string"
 > }
@@ -68,7 +71,7 @@
 >     if [[ -n $completion_candidate ]]; then
 >       completion_candidates "$completion_current" "$completion_candidate"
 >     fi
->   done <<< "$completion_output"
+>   done <<<"$completion_output"
 > }
 >
 = render :completion_script
