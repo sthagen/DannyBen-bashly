@@ -1,0 +1,7 @@
+> {{ aliases.join ' | ' }})
+if arg
+  = render(:completion_filter_arg).indent 2
+else
+  = render(:completion_filter_no_arg).indent 2
+end
+>   ;;

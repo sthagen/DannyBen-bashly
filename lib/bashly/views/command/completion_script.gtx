@@ -1,0 +1,15 @@
+= view_marker
+
+> send_completions() {
+>   local completion_shell="${1:-bash}"
+>
+>   case "$completion_shell" in
+>     bash) send_completions_bash ;;
+>     *)
+>       printf 'unsupported shell: %s\n' "$completion_shell" >&2
+>       return 1
+>       ;;
+>   esac
+> }
+>
+= render :completion_script_bash

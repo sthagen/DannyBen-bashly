@@ -3,7 +3,10 @@
 
 :completions:
   name: file
-  completions: [<file>, README.md]
+  completions:
+    static: [README.md]
+    dynamic: [recent_files]
+    options: [files, no-space]
 
 :required:
   name: file

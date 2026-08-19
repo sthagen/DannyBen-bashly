@@ -297,11 +297,11 @@ _bashly_completions() {
 
   case "$node_id:$positional_index" in
     5:0)
-      while read -r; do COMPREPLY+=("$REPLY"); done < <(compgen -W "colors completions completions_script completions_yaml config help hooks ini lib render_markdown render_markdown_github render_mandoc settings stacktrace strings validations yaml" -- "$cur")
+      while read -r; do COMPREPLY+=("$REPLY"); done < <(compgen -W "colors config help hooks ini lib render_markdown render_markdown_github render_mandoc settings stacktrace strings validations yaml" -- "$cur")
       return
       ;;
     6:0)
-      while read -r; do COMPREPLY+=("$REPLY"); done < <(compgen -W "arg arg.allowed arg.completions arg.default arg.help arg.name arg.repeatable arg.required arg.validate command command.alias command.args command.catch_all command.commands command.completions command.default command.dependencies command.environment_variables command.examples command.expose command.extensible command.filename command.filters command.flags command.footer command.function command.group command.help command.help_header_override command.name command.private command.variables command.version environment_variable environment_variable.default environment_variable.help environment_variable.name environment_variable.private environment_variable.required environment_variable.validate flag flag.alias flag.allowed flag.arg flag.completions flag.conflicts flag.default flag.help flag.long flag.needs flag.negatable flag.private flag.repeatable flag.required flag.short flag.unique flag.validate variable variable.name variable.value" -- "$cur")
+      while read -r; do COMPREPLY+=("$REPLY"); done < <(compgen -W "arg arg.allowed arg.completions arg.default arg.help arg.name arg.repeatable arg.required arg.validate command command.alias command.args command.catch_all command.commands command.default command.dependencies command.environment_variables command.examples command.expose command.extensible command.filename command.filters command.flags command.footer command.function command.group command.help command.help_header_override command.name command.private command.variables command.version environment_variable environment_variable.default environment_variable.help environment_variable.name environment_variable.private environment_variable.required environment_variable.validate flag flag.alias flag.allowed flag.arg flag.completions flag.conflicts flag.default flag.help flag.long flag.needs flag.negatable flag.private flag.repeatable flag.required flag.short flag.unique flag.validate variable variable.name variable.value" -- "$cur")
       return
       ;;
     8:0)

@@ -60,9 +60,6 @@ tokens:
   path:
   library:
     - colors
-    - completions
-    - completions_script
-    - completions_yaml
     - config
     - help
     - hooks
@@ -91,7 +88,6 @@ tokens:
     - command.args
     - command.catch_all
     - command.commands
-    - command.completions
     - command.default
     - command.dependencies
     - command.environment_variables

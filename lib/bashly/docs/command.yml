@@ -74,18 +74,6 @@ command.commands:
       alias: a
       help: Register a local repository
 
-command.completions:
-  help: Specify a list of additional completion suggestions when used in conjunction with `bashly add completions`.
-  url: https://bashly.dev/configuration/command/#completions
-  example: |-
-    commands:
-    - name: view
-      help: View a directory, system user or a git branch
-      completions:
-      - <directory>
-      - <user>
-      - $(git branch 2> /dev/null)
-
 command.default:
   help: Specify that this sub-command will be executed implicitly.
   url: https://bashly.dev/configuration/command/#default

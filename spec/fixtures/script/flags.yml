@@ -46,7 +46,11 @@
 :completions_completions:
   long: --path
   short: -p
-  completions: [<file>, README.md]
+  arg: path
+  completions:
+    static: [README.md]
+    dynamic: [recent_files]
+    options: [files, no-space]
 
 :default_string:
   long: --file

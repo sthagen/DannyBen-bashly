@@ -158,6 +158,7 @@ env: development
 # - never           # do not render this feature
 enable_header_comment: always
 enable_bash3_bouncer: always
+enable_completions: never
 enable_view_markers: development
 enable_inspect_args: development
 enable_deps_array: always

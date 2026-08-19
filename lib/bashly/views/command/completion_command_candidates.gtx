@@ -1,0 +1,3 @@
+if completion_aliases.any?
+  > completion_candidates "$completion_current" {{ completion_aliases.join ' ' }}
+end

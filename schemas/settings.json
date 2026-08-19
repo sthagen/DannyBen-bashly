@@ -190,6 +190,18 @@
       ],
       "default": "always"
     },
+    "enable_completions": {
+      "title": "enable_completions",
+      "description": "Whether to include runtime completion functions in the generated script\nhttps://bashly.dev/usage/settings/#enable_completions",
+      "type": "string",
+      "enum": [
+        "development",
+        "production",
+        "always",
+        "never"
+      ],
+      "default": "never"
+    },
     "enable_view_markers": {
       "title": "enable_view_markers",
       "description": "Whether to include view marker comments in the generated script\nhttps://bashly.dev/usage/settings/#enable_view_markers",
@@ -306,7 +318,7 @@
       "title": "watch latency",
       "description": "The latency in seconds for the file system changes watcher\nhttps://bashly.dev/usage/settings/#watch_latency",
       "type": "number",
-      "default": 1
+      "default": 1.0
     },
     "usage_colors": {
       "title": "usage colors",

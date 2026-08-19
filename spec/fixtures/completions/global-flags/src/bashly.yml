@@ -1,0 +1,27 @@
+name: cli
+help: Global flag completion fixture
+version: 0.1.0
+
+flags:
+- long: --profile
+  short: -p
+  arg: profile
+  allowed: [development, production]
+  help: Select a profile
+- long: --verbose
+  short: -v
+  repeatable: true
+  help: Increase verbosity
+- long: --host
+  short: -h
+  arg: host
+  allowed: [user, admin]
+  help: Select a host
+
+commands:
+- name: deploy
+  help: Deploy the application
+  flags:
+  - long: --force
+    short: -f
+    help: Force the deployment

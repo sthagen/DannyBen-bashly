@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 3.2'
 
   s.add_dependency 'colsole', '~> 1.0'
-  s.add_dependency 'completely', '~> 0.8.0'
   s.add_dependency 'gtx', '~> 0.1.1'
   s.add_dependency 'listen', '~> 3.9'
   s.add_dependency 'lp', '~> 0.2.0'

@@ -42,8 +42,10 @@ describe Script::Argument do
   describe '#completions' do
     let(:fixture) { :completions }
 
-    it 'returns the completion suggestions' do
-      expect(subject.completions).to eq ['<file>', 'README.md']
+    it 'separates completion values, commands, and options' do
+      expect(subject.completion_static).to eq ['README.md']
+      expect(subject.completion_dynamic).to eq ['recent_files']
+      expect(subject.completion_options).to eq %w[files no-space]
     end
   end
 
