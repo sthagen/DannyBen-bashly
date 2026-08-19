@@ -161,11 +161,11 @@ properties:
       - always
       - never
     default: always
-  enable_bash3_bouncer:
-    title: enable_bash3_bouncer
+  enable_bash_version_bouncer:
+    title: enable_bash_version_bouncer
     description: |-
       Whether to include the code snippet that aborts when an old version of bash is detected in the generated script
-      https://bashly.dev/usage/settings/#enable_bash3_bouncer
+      https://bashly.dev/usage/settings/#enable_bash_version_bouncer
     type: string
     enum: *feature_toggles
     default: always

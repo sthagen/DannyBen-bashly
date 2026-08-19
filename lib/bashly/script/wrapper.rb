@@ -46,7 +46,7 @@ module Bashly
 
       def default_header
         result = render 'header'
-        result += render('bash3_bouncer') unless function_name || !Settings.enabled?(:bash3_bouncer)
+        result += render('bash_version_bouncer') unless function_name || !Settings.enabled?(:bash_version_bouncer)
         result
       end
 

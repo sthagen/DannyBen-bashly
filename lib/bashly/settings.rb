@@ -9,7 +9,7 @@ module Bashly
         :compact_short_flags,
         :conjoined_flag_args,
         :config_path,
-        :enable_bash3_bouncer,
+        :enable_bash_version_bouncer,
         :enable_completions,
         :enable_deps_array,
         :enable_env_var_names_array,
@@ -65,8 +65,8 @@ module Bashly
           (send(:"enable_#{feature}") == 'development' && !production?)
       end
 
-      def enable_bash3_bouncer
-        @enable_bash3_bouncer ||= get :enable_bash3_bouncer
+      def enable_bash_version_bouncer
+        @enable_bash_version_bouncer ||= get :enable_bash_version_bouncer
       end
 
       def enable_completions
