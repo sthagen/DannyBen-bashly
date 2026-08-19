@@ -79,11 +79,12 @@ _cli_completions() {
 
 ````
 
-### `$ ./cli __complete`
+### `$ ./cli __complete ""`
 
 ````shell
 completions
 download
+:options=
 
 
 ````
@@ -95,6 +96,7 @@ download
 -h
 --force
 -f
+:options=
 
 
 ````

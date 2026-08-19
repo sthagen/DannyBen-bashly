@@ -78,6 +78,26 @@ describe Script::Command do
     end
   end
 
+  describe 'configured completions' do
+    let(:fixture) { :completions }
+
+    it 'exposes structured argument completions' do
+      argument = subject.args.first
+
+      expect(argument.completion_static).to eq %w[main develop]
+      expect(argument.completion_dynamic).to eq ['git branch']
+      expect(argument.completion_options).to eq ['no-space']
+    end
+
+    it 'exposes structured flag completions' do
+      flag = subject.flags.first
+
+      expect(flag.completion_static).to be_empty
+      expect(flag.completion_dynamic).to be_empty
+      expect(flag.completion_options).to eq ['files']
+    end
+  end
+
   describe '#filename' do
     context 'when it is the root command' do
       it 'returns root_command.sh' do

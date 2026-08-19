@@ -17,6 +17,18 @@ describe Library do
       expect(matter[:content]).to eq File.read("#{lib_dir}/colors.sh")
     end
 
+    context 'when the library has a custom handler' do
+      let(:name) { :help }
+
+      before { reset_tmp_dir example: 'minimal' }
+
+      it 'delegates the request to the custom handler' do
+        expect(subject.files).to contain_exactly(
+          path: 'spec/tmp/src/help_command.sh',
+          content: include('help_function=download_usage')
+        )
+      end
+    end
   end
 
   describe '#post_install_message' do
@@ -37,6 +49,17 @@ describe Library do
       end
     end
 
+    context 'when the library has a custom handler' do
+      let(:name) { :help }
+
+      before { reset_tmp_dir example: 'minimal' }
+
+      it 'returns the message from the custom handler' do
+        expect(subject.post_install_message).to include(
+          'Add this as a command to your bashly.yml:'
+        )
+      end
+    end
   end
 
   describe '#find_file' do

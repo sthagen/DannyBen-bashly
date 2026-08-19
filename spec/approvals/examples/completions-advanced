@@ -1,7 +1,7 @@
 + bashly generate
 creating user files in src
 skipped src/completions_command.sh (exists)
-skipped src/download_command.sh (exists)
+skipped src/deploy_command.sh (exists)
 created ./cli
 run ./cli --help to test your bash script
 + ./cli completions
@@ -11,11 +11,12 @@ _cli_completions() {
   local completion_current="${COMP_WORDS[COMP_CWORD]:-}"
 + ./cli __complete ''
 completions
-download
+deploy
 :options=
-+ ./cli __complete download -
---help
--h
---force
--f
-:options=
++ ./cli __complete deploy main st
+staging
+:options=no-space
++ ./cli __complete deploy --config ''
+:options=files
++ ./cli __complete deploy --directory ''
+:options=directories

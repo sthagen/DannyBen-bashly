@@ -15,3 +15,17 @@ if allowed
     > completion_candidates "$completion_current" "${completion_values[@]}"
   end
 end
+
+if completion_static.any?
+  > completion_candidates "$completion_current" {{ completion_static.map { |value| Shellwords.shellescape value }.join ' ' }}
+end
+
+completion_dynamic.each do |command|
+  > if completion_output="$({ {{ command }}; } 2>/dev/null)"; then
+  >   completion_dynamic_candidates "$completion_current" "$completion_output"
+  > fi
+end
+
+if completion_options.any?
+  > completion_add_options {{ completion_options.join ' ' }}
+end

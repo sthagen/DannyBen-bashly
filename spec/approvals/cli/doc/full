@@ -40,14 +40,19 @@ arg.allowed
 
 arg.completions
 
-  Specify a list of additional completion suggestions.
+  Configure additional runtime completions.
+  static contains literal candidates. dynamic contains Bash commands that
+  print one candidate per line. options accepts files, directories, and
+  no-space.
 
     args:
-    - name: path
-      help: File or directory to process
+    - name: branch
+      help: Branch to process
       completions:
-      - <file>
-      - <directory>
+        static: [main, develop]
+        dynamic:
+        - git branch --format='%(refname:short)'
+        options: [no-space]
 
   See https://bashly.dev/configuration/argument/#completions
 
@@ -207,20 +212,6 @@ command.commands
       help: Register a local repository
 
   See https://bashly.dev/configuration/command/#commands
-
-command.completions
-
-  Specify a list of additional completion suggestions.
-
-    commands:
-    - name: view
-      help: View a directory, system user or a git branch
-      completions:
-      - <directory>
-      - <user>
-      - $(git branch 2> /dev/null)
-
-  See https://bashly.dev/configuration/command/#completions
 
 command.default
 
@@ -678,14 +669,16 @@ flag.arg
 
 flag.completions
 
-  Specify a list of additional completion suggestions. Must be accompanied by
-  arg.
+  Configure additional runtime completions. Must be accompanied by arg.
+  static contains literal candidates. dynamic contains Bash commands that
+  print one candidate per line. options accepts files, directories, and
+  no-space.
 
     flags:
-    - long: --user
-      arg: username
+    - long: --config
+      arg: file
       completions:
-      - <user>
+        options: [files]
     
     # Anything in the 'allowed' option is automatically added as a completion.
     - long: --protocol

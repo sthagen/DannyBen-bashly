@@ -10,7 +10,23 @@
   args:
   - name: path
     allowed: [one, two]
+    completions:
+      options: [files]
+
+:arg_completions_array:
+  name: invalid
+  help: completions must use the structured contract
+  args:
+  - name: path
     completions: [<file>]
+
+:arg_completions_unknown_option:
+  name: invalid
+  help: completion options use a fixed vocabulary
+  args:
+  - name: path
+    completions:
+      options: [users]
 
 :arg_default_array_without_repeatable:
   name: invalid
@@ -284,7 +300,8 @@
   flags:
   - long: --file
     allowed: [one, two]
-    completions: [<file>]
+    completions:
+      options: [files]
 
 :flag_allowed_without_arg:
   name: invalid
@@ -298,7 +315,14 @@
   help: flag must have an arg when using completions
   flags:
   - long: --target
-    completions: [<dir>]    
+    completions:
+      options: [directories]
+
+:command_completions:
+  name: invalid
+  help: commands no longer accept completions
+  completions:
+    static: [one]
 
 :flag_conflicts_array:
   name: invalid

@@ -43,6 +43,18 @@ module Bashly
         end
       end
 
+      def completion_static
+        completions&.fetch('static', []) || []
+      end
+
+      def completion_dynamic
+        completions&.fetch('dynamic', []) || []
+      end
+
+      def completion_options
+        completions&.fetch('options', []) || []
+      end
+
       def name
         long || short
       end

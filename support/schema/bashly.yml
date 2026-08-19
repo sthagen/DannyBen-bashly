@@ -62,19 +62,7 @@ definitions:
           examples:
             - eu
       completions:
-        title: completions
-        description: |-
-          Completions of the current positional argument
-          https://bashly.dev/configuration/argument/#completions
-        type: array
-        minItems: 1
-        uniqueItems: true
-        items:
-          description: A completion value or action of the current positional argument
-          type: string
-          minLength: 1
-          examples:
-            - <file>
+        $ref: '#/definitions/completions-property'
       repeatable:
         title: repeatable
         description: |-
@@ -255,17 +243,7 @@ definitions:
         type: boolean
         default: false
       completions:
-        title: completions
-        description: |-
-          Completions of the current flag
-          https://bashly.dev/configuration/flag/#completions
-        type: array
-        minItems: 1
-        uniqueItems: true
-        items:
-          description: A completion of the current flag
-          type: string
-          minLength: 1
+        $ref: '#/definitions/completions-property'
       private:
         title: private
         description: |-
@@ -631,40 +609,37 @@ definitions:
   completions-property:
     title: completions
     description: |-
-      Completions of the current script or sub-command
-      https://bashly.dev/configuration/command/#completions
-    type: array
-    minItems: 1
-    uniqueItems: true
-    items:
-      description: A completion of the current script or sub-command
-      type: string
-      minLength: 1
-      examples:
-        - <alias>
-        - <arrayvar>
-        - <binding>
-        - <builtin>
-        - <command>
-        - <directory>
-        - <disabled>
-        - <enabled>
-        - <export>
-        - <file>
-        - <function>
-        - <group>
-        - <helptopic>
-        - <hostname>
-        - <job>
-        - <keyword>
-        - <running>
-        - <service>
-        - <setopt>
-        - <shopt>
-        - <signal>
-        - <stopped>
-        - <user>
-        - <variable>
+      Additional completions for an argument or flag value
+    type: object
+    minProperties: 1
+    properties:
+      static:
+        description: Literal completion candidates
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          type: string
+          minLength: 1
+      dynamic:
+        description: Bash commands that print one completion candidate per line
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          type: string
+          minLength: 1
+      options:
+        description: Additional completion sources and shell behavior
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          enum:
+            - files
+            - directories
+            - no-space
+    additionalProperties: false
   dependencies-command-property:
     title: command
     description: |-
@@ -845,8 +820,6 @@ definitions:
         $ref: '#/definitions/sub-command-group-property'
       catch_all:
         $ref: '#/definitions/catch-all-property'
-      completions:
-        $ref: '#/definitions/completions-property'
       dependencies:
         $ref: '#/definitions/dependencies-property'
       expose:
@@ -895,8 +868,6 @@ properties:
     $ref: '#/definitions/footer-property'
   catch_all:
     $ref: '#/definitions/catch-all-property'
-  completions:
-    $ref: '#/definitions/completions-property'
   dependencies:
     $ref: '#/definitions/dependencies-property'
   extensible:

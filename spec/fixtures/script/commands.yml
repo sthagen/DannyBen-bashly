@@ -17,6 +17,20 @@
   - name: internal
     private: true
 
+:completions:
+  name: checkout
+  args:
+  - name: branch
+    completions:
+      static: [main, develop]
+      dynamic: [git branch]
+      options: [no-space]
+  flags:
+  - long: --config
+    arg: file
+    completions:
+      options: [files]
+
 :basic_command:
   name: get
   alias: g

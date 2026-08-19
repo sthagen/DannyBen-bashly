@@ -12,7 +12,6 @@ command.alias
 command.args
 command.catch_all
 command.commands
-command.completions
 command.default
 command.dependencies
 command.environment_variables

@@ -1,0 +1,66 @@
+name: cli
+help: Configured runtime completion fixture
+version: 0.1.0
+
+commands:
+- name: static
+  help: Complete static values
+  args:
+  - name: value
+    completions:
+      static: [main, develop, two words, '$literal', ':options=files']
+
+- name: external
+  help: Complete values from an external command
+  args:
+  - name: value
+    completions:
+      dynamic:
+      - printf 'alpha\nbeta\n'
+
+- name: internal
+  help: Complete values from an internal function
+  args:
+  - name: value
+    completions:
+      dynamic: [completion_colors]
+
+- name: failure
+  help: Ignore a failing dynamic producer
+  args:
+  - name: value
+    completions:
+      static: [fallback]
+      dynamic: [completion_failure]
+
+- name: files
+  help: Request file additions
+  args:
+  - name: value
+    completions:
+      static: [apple.txt]
+      options: [files]
+
+- name: directories
+  help: Request directory additions
+  args:
+  - name: value
+    completions:
+      options: [directories]
+
+- name: combined
+  help: Combine completion options
+  args:
+  - name: value
+    completions:
+      options: [files, directories, no-space]
+
+- name: flag
+  help: Complete a flag value
+  flags:
+  - long: --target
+    arg: target
+    completions:
+      static: [production, preview]
+      dynamic: [completion_colors]
+      options: [no-space]

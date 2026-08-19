@@ -58,14 +58,18 @@ flag.arg:
       help: Specify the user name
 
 flag.completions:
-  help: Specify a list of additional completion suggestions. Must be accompanied by `arg`.
+  help: |-
+    Configure additional runtime completions. Must be accompanied by `arg`.
+    `static` contains literal candidates. `dynamic` contains Bash commands that
+    print one candidate per line. `options` accepts `files`, `directories`, and
+    `no-space`.
   url: https://bashly.dev/configuration/flag/#completions
   example: |-
     flags:
-    - long: --user
-      arg: username
+    - long: --config
+      arg: file
       completions:
-      - <user>
+        options: [files]
     
     # Anything in the 'allowed' option is automatically added as a completion.
     - long: --protocol

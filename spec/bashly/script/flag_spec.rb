@@ -89,6 +89,16 @@ describe Script::Flag do
     end
   end
 
+  describe '#completions' do
+    let(:fixture) { :completions_completions }
+
+    it 'separates completion values, commands, and options' do
+      expect(subject.completion_static).to eq ['README.md']
+      expect(subject.completion_dynamic).to eq ['recent_files']
+      expect(subject.completion_options).to eq %w[files no-space]
+    end
+  end
+
   describe '#name' do
     context 'with both short and long options' do
       it 'returns the long option' do

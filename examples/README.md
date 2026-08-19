@@ -25,6 +25,7 @@ Each of these examples demonstrates one aspect or feature of bashly.
 
 ## Advanced configuration features
 
+- [completions-advanced](completions-advanced#readme) - configuring static, dynamic, and option-based runtime completions
 - [catch-all](catch-all#readme) - a command that can receive an arbitrary number of arguments
 - [catch-all-advanced](catch-all-advanced#readme) - another example for the `catch_all` option
 - [catch-all-stdin](catch-all-stdin#readme) - combining `catch_all` with `stdin` to read multiple files
