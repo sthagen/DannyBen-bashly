@@ -5,13 +5,13 @@ require 'bashly/version'
 Gem::Specification.new do |s|
   s.name        = 'bashly'
   s.version     = Bashly::VERSION
-  s.summary     = 'Bash Command Line Tool Generator'
+  s.summary     = 'Bash command-line framework and CLI generator'
   s.description = 'Generate bash command line tools using YAML configuration'
   s.authors     = ['Danny Ben Shitrit']
   s.email       = 'db@dannyben.com'
   s.files       = Dir['README.md', 'lib/**/*']
   s.executables = ['bashly']
-  s.homepage    = 'https://github.com/bashly-framework/bashly'
+  s.homepage    = 'https://bashly.dev'
   s.license     = 'MIT'
   s.required_ruby_version = '>= 3.3'
 
