@@ -4,7 +4,7 @@ describe 'runtime completions', :slow do
   workspaces.each do |workspace|
     context File.basename(workspace) do
       examples = YAML.trusted_load_file "#{workspace}/examples.yml"
-      cli = File.expand_path 'spec/tmp/cli'
+      let(:cli) { File.expand_path 'spec/tmp/cli' }
 
       before(:context) do
         Settings.completions = 'minimal'
@@ -24,7 +24,7 @@ describe 'runtime completions', :slow do
 
       examples.each do |name, example|
         describe name do
-          it 'works' do
+          it 'returns the expected completions' do
             stdout, stderr, status = Open3.capture3(
               cli, '__complete', *example['words']
             )
@@ -38,5 +38,4 @@ describe 'runtime completions', :slow do
       end
     end
   end
-
 end

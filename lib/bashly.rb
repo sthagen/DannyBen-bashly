@@ -12,7 +12,7 @@ module Bashly
   ]
 
   autoloads 'bashly/concerns', %i[
-    AssetHelper Renderable ValidationHelpers
+    AssetHelper Renderable SettingsCompletions ValidationHelpers
   ]
 
   module Script
