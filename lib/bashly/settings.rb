@@ -1,9 +1,10 @@
 module Bashly
   class Settings
-    COMPLETION_SHELLS = %w[bash zsh].freeze
+    COMPLETION_SHELLS = SettingsCompletions::COMPLETION_SHELLS
 
     class << self
       include AssetHelper
+      include SettingsCompletions
 
       attr_writer(
         :argfile_var,
@@ -50,28 +51,6 @@ module Bashly
 
       def compact_short_flags
         @compact_short_flags ||= get :compact_short_flags
-      end
-
-      def completions
-        @completions ||= get :completions
-      end
-
-      def completions?
-        completions == 'minimal' || completion_shells.any?
-      end
-
-      def completion_shells
-        value = completions
-        return [] if value.nil? || value == false || value == 'minimal'
-        return COMPLETION_SHELLS if value == 'full'
-
-        shells = value.split(',', -1).map(&:strip) if value.is_a? String
-        valid = shells&.any? && shells.all? { |shell| COMPLETION_SHELLS.include? shell }
-        unique = shells&.uniq == shells
-        return shells if valid && unique
-
-        raise ConfigurationError,
-          "completions must be false, minimal, full, or a comma-separated list of: #{COMPLETION_SHELLS.join ', '}"
       end
 
       def conjoined_flag_args

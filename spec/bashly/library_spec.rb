@@ -24,7 +24,7 @@ describe Library do
 
       it 'delegates the request to the custom handler' do
         expect(subject.files).to contain_exactly(
-          path: 'spec/tmp/src/help_command.sh',
+          path:    'spec/tmp/src/help_command.sh',
           content: include('help_function=download_usage')
         )
       end

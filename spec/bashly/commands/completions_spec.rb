@@ -17,5 +17,4 @@ describe Commands::Completions do
         .to output(completions_script).to_stdout
     end
   end
-
 end

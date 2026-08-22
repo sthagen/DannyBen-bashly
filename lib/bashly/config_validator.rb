@@ -2,6 +2,8 @@ module Bashly
   class ConfigValidator
     include ValidationHelpers
 
+    COMPLETION_OPTIONS = %w[files directories no-space].freeze
+
     attr_reader :data
 
     def initialize(data)
@@ -97,7 +99,7 @@ module Bashly
       assert_array "#{key}.options", value['options'], of: :string
 
       Array(value['options']).each do |option|
-        assert %w[files directories no-space].include?(option),
+        assert COMPLETION_OPTIONS.include?(option),
           "#{key}.options contains an unknown option: #{option}"
       end
     end

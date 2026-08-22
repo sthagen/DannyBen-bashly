@@ -19,7 +19,7 @@ describe 'Bash completion script', :slow do
     )
   end
 
-  context 'generation' do
+  context 'when generating the script' do
     let(:cli) { File.expand_path 'spec/tmp/cli' }
 
     before(:context) do
@@ -66,7 +66,7 @@ describe 'Bash completion script', :slow do
     end
   end
 
-  context 'configured options' do
+  context 'with configured options' do
     before(:context) do
       Settings.completions = 'full'
       reset_tmp_dir
