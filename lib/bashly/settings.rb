@@ -32,7 +32,6 @@ module Bashly
         :target_dir,
         :usage_colors,
         :var_aliases,
-        :watch_evented,
         :watch_latency,
         :word_wrap
       )
@@ -204,10 +203,6 @@ module Bashly
 
       def var_aliases
         @var_aliases ||= get :var_aliases
-      end
-
-      def watch_evented
-        @watch_evented ||= get :watch_evented
       end
 
       def watch_latency
