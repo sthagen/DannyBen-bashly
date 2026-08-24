@@ -29,7 +29,7 @@ module Bashly
         else
           add_lib args['LIBRARY']
         end
-
+      ensure
         lib_source.cleanup if lib_source.git?
       end
 

@@ -218,6 +218,15 @@ describe Commands::Generate, :slow do
         expect { subject.execute %w[generate -u] }.to output_approval('cli/generate/upgrade-custom-source')
         expect(File.read 'spec/tmp/src/lib/database.sh').to include('dummy')
       end
+
+      it 'cleans up a git source when upgrading fails' do
+        source = instance_double LibrarySource, git?: true
+        allow(LibrarySource).to receive(:new).with('/tmp/bashly-tmp-source').and_return(source)
+        allow(source).to receive(:libraries).and_raise('failed')
+        expect(source).to receive(:cleanup)
+
+        expect { subject.execute %w[generate -u] }.to raise_error('failed')
+      end
     end
   end
 

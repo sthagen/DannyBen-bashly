@@ -196,5 +196,13 @@ describe Commands::Add do
       expect { subject.execute %w[add --source github:dannyben/bashly//spec/fixtures/libraries database] }
         .to output_approval('cli/add/from-github')
     end
+
+    it 'cleans up the source when adding fails' do
+      lib_source = instance_double LibrarySource, git?: true, libraries: {}
+      allow(subject).to receive(:lib_source).and_return(lib_source)
+      expect(lib_source).to receive(:cleanup)
+
+      expect { subject.execute %w[add --source github:user/repo unknown] }.to raise_error(/Unknown library/)
+    end
   end
 end
