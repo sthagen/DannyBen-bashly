@@ -7,7 +7,6 @@ action do |args|
     examples/render-mandoc
     examples/render-markdown
     examples/settings
-    spec/fixtures/workspaces/completions-private
     spec/fixtures/workspaces/custom-paths
     spec/fixtures/workspaces/import
     spec/fixtures/workspaces/lib-custom-source

@@ -23,6 +23,23 @@ module Bashly
         end
       end
 
+      def completion_static
+        completions&.fetch('static', []) || []
+      end
+
+      def completion_dynamic
+        completions&.fetch('dynamic', []) || []
+      end
+
+      def completion_options
+        completions&.fetch('options', []) || []
+      end
+
+      def completion?
+        allowed&.any? || completion_static.any? ||
+          completion_dynamic.any? || completion_options.any?
+      end
+
       def label
         repeatable ? "#{name.upcase}..." : name.upcase
       end

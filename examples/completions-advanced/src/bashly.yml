@@ -1,0 +1,50 @@
+name: cli
+help: Advanced runtime completions example
+version: 0.1.0
+
+commands:
+- name: completions
+  help: Generate a shell completion script
+  args:
+  - name: shell
+    help: Shell to generate completions for
+    allowed: [bash, zsh]
+    default: bash
+
+- name: deploy
+  help: Deploy a branch
+  args:
+  - name: branch
+    help: Branch to deploy
+    required: true
+
+    # Run an external Bash command and add each output line as a candidate.
+    completions:
+      dynamic:
+      - git branch --format='%(refname:short)'
+  - name: environment
+    help: Environment to deploy to
+
+    # Combine literal candidates with an internal function. Prevent the shell
+    # from appending a space after the selected completion.
+    completions:
+      static: [staging, production]
+      dynamic: [completion_environments]
+      options: [no-space]
+
+  flags:
+  - long: --config
+    arg: file
+    help: Deployment configuration file
+
+    # Ask the shell to add file and directory candidates.
+    completions:
+      options: [files]
+
+  - long: --directory
+    arg: path
+    help: Deployment directory
+
+    # Ask the shell to add directory candidates only.
+    completions:
+      options: [directories]

@@ -1,0 +1,8 @@
+unless repeatable
+  > completion_blocked_flags["{{ name }}"]=1
+end
+if conflicts
+  conflicts.each do |conflict|
+    > completion_blocked_flags["{{ conflict }}"]=1
+  end
+end

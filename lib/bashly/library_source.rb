@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'shellwords'
 require 'tmpdir'
 
 module Bashly
@@ -34,7 +35,8 @@ module Bashly
     end
 
     def cleanup
-      FileUtils.rm_rf(File.join(Dir.tmpdir, 'bashly-libs-*'))
+      FileUtils.rm_rf @tmpdir if @tmpdir
+      @tmpdir = nil
     end
 
   private
@@ -48,11 +50,11 @@ module Bashly
     end
 
     def git_clone
-      dir = Dir.mktmpdir 'bashly-libs-'
-      safe_run "git clone --quiet #{git_specs[:url]} #{dir}"
-      safe_run %[git -C "#{dir}" checkout --quiet #{git_specs[:ref]}] if git_specs[:ref]
+      @tmpdir = Dir.mktmpdir 'bashly-libs-'
+      safe_run 'git', 'clone', '--quiet', git_specs[:url], @tmpdir
+      safe_run 'git', '-C', @tmpdir, 'checkout', '--quiet', git_specs[:ref] if git_specs[:ref]
 
-      "#{dir}#{git_specs[:path]}"
+      "#{@tmpdir}#{git_specs[:path]}"
     end
 
     def git_specs
@@ -70,8 +72,8 @@ module Bashly
       end
     end
 
-    def safe_run(cmd)
-      raise "Failed running command:\nm`#{cmd}`" unless system cmd
+    def safe_run(*command)
+      raise "Failed running command:\nm`#{Shellwords.join command}`" unless system(*command)
     end
 
     def transform_github_uri

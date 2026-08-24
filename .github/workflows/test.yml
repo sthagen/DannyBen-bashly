@@ -14,14 +14,14 @@ jobs:
       LC_ALL: en_US.UTF-8 
 
     strategy:
-      matrix: { ruby: ['3.2', '3.3', '3.4', '4.0'] }
+      matrix: { ruby: ['3.3', '3.4', '4.0'] }
 
     steps:
     - name: Checkout code
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Install OS dependencies
-      run: sudo apt-get -y install mandoc
+      run: sudo apt-get -y install mandoc zsh
 
     # Rush needed for easy installation of stuff
     - name: Install rush

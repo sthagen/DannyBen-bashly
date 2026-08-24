@@ -41,6 +41,11 @@ module Bashly
           commands.map(&:name)
         end
 
+        # Returns command names and aliases that can be offered as completions
+        def completion_aliases
+          public_commands.flat_map(&:aliases).reject { |name| name.end_with? '*' }
+        end
+
         # Returns an array of the Commands
         def commands
           return [] unless options['commands']

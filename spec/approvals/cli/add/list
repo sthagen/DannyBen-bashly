@@ -2,15 +2,6 @@ colors
   Add standard functions for printing colorful and formatted text to the lib
   directory.
 
-completions [PATH]
-  Generate a bash completions function.
-
-completions_script [PATH]
-  Generate a standalone bash completions script.
-
-completions_yaml [PATH]
-  Generate a completions YAML configuration for Completely.
-
 config
   Add functions for handling INI configuration files to the lib directory.
 

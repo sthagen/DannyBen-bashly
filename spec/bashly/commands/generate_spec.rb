@@ -103,7 +103,7 @@ describe Commands::Generate, :slow do
       cp 'lib/bashly/templates/bashly.yml', "#{source_dir}/bashly.yml"
     end
 
-    it 'generates the cli script wrapped in a function without bash3 bouncer' do
+    it 'generates the cli script wrapped in a function without bash version bouncer' do
       expect { subject.execute %w[generate --wrap function] }.to output_approval('cli/generate/wrap-function')
       expect(File).to exist(cli_script)
       lines = File.readlines cli_script
@@ -217,6 +217,15 @@ describe Commands::Generate, :slow do
       it 'upgrades the library' do
         expect { subject.execute %w[generate -u] }.to output_approval('cli/generate/upgrade-custom-source')
         expect(File.read 'spec/tmp/src/lib/database.sh').to include('dummy')
+      end
+
+      it 'cleans up a git source when upgrading fails' do
+        source = instance_double LibrarySource, git?: true
+        allow(LibrarySource).to receive(:new).with('/tmp/bashly-tmp-source').and_return(source)
+        allow(source).to receive(:libraries).and_raise('failed')
+        expect(source).to receive(:cleanup)
+
+        expect { subject.execute %w[generate -u] }.to raise_error('failed')
       end
     end
   end

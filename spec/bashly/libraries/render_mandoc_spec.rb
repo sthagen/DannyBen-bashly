@@ -58,8 +58,8 @@ describe 'libraries/render/mandoc' do
       before { File.write "#{target}/#{show}", 'dummy' }
 
       it 'shows the requested file using man' do
-        expect(subject).to receive(:system).with(/pandoc.*/).ordered.and_return(true)
-        expect(subject).to receive(:system).with("man #{target}/#{show}").ordered
+        expect(subject).to receive(:system).with('pandoc', *any_args).ordered.and_return(true)
+        expect(subject).to receive(:system).with('man', "#{target}/#{show}").ordered
 
         expect { subject.instance_eval render_script }
           .to output_approval('libraries/render/mandoc/show')

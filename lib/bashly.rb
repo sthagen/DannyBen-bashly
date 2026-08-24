@@ -6,13 +6,13 @@ module Bashly
   autoloads 'bashly/refinements', %i[ComposeRefinements]
 
   autoloads 'bashly', %i[
-    CLI CompletionBuilder Config ConfigValidator Library LibrarySource
+    CLI Config ConfigValidator Library LibrarySource
     LibrarySourceConfig MessageStrings RenderContext RenderSource Settings
     VERSION Watch
   ]
 
   autoloads 'bashly/concerns', %i[
-    AssetHelper Completions Renderable ValidationHelpers
+    AssetHelper Renderable SettingsCompletions ValidationHelpers
   ]
 
   module Script
@@ -37,9 +37,6 @@ module Bashly
 
   module Libraries
     autoload :Base, 'bashly/libraries/base'
-    autoload :CompletionsFunction, 'bashly/libraries/completions/completions_function'
-    autoload :CompletionsScript, 'bashly/libraries/completions/completions_script'
-    autoload :CompletionsYAML, 'bashly/libraries/completions/completions_yaml'
     autoload :Help, 'bashly/libraries/help/help'
   end
 end

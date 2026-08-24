@@ -34,15 +34,21 @@ arg.allowed:
       default: development
 
 arg.completions:
-  help: Specify a list of additional completion suggestions when used in conjunction with `bashly add completions`.
+  help: |-
+    Configure additional runtime completions.
+    `static` contains literal candidates. `dynamic` contains Bash commands that
+    print one candidate per line. `options` accepts `files`, `directories`, and
+    `no-space`.
   url: https://bashly.dev/configuration/argument/#completions
   example: |-
     args:
-    - name: path
-      help: File or directory to process
+    - name: branch
+      help: Branch to process
       completions:
-      - <file>
-      - <directory>
+        static: [main, develop]
+        dynamic:
+        - git branch --format='%(refname:short)'
+        options: [no-space]
 
 arg.default:
   help: Specify the value to apply when not provided by the user.

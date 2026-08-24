@@ -1,0 +1,81 @@
+= view_marker
+
+> completion_run() {
+>   local -a completion_words=("$@")
+>   local -A completion_blocked_flags=()
+>   local -A completion_emitted=()
+>   local -a completion_options=()
+>   local -A completion_options_seen=()
+>   local completion_count=${#completion_words[@]}
+>   local completion_current=""
+>
+>   if [[ $completion_count -gt 0 ]]; then
+>     completion_current="${completion_words[$((completion_count - 1))]}"
+>     unset 'completion_words[completion_count - 1]'
+>   fi
+>
+>   {{ function_name }}_completion "$completion_current" "${completion_words[@]}"
+>
+>   local completion_options_string=""
+>   if [[ ${#completion_options[@]} -gt 0 ]]; then
+>     completion_options_string="$(
+>       IFS=,
+>       printf '%s' "${completion_options[*]}"
+>     )"
+>   fi
+>   printf ':options=%s\n' "$completion_options_string"
+> }
+>
+> completion_candidates() {
+>   local completion_current="$1"
+>   shift
+>
+>   local completion_candidate
+>   for completion_candidate in "$@"; do
+>     if [[ $completion_candidate == "$completion_current"* ]] &&
+>       [[ -z "${completion_emitted[$completion_candidate]:-}" ]]; then
+>       printf '%s\n' "$completion_candidate"
+>       completion_emitted["$completion_candidate"]=1
+>     fi
+>   done
+> }
+>
+> completion_flag_candidates() {
+>   local completion_flag="$1"
+>   local completion_current="$2"
+>   shift 2
+>
+>   if [[ -z "${completion_blocked_flags[$completion_flag]:-}" ]]; then
+>     completion_candidates "$completion_current" "$@"
+>   fi
+> }
+>
+> completion_add_options() {
+>   local completion_option
+>   for completion_option in "$@"; do
+>     if [[ -z "${completion_options_seen[$completion_option]:-}" ]]; then
+>       completion_options+=("$completion_option")
+>       completion_options_seen["$completion_option"]=1
+>     fi
+>   done
+> }
+>
+> completion_dynamic_candidates() {
+>   local completion_current="$1"
+>   local completion_output="$2"
+>
+>   [[ -n $completion_output ]] || return
+>
+>   local completion_candidate
+>   while IFS= read -r completion_candidate; do
+>     if [[ -n $completion_candidate ]]; then
+>       completion_candidates "$completion_current" "$completion_candidate"
+>     fi
+>   done <<<"$completion_output"
+> }
+>
+= render :completion_script if Settings.completion_shells.any?
+= render :completion_function
+deep_commands.each do |command|
+  = command.render :completion_function
+end

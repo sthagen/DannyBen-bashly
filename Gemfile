@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
-# gem 'debug'
-gem 'rspec'
-gem 'rspec_approvals'
-gem 'runfile', '~> 1.0', require: false
-gem 'runfile-tasks', '~> 1.0', require: false
-gem 'simplecov'
+group :development do
+  # gem 'debug'
+  gem 'completely'
+  gem 'rspec'
+  gem 'rspec_approvals'
+  gem 'runfile', require: false
+  gem 'runfile-tasks', require: false
+  gem 'simplecov'
+end
 
 gemspec

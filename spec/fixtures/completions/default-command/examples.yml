@@ -1,0 +1,19 @@
+parent and default command candidates:
+  words: ['']
+  expected: [run, inspect, container, image]
+
+parent and default command prefix:
+  words: [i]
+  expected: [inspect, image]
+
+explicit default command:
+  words: [inspect, '']
+  expected: [container, image]
+
+implicit default command flag:
+  words: [--format, '']
+  expected: [json, yaml]
+
+implicit default command argument:
+  words: [container, '']
+  expected: []

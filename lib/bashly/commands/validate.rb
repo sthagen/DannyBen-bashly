@@ -1,5 +1,3 @@
-require 'lp'
-
 module Bashly
   module Commands
     class Validate < Base
@@ -13,7 +11,7 @@ module Bashly
 
       def run
         if args['--verbose']
-          lp config
+          puts config.to_yaml
           puts '---'
         end
         validate_config

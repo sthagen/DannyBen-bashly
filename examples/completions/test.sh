@@ -2,13 +2,10 @@
 
 set -x
 
-bashly add completions --force
 bashly generate
 
 ### Try Me ###
 
-./cli
-./cli -h
-./cli completions -h
-./cli completions | head -n6
-
+./cli completions | head -n3
+./cli __complete ""
+./cli __complete download -

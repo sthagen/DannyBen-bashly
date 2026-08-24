@@ -23,12 +23,11 @@ describe 'rendering markdown', :stable do
         cp "examples/#{example}/src/bashly.yml", "#{source_dir}/bashly.yml"
       end
 
-      it 'renders properly' do
+      it 'renders all documents properly' do
         expect { subject.execute %W[render :markdown #{target}] }
           .to output_approval("rendering/markdown/#{example}/stdout")
 
         Dir["#{target}/*.md"].each do |file|
-          puts "    => #{file}"
           basename = File.basename(file)
 
           expect(File.read(file))

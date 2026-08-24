@@ -1,15 +1,19 @@
 module Bashly
   class Settings
+    COMPLETION_SHELLS = SettingsCompletions::COMPLETION_SHELLS
+
     class << self
       include AssetHelper
+      include SettingsCompletions
 
       attr_writer(
         :argfile_var,
         :commands_dir,
         :compact_short_flags,
+        :completions,
         :conjoined_flag_args,
         :config_path,
-        :enable_bash3_bouncer,
+        :enable_bash_version_bouncer,
         :enable_deps_array,
         :enable_env_var_names_array,
         :enable_header_comment,
@@ -29,7 +33,6 @@ module Bashly
         :target_dir,
         :usage_colors,
         :var_aliases,
-        :watch_evented,
         :watch_latency,
         :word_wrap
       )
@@ -64,8 +67,8 @@ module Bashly
           (send(:"enable_#{feature}") == 'development' && !production?)
       end
 
-      def enable_bash3_bouncer
-        @enable_bash3_bouncer ||= get :enable_bash3_bouncer
+      def enable_bash_version_bouncer
+        @enable_bash_version_bouncer ||= get :enable_bash_version_bouncer
       end
 
       def enable_deps_array
@@ -179,10 +182,6 @@ module Bashly
 
       def var_aliases
         @var_aliases ||= get :var_aliases
-      end
-
-      def watch_evented
-        @watch_evented ||= get :watch_evented
       end
 
       def watch_latency

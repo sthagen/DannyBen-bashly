@@ -1,68 +1,40 @@
-require 'listen'
+require 'watchly'
 
 module Bashly
-  # File system watcher - an ergonomic wrapper around the Listen gem
+  # File system watcher - an ergonomic wrapper around the Watchly gem
   class Watch
-    attr_reader :dirs, :options
+    attr_reader :interval, :targets
 
-    def initialize(*dirs, **options)
-      @options = default_options.merge(options).freeze
-      @dirs = dirs.empty? ? ['.'] : dirs
+    def initialize(*targets, interval: nil)
+      @targets = targets.empty? ? ['.'] : targets
+      @interval = interval || default_interval
     end
 
-    def on_change(&)
-      start(&)
-      wait
-    ensure
-      stop
-    end
+    def on_change
+      raise ArgumentError, 'block required' unless block_given?
 
-  private
-
-    def default_options
-      {
-        force_polling: force_polling?,
-        latency:       latency,
-      }
-    end
-
-    def force_polling?
-      !Settings.watch_evented
-    end
-
-    def latency
-      value = Settings.watch_latency.to_f
-      value.positive? ? value : 0.1
-    end
-
-    def start(&block)
-      raise ArgumentError, 'block required' unless block
-
-      @listener = build_listener(&block)
-      @listener.start
-    end
-
-    def stop
-      @listener&.stop
-      @listener = nil
-    end
-
-    def wait
-      sleep
+      watcher.on_change do |changes|
+        yield normalize(changes)
+      end
     rescue ::Interrupt => e
       raise Bashly::Interrupt, cause: e
     end
 
-    def build_listener
-      listen.to(*dirs, **options) do |modified, added, removed|
-        yield changes(modified, added, removed)
-      end
+  private
+
+    def default_interval
+      value = Settings.watch_latency.to_f
+      value.positive? ? value : 0.1
     end
 
-    def changes(modified, added, removed)
-      { modified:, added:, removed: }
+    def normalize(changes)
+      {
+        modified: changes.modified,
+        added:    changes.added,
+        removed:  changes.removed,
+      }
     end
 
-    def listen = Listen
+    def watcher = @watcher ||= Watchly::Watcher.new(*targets, interval:)
   end
 end

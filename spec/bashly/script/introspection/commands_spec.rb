@@ -52,6 +52,14 @@ describe Script::Introspection::Commands do
     end
   end
 
+  describe '#completion_aliases' do
+    let(:fixture) { :completion_aliases }
+
+    it 'returns public command aliases without wildcard aliases' do
+      expect(subject.completion_aliases).to eq %w[download d upload]
+    end
+  end
+
   describe '#commands' do
     let(:fixture) { :docker }
 

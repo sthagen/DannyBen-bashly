@@ -8,16 +8,19 @@
 = render :user_lib if user_lib.any?
 = render :command_functions
 = render :parse_requirements
+= render :completions if Settings.completions?
 = render :user_hooks
 = render :initialize
 = render :run
 
-> 
+>
+= render :start
+>
 if Settings.enabled? :sourcing
   > if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  = render(:start).indent 2
+  >   {{ Settings.function_name :start }} "$@"
   > fi
 else
-  = render :start
+  > {{ Settings.function_name :start }} "$@"
 end
-> 
+>

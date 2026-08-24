@@ -138,7 +138,7 @@ properties:
       Whether to show command examples when the input line is missing required arguments
       https://bashly.dev/usage/settings/#show_examples_on_error
     type: boolean
-    default: true
+    default: false
   env:
     title: env
     description: |-
@@ -161,14 +161,26 @@ properties:
       - always
       - never
     default: always
-  enable_bash3_bouncer:
-    title: enable_bash3_bouncer
+  enable_bash_version_bouncer:
+    title: enable_bash_version_bouncer
     description: |-
       Whether to include the code snippet that aborts when an old version of bash is detected in the generated script
-      https://bashly.dev/usage/settings/#enable_bash3_bouncer
+      https://bashly.dev/usage/settings/#enable_bash_version_bouncer
     type: string
     enum: *feature_toggles
     default: always
+  completions:
+    title: completions
+    description: |-
+      Which runtime completion functions and shell adapters to include in the generated script.
+      Use minimal for the runtime engine only, full for all available adapters, or a comma-separated shell list.
+      https://bashly.dev/usage/settings/#completions
+    oneOf:
+      - type: "null"
+      - const: false
+      - type: string
+        pattern: '^(minimal|full|(bash|zsh)(\s*,\s*(bash|zsh))*)$'
+    default: null
   enable_view_markers:
     title: enable_view_markers
     description: |-
@@ -245,20 +257,13 @@ properties:
     type: string
     minLength: 1
     default: ARGFILE
-  watch_evented:
-    title: watch evented
-    description: |-
-      Whether to use evented file system watch instead of the default polling
-      https://bashly.dev/usage/settings/#watch_evented
-    type: boolean
-    default: false
   watch_latency:
     title: watch latency
     description: |-
-      The latency in seconds for the file system changes watcher
+      The polling interval in seconds for the file system changes watcher
       https://bashly.dev/usage/settings/#watch_latency
     type: number
-    default: 1.0
+    default: 2.0
   usage_colors:
     title: usage colors
     description: |-
@@ -336,6 +341,12 @@ properties:
       https://bashly.dev/usage/settings/#function_names
     type: object
     properties:
+      start:
+        title: start
+        description: |-
+          Name for the start() function
+          https://bashly.dev/usage/settings/#function_names
+        oneOf: *optional_string
       run:
         title: run
         description: |-

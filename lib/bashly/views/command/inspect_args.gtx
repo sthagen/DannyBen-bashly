@@ -4,7 +4,7 @@
 >   local k
 >
 >   if ((${#args[@]})); then
->     readarray -t sorted_keys < <(printf '%s\n' "${!args[@]}" | sort)
+>     readarray -t sorted_keys < <(printf '%s\n' "${!args[@]}" | LC_ALL=C sort)
 >     echo args:
 >     for k in "${sorted_keys[@]}"; do
 >       echo "- \${args[$k]} = ${args[$k]}"
@@ -28,7 +28,7 @@ end
 
 if Settings.enabled? :deps_array
   >   if ((${#deps[@]})); then
-  >     readarray -t sorted_keys < <(printf '%s\n' "${!deps[@]}" | sort)
+  >     readarray -t sorted_keys < <(printf '%s\n' "${!deps[@]}" | LC_ALL=C sort)
   >     echo
   >     echo deps:
   >     for k in "${sorted_keys[@]}"; do
@@ -40,7 +40,7 @@ end
 
 if Settings.enabled? :env_var_names_array
   >   if ((${#env_var_names[@]})); then
-  >     readarray -t sorted_names < <(printf '%s\n' "${env_var_names[@]}" | sort)
+  >     readarray -t sorted_names < <(printf '%s\n' "${env_var_names[@]}" | LC_ALL=C sort)
   >     echo
   >     echo "environment variables:"
   >     for k in "${sorted_names[@]}"; do

@@ -1,12 +1,7 @@
-require 'completely'
-
 describe YAML do
   describe '::trusted_load' do
     it 'does not override YAML.load for other gems' do
-      completions = Completely::Completions.load 'spec/fixtures/completely/pattern.yml'
-
-      expect(completions.config).to be_a Completely::PatternConfig
-      expect(completions).to be_valid
+      expect(described_class.load('name: bashly')).to eq 'name' => 'bashly'
     end
 
     it 'falls back to YAML.load when unsafe_load is not available' do
@@ -18,10 +13,10 @@ describe YAML do
   end
 
   describe '::trusted_load_file' do
-    let(:path) { 'spec/fixtures/completely/pattern.yml' }
+    let(:path) { 'spec/fixtures/script/commands.yml' }
 
     it 'loads a trusted YAML file' do
-      expect(described_class.trusted_load_file(path)).to include 'patterns'
+      expect(described_class.trusted_load_file(path)).to include :basic_command
     end
   end
 

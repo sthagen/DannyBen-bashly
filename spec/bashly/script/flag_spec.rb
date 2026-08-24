@@ -9,8 +9,7 @@ describe Script::Flag do
   describe 'composition' do
     it 'includes the necessary modules' do
       modules = [
-        Script::Introspection::Visibility, Script::Introspection::Validate,
-        Completions::Flag
+        Script::Introspection::Visibility, Script::Introspection::Validate
       ]
       expect(described_class.ancestors).to include(*modules)
     end
@@ -87,6 +86,16 @@ describe Script::Flag do
       it 'returns a single string' do
         expect(subject.default_string).to eq 'spaced\\ one'
       end
+    end
+  end
+
+  describe '#completions' do
+    let(:fixture) { :completions_completions }
+
+    it 'separates completion values, commands, and options' do
+      expect(subject.completion_static).to eq ['README.md']
+      expect(subject.completion_dynamic).to eq ['recent_files']
+      expect(subject.completion_options).to eq %w[files no-space]
     end
   end
 

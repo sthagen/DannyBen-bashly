@@ -107,6 +107,8 @@ module Bashly
           quiet_say "r`warning` not upgrading c`#{existing_file}`, " \
             "unknown library '#{library_name}'"
         end
+      ensure
+        source.cleanup if source&.git?
       end
 
       def upgrade!(existing_file, library)

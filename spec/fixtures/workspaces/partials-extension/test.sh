@@ -16,7 +16,6 @@ bundle exec bashly generate
 
 # Add all libraries known to mankind (those that generate .sh files)
 bundle exec bashly add colors
-bundle exec bashly add completions
 bundle exec bashly add config
 bundle exec bashly add help
 bundle exec bashly add lib
