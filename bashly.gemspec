@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'colsole', '~> 1.0'
   s.add_dependency 'gtx', '~> 0.1.1'
-  s.add_dependency 'lp', '~> 0.2.0'
   s.add_dependency 'mister_bin', '~> 0.9.0'
   s.add_dependency 'requires', '~> 1.1'
   s.add_dependency 'tty-markdown', '~> 0.7.2'
