@@ -36,8 +36,3 @@ RSpec/ExampleLength:
     - 'spec/bashly/integration/**/*'
     - 'spec/bashly/libraries/render*'
     - 'spec/bashly/script/command_spec.rb'
-
-# Allow `puts` in some specs
-RSpec/Output:
-  Exclude:
-    - spec/bashly/integration/**/*
