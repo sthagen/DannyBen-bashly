@@ -1,5 +1,6 @@
 # render script - mandoc
 require 'gtx'
+require 'shellwords'
 
 # Load the GTX template
 template = "#{source}/mandoc.gtx"
@@ -12,9 +13,12 @@ save_manpage = lambda { |command|
   save mdfile, gtx.parse(command)
 
   # The pandoc command that creates a manpage from markdown
-  cmd = %[pandoc -f markdown-smart -s --to man "#{mdfile}" > "#{manfile}"]
-  success = system cmd
-  raise "Failed running pandoc\nMake sure the following command succeeds and try again:\n\n  #{cmd}" unless success
+  command = ['pandoc', '-f', 'markdown-smart', '-s', '--to', 'man', mdfile, '-o', manfile]
+  success = system(*command)
+  unless success
+    command_string = Shellwords.join command
+    raise "Failed running pandoc\nMake sure the following command succeeds and try again:\n\n  #{command_string}"
+  end
 
   say "g`saved` #{manfile}"
 }
@@ -30,5 +34,5 @@ end
 # Show one of the files if requested
 if show
   file = "#{target}/#{show}"
-  system "man #{file}" if File.exist?(file)
+  system 'man', file if File.exist?(file)
 end

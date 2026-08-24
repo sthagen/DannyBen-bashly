@@ -3,8 +3,6 @@ describe LibrarySource do
 
   let(:uri) { nil }
 
-  after(:all) { described_class.new.cleanup }
-
   describe '#uri' do
     context 'when it starts with github:' do
       let(:uri) { 'github:user/repo//the-path@the-ref' }
@@ -79,8 +77,31 @@ describe LibrarySource do
     context 'with a git source' do
       let(:uri) { 'github:dannyben/bashly//spec/fixtures/libraries@0058d77' }
 
+      after { subject.cleanup }
+
       it 'clones the repo to a temp directory and returns its path' do
         expect(subject.config_path).to match %r{/tmp/bashly-libs-.*/spec/fixtures/libraries/libraries.yml}
+      end
+    end
+
+    context 'with a git ref' do
+      let(:uri) { 'git:https://example.com/repo.git@release' }
+      let(:tmpdir) { Dir.mktmpdir 'bashly-libs-spec-' }
+
+      before do
+        File.write "#{tmpdir}/libraries.yml", '{}'
+        allow(Dir).to receive(:mktmpdir).with('bashly-libs-').and_return(tmpdir)
+      end
+
+      after { subject.cleanup }
+
+      it 'passes each command argument directly to git' do
+        expect(subject).to receive(:system)
+          .with('git', 'clone', '--quiet', 'https://example.com/repo.git', tmpdir).ordered.and_return(true)
+        expect(subject).to receive(:system)
+          .with('git', '-C', tmpdir, 'checkout', '--quiet', 'release').ordered.and_return(true)
+
+        expect(subject.config_path).to eq "#{tmpdir}/libraries.yml"
       end
     end
 
@@ -120,9 +141,22 @@ describe LibrarySource do
   end
 
   describe '#cleanup' do
-    it 'remoces all /tmp/bashly-libs-* directories' do
-      expect(FileUtils).to receive(:rm_rf).with("#{Dir.tmpdir}/bashly-libs-*")
+    let(:uri) { 'git:https://example.com/repo.git' }
+    let(:tmpdir) { Dir.mktmpdir 'bashly-libs-spec-' }
+
+    before do
+      allow(Dir).to receive(:mktmpdir).with('bashly-libs-').and_return(tmpdir)
+      allow(subject).to receive(:safe_run)
+      File.write "#{tmpdir}/libraries.yml", '{}'
+      subject.config_path
+    end
+
+    after { FileUtils.rm_rf tmpdir }
+
+    it 'removes its temporary directory' do
       subject.cleanup
+
+      expect(Dir).not_to exist(tmpdir)
     end
   end
 end
