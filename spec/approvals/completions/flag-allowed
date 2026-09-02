@@ -1,6 +1,0 @@
----
-some command*--protocol: &1
-- ssh
-- sftp
-- https
-some command*-p: *1

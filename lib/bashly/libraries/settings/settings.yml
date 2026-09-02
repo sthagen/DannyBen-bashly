@@ -157,23 +157,28 @@ env: development
 # - always          # render this feature in any environment
 # - never           # do not render this feature
 enable_header_comment: always
-enable_bash3_bouncer: always
+enable_bash_version_bouncer: always
 enable_view_markers: development
 enable_inspect_args: development
 enable_deps_array: always
 enable_env_var_names_array: always
 enable_sourcing: development
 
+# Generate native runtime completions. Supported values:
+# - ~ or false     # disable completions (default)
+# - minimal        # generate the runtime completion engine without shell adapters
+# - bash or zsh    # generate the runtime engine and one shell adapter
+# - bash,zsh       # generate the runtime engine and selected shell adapters
+# - full           # generate the runtime engine and all available shell adapters
+completions: ~
+
 
 #-------------------------------------------------------------------------------
 # DEVELOPER OPTIONS
 #-------------------------------------------------------------------------------
 
-# When true, use filesystem evented watching instead of polling
-watch_evented: false
-
-# File change detection latency (seconds)
-watch_latency: 1.0
+# File change detection polling interval (seconds)
+watch_latency: 2.0
 
 
 #-------------------------------------------------------------------------------
@@ -192,5 +197,6 @@ var_aliases:
 
 # Choose different names for some of the internal functions.
 function_names:
+  start: ~
   run: ~
   initialize: ~

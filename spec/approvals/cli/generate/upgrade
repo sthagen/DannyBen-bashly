@@ -3,7 +3,6 @@ skipped spec/tmp/src/download_command.sh (exists)
 skipped spec/tmp/src/upload_command.sh (exists)
 updated spec/tmp/src/lib/colors.sh
 updated spec/tmp/src/lib/config.sh
-updated spec/tmp/src/lib/send_completions.sh
 updated spec/tmp/src/lib/validations/validate_dir_exists.sh
 updated spec/tmp/src/lib/validations/validate_file_exists.sh
 updated spec/tmp/src/lib/validations/validate_integer.sh

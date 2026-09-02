@@ -1,0 +1,48 @@
+static candidates:
+  words: [static, '']
+  expected: [main, develop, two words, '$literal', ':options=files']
+
+static candidate prefix:
+  words: [static, dev]
+  expected: [develop]
+
+external command:
+  words: [external, '']
+  expected: [alpha, beta]
+
+external command prefix:
+  words: [external, b]
+  expected: [beta]
+
+internal function:
+  words: [internal, '']
+  expected: [red, green, blue]
+
+failing command:
+  words: [failure, '']
+  expected: [fallback]
+
+files option:
+  words: [files, '']
+  expected: [apple.txt]
+  options: files
+
+directories option:
+  words: [directories, '']
+  expected: []
+  options: directories
+
+combined options:
+  words: [combined, '']
+  expected: []
+  options: files,directories,no-space
+
+flag values:
+  words: [flag, --target, '']
+  expected: [production, preview, red, green, blue]
+  options: no-space
+
+flag value prefix:
+  words: [flag, --target, pr]
+  expected: [production, preview]
+  options: no-space

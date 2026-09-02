@@ -7,7 +7,6 @@ action :regen do |args|
   ENV['PATH']="#{Dir.pwd}/examples/extensible:#{ENV['PATH']}"
 
   blacklist = %w[
-    spec/fixtures/workspaces/completions-private
     spec/fixtures/workspaces/custom-paths
     spec/fixtures/workspaces/import
     spec/fixtures/workspaces/lib-custom-source

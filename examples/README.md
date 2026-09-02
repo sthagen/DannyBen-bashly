@@ -21,9 +21,11 @@ Each of these examples demonstrates one aspect or feature of bashly.
 - [default-values](default-values#readme) - arguments and flags with default values
 - [minus-v](minus-v#readme) - using `-v` and `-h` in your script
 - [multiline](multiline#readme) - help messages with multiple lines
+- [completions](completions#readme) - exposing runtime shell completions
 
 ## Advanced configuration features
 
+- [completions-advanced](completions-advanced#readme) - configuring static, dynamic, and option-based runtime completions
 - [catch-all](catch-all#readme) - a command that can receive an arbitrary number of arguments
 - [catch-all-advanced](catch-all-advanced#readme) - another example for the `catch_all` option
 - [catch-all-stdin](catch-all-stdin#readme) - combining `catch_all` with `stdin` to read multiple files
@@ -67,7 +69,6 @@ Each of these examples demonstrates one aspect or feature of bashly.
 - [ini](ini#readme) - using the ini library for direct, low level access to INI files
 - [yaml](yaml#readme) - using the YAML reading functions
 - [colors](colors#readme) - using the color print feature
-- [completions](completions#readme) - adding bash completion functionality
 - [validations](validations#readme) - adding validation functions for arguments, flags or environment variables
 - [hooks](hooks#readme) - adding before/after hooks
 - [stacktrace](stacktrace#readme) - adding stacktrace on error

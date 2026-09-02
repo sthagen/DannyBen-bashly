@@ -2,6 +2,8 @@ module Bashly
   class ConfigValidator
     include ValidationHelpers
 
+    COMPLETION_OPTIONS = %w[files directories no-space].freeze
+
     attr_reader :data
 
     def initialize(data)
@@ -88,6 +90,20 @@ module Bashly
       assert [true, false, nil, 'always'].include?(value), "#{key} must be a boolean, or the string 'always'"
     end
 
+    def assert_completions(key, value)
+      return unless value
+
+      assert_hash key, value, keys: %i[static dynamic options]
+      assert_array "#{key}.static", value['static'], of: :string
+      assert_array "#{key}.dynamic", value['dynamic'], of: :string
+      assert_array "#{key}.options", value['options'], of: :string
+
+      Array(value['options']).each do |option|
+        assert COMPLETION_OPTIONS.include?(option),
+          "#{key}.options contains an unknown option: #{option}"
+      end
+    end
+
     def assert_arg(key, value)
       assert_hash key, value, keys: Script::Argument.option_keys
       refute value['allowed'] && value['completions'], "#{key} cannot have both nub`allowed` and nub`completions`"
@@ -101,7 +117,7 @@ module Bashly
       assert_boolean "#{key}.unique", value['unique']
 
       assert_array "#{key}.allowed", value['allowed'], of: :string
-      assert_array "#{key}.completions", value['completions'], of: :string
+      assert_completions "#{key}.completions", value['completions']
 
       refute value['name'].match(/^-/), "#{key}.name must not start with '-'"
 
@@ -137,7 +153,7 @@ module Bashly
       assert_boolean "#{key}.required", value['required']
       assert_array "#{key}.allowed", value['allowed'], of: :string
       assert_array "#{key}.conflicts", value['conflicts'], of: :string
-      assert_array "#{key}.completions", value['completions'], of: :string
+      assert_completions "#{key}.completions", value['completions']
 
       assert value['long'].match(/^--[a-zA-Z0-9_-]+$/), "#{key}.long must be in the form of '--name'" if value['long']
       assert value['short'].match(/^-[a-zA-Z0-9]$/), "#{key}.short must be in the form of '-n'" if value['short']
@@ -236,7 +252,6 @@ module Bashly
       assert_array "#{key}.args", value['args'], of: :arg
       assert_array "#{key}.flags", value['flags'], of: :flag
       assert_array "#{key}.commands", value['commands'], of: :command
-      assert_array "#{key}.completions", value['completions'], of: :string
       assert_array "#{key}.filters", value['filters'], of: :string
       assert_array "#{key}.environment_variables", value['environment_variables'], of: :env_var
       assert_array "#{key}.variables", value['variables'], of: :var

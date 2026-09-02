@@ -1,0 +1,22 @@
++ bashly generate
+creating user files in src
+skipped src/completions_command.sh (exists)
+skipped src/deploy_command.sh (exists)
+created ./cli
+run ./cli --help to test your bash script
++ ./cli completions
++ head -n3
+_cli_completions() {
+  local completion_command="${COMP_WORDS[0]}"
+  local completion_current="${COMP_WORDS[COMP_CWORD]:-}"
++ ./cli __complete ''
+completions
+deploy
+:options=
++ ./cli __complete deploy main st
+staging
+:options=no-space
++ ./cli __complete deploy --config ''
+:options=files
++ ./cli __complete deploy --directory ''
+:options=directories

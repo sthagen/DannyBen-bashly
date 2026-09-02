@@ -58,51 +58,51 @@ flags:
 ### `$ man docs/download.1 | col -bx`
 
 ````shell
-download(1)                   Sample application                   download(1)
+download(1)                    Sample application                   download(1)
 
 NAME
-       download - Sample application
+     download - Sample application
 
 SYNOPSIS
-       download SOURCE [TARGET...]  OPTIONS
+     download SOURCE [TARGET...]  OPTIONS
 
 DESCRIPTION
-       Sample application
+     Sample application
 
 ARGUMENTS
    SOURCE
-       Source to download from
+     Source to download from
 
-       • Required
+     • Required
 
-       • Allowed Values: server1, server2
+     • Allowed Values: server1, server2
 
    TARGET
-       Target filename (default: same as source)
+     Target filename (default: same as source)
 
-       • Repeatable
+     • Repeatable
 
 OPTIONS
    --force, -f
-       Overwrite existing files
+     Overwrite existing files
 
    --debug, -d
-       Show debug information
+     Show debug information
 
 DEPENDENCIES
    aws-cli
-       Download from <https://aws.amazon.com/cli/>
+     Download from <https://aws.amazon.com/cli/>
 
 SEE ALSO
-       docker(1), docker-compose.yml(5)
+     docker(1), docker-compose.yml(5)
 
 ISSUE TRACKER
-       Report issues at <https://github.com/lanalang/smallville>
+     Report issues at <https://github.com/lanalang/smallville>
 
 AUTHORS
-       Lana Lang.
+     Lana Lang.
 
-Version 0.1.0                     August 2025                      download(1)
+Version 0.1.0                     August 2026                       download(1)
 
 
 ````

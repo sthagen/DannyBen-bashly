@@ -18,14 +18,15 @@ describe Library do
     end
 
     context 'when the library has a custom handler' do
-      let(:name) { :completions }
+      let(:name) { :help }
 
       before { reset_tmp_dir example: 'minimal' }
 
-      it 'delegaes the request to a custom handler' do
-        expect(subject.files).to be_an Array
-        expect(subject.files.first).to be_a Hash
-        expect(subject.files.first.keys).to match_array %i[path content]
+      it 'delegates the request to the custom handler' do
+        expect(subject.files).to contain_exactly(
+          path:    'spec/tmp/src/help_command.sh',
+          content: include('help_function=download_usage')
+        )
       end
     end
   end
@@ -49,12 +50,14 @@ describe Library do
     end
 
     context 'when the library has a custom handler' do
-      let(:name) { :completions_yaml }
+      let(:name) { :help }
 
       before { reset_tmp_dir example: 'minimal' }
 
-      it 'returns the message form the handler' do
-        expect(subject.post_install_message).to include 'completely'
+      it 'returns the message from the custom handler' do
+        expect(subject.post_install_message).to include(
+          'Add this as a command to your bashly.yml:'
+        )
       end
     end
   end

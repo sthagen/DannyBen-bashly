@@ -1,0 +1,44 @@
+> while [[ $# -gt 0 ]]; do
+>   case "$1" in
+public_commands.each do |command|
+  >     {{ command.aliases.join ' | ' }})
+  >       shift
+  >       {{ command.function_name }}_completion "$completion_current" "$@"
+  >       return
+  >       ;;
+end
+if fixed_flags?
+  if short_flag_exist? '-h'
+    >     --help)
+  else
+    >     --help | -h)
+  end
+  >       completion_blocked_flags["--help"]=1
+  >       shift
+  >       ;;
+  if root_command?
+    if short_flag_exist? '-v'
+      >     --version)
+    else
+      >     --version | -v)
+    end
+    >       completion_blocked_flags["--version"]=1
+    >       shift
+    >       ;;
+  end
+end
+public_flags.each do |flag|
+  = flag.render(:completion_filter).indent 4
+end
+>     *)
+if args.any?
+  = render(:completion_argument_filter).indent 6
+elsif default_command
+  >       {{ default_command.function_name }}_completion "$completion_current" "$@"
+  >       return
+else
+  >       return
+end
+>       ;;
+>   esac
+> done

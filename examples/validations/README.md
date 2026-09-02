@@ -39,9 +39,12 @@ commands:
     # Bashly will look for a function named `validate_integer` in your
     # script, you can use any name as long as it has a matching function.
     validate: integer
+  
   - name: second
     help: Second number
-    validate: integer
+
+    # Multiple validations can be provided as an array.
+    validate: [not_empty, integer]
 
   flags:
   - long: --save
@@ -95,6 +98,15 @@ args:
 ````shell
 validation error in FIRST:
 must be an integer
+
+
+````
+
+### `$ ./validate calc 1 ''`
+
+````shell
+validation error in SECOND:
+must not be empty
 
 
 ````

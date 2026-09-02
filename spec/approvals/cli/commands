@@ -7,7 +7,7 @@ Commands:
   generate     Generate the bash script and required files
   add          Add extra features and customization to your script
   doc          Show bashly reference documentation
-  completions  Install bash completions for bashly itself
+  completions  Display bash completions for bashly itself
   render       Render the bashly data structure using custom templates
   shell        Start an interactive bashly shell
 

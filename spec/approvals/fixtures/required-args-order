@@ -27,9 +27,9 @@ args:
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--method]} = GET
+- ${args[--role]} = admin
 - ${args[port]} = 3000
 - ${args[protocol]} = http
-- ${args[--role]} = admin
 + ./download http --role admin --method GET 3000
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'download' command.
@@ -37,9 +37,9 @@ args:
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--method]} = GET
+- ${args[--role]} = admin
 - ${args[port]} = 3000
 - ${args[protocol]} = http
-- ${args[--role]} = admin
 + ./download --role admin --method GET http 3000
 # This file is located at 'src/root_command.sh'.
 # It contains the implementation for the 'download' command.
@@ -47,6 +47,6 @@ args:
 # Feel free to edit this file; your changes will persist when regenerating.
 args:
 - ${args[--method]} = GET
+- ${args[--role]} = admin
 - ${args[port]} = 3000
 - ${args[protocol]} = http
-- ${args[--role]} = admin

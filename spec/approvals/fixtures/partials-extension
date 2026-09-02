@@ -20,15 +20,6 @@ src/initialize.sh. You may run the following command to add this file:
 
   $ bashly add hooks
 
-+ bundle exec bashly add completions
-created src/lib/send_completions.bash
-
-In order to enable completions in your script, create a command or a flag (for example: cli completions or cli --completions) that calls the send_completions function.
-
-Your users can then run something like this to enable completions:
-
-  $ eval "$(cli completions)"
-
 + bundle exec bashly add config
 created src/lib/config.bash
 created src/lib/ini.bash
@@ -62,7 +53,6 @@ updated src/help_command.bash
 updated src/lib/colors.bash
 updated src/lib/config.bash
 updated src/lib/ini.bash
-updated src/lib/send_completions.bash
 updated src/lib/validations/validate_dir_exists.bash
 updated src/lib/validations/validate_file_exists.bash
 updated src/lib/validations/validate_integer.bash

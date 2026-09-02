@@ -1,0 +1,20 @@
+name: cli
+help: Default command completion fixture
+
+commands:
+- name: run
+  help: Run a target
+
+- name: inspect
+  help: Inspect a resource
+  default: true
+  args:
+  - name: resource
+    allowed: [container, image]
+    help: Resource to inspect
+  flags:
+  - long: --format
+    short: -f
+    arg: format
+    allowed: [json, yaml]
+    help: Output format
