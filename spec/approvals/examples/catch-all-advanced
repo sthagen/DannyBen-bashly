@@ -101,6 +101,17 @@ other_args:
 - ${other_args[*]} = -abc --option=value
 - ${other_args[0]} = -abc
 - ${other_args[1]} = --option=value
++ ./cli download source -- -anything
+# This file is located at 'src/download_command.sh'.
+# It contains the implementation for the 'cli download' command.
+# The code you write here will be wrapped by a function named 'cli_download_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args:
+- ${args[source]} = source
+
+other_args:
+- ${other_args[*]} = -anything
+- ${other_args[0]} = -anything
 + ./cli upload -h
 cli upload - Upload a file
 

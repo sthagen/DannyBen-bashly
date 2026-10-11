@@ -4,3 +4,6 @@ export CHANGELOG_COMPARE_URL=https://github.com/bashly-framework/bashly/compare/
 
 # include the debug gem
 export DEBUGGER=1
+
+# Local bashly-book checkout used by the release.md Retype checks
+export BASHLY_SITE_DIR=/path/to/bashly-book

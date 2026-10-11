@@ -1,0 +1,46 @@
++ bashly generate
+creating user files in src
+created src/root_command.sh
+created ./download
+run ./download --help to test your bash script
++ ./download
+missing required argument: SOURCE
+usage: download SOURCE [TARGET] [OPTIONS]
++ ./download -h
+download - Sample minimal application without commands
+
+Usage:
+  download SOURCE [TARGET] [OPTIONS]
+  download --help | -h
+  download --version | -v
+
+Options:
+  --force, -f
+    Overwrite existing files
+
+  --help, -h
+    Show this help
+
+  --version, -v
+    Show version number
+
+Arguments:
+  SOURCE
+    URL to download from
+
+  TARGET
+    Target filename (default: same as source)
+
+Examples:
+  download example.com
+  download example.com ./output -f
+
++ ./download --force -- -source.txt -target.txt
+# This file is located at 'src/root_command.sh'.
+# It contains the implementation for the 'download' command.
+# The code you write here will be wrapped by a function named 'root_command()'.
+# Feel free to edit this file; your changes will persist when regenerating.
+args:
+- ${args[--force]} = 1
+- ${args[source]} = -source.txt
+- ${args[target]} = -target.txt

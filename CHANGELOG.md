@@ -1,6 +1,29 @@
 Changelog
 ========================================
 
+v2.0.0 - 2026-09-27
+----------------------------------------
+
+- Refactor completions as native runtime functions [`e996014f8`](https://github.com/bashly-framework/bashly/commit/e996014f8)
+- Add Settings.enable_completions [`2e631ff3b`](https://github.com/bashly-framework/bashly/commit/2e631ff3b)
+- Remove old completions implementation and self-completion installer [`d39d21ac7`](https://github.com/bashly-framework/bashly/commit/d39d21ac7)
+- Generate `send_completions()` function natively when completions generation is enabled [`9f4582fc5`](https://github.com/bashly-framework/bashly/commit/9f4582fc5)
+- Add structured runtime completions [`b7530351f`](https://github.com/bashly-framework/bashly/commit/b7530351f)
+- Drop support for Ruby 3.2 [`15723e043`](https://github.com/bashly-framework/bashly/commit/15723e043)
+- Rename settings.enable_bash3_bouncer to enable_bash_version_bouncer [`07e9fdeb4`](https://github.com/bashly-framework/bashly/commit/07e9fdeb4)
+- Add zsh completions wrapper [`ec5599b21`](https://github.com/bashly-framework/bashly/commit/ec5599b21)
+- Refactor completions settings [`cffb490ae`](https://github.com/bashly-framework/bashly/commit/cffb490ae)
+- Make `inspect_args` sorting deterministic [`f3e6505f4`](https://github.com/bashly-framework/bashly/commit/f3e6505f4)
+- Add `start()` bash function to wrap `__complete`, initialize` and `run` [`154686367`](https://github.com/bashly-framework/bashly/commit/154686367)
+- Avoid empty argument branches in generated completions [`54c51e55f`](https://github.com/bashly-framework/bashly/commit/54c51e55f)
+- Update gemspec metadata [`5aec547c4`](https://github.com/bashly-framework/bashly/commit/5aec547c4)
+- Replace `listen` with `watchly` [`207eb89b0`](https://github.com/bashly-framework/bashly/commit/207eb89b0)
+- Remove `lp` dependency [`2bf83e411`](https://github.com/bashly-framework/bashly/commit/2bf83e411)
+- Harden external commands and temporary cleanup [`795ec6967`](https://github.com/bashly-framework/bashly/commit/795ec6967)
+- Add support for end-of-options delimiter [`ed5c1120a`](https://github.com/bashly-framework/bashly/commit/ed5c1120a)
+- Compare [`v1.4.0..v2.0.0`](https://github.com/bashly-framework/bashly/compare/v1.4.0..v2.0.0)
+
+
 v1.4.0 - 2026-07-09
 ----------------------------------------
 

@@ -20,6 +20,10 @@ bashly generate
 # ...use the double dash (--) operator to disable input normalization
 ./cli download source target --force -- -abc --option=value
 
+# catch_all receives everything after the delimiter, even when an optional
+# positional argument is still available
+./cli download source -- -anything
+
 ./cli upload -h
 ./cli upload
 ./cli upload file1 "file 2" file3

@@ -1,21 +1,39 @@
 = view_marker
 
+unless catch_all.enabled?
+> local options_ended=false
+> local parse_key
+>
+end
+
 > while [[ $# -gt 0 ]]; do
 >   key="$1"
+if catch_all.enabled?
 >   case "$key" in
+else
+>   parse_key="$key"
+>   [[ $options_ended == true ]] && parse_key=
+>   case "$parse_key" in
+end
 
 unless global_flags?
   flags.each do |flag|
     = flag.render(:case).indent(4)
   end
+  >
 end
 
->
 if catch_all.enabled?
 >     --)
 >       shift
 >       other_args+=("$@")
 >       break
+>       ;;
+>
+else
+>     --)
+>       shift
+>       options_ended=true
 >       ;;
 >
 end
